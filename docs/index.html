@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OIKOS HP Design Patterns</title>
+  <meta name="description" content="NPO法人OIKOS トップページのデザイン3パターンを比較できるGitHub Pages用の一覧ページです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #18202b;
+      --sub: #5f6b7a;
+      --border: #e6e9ef;
+      --primary: #2563eb;
+      --shadow: 0 16px 50px rgba(24, 32, 43, 0.08);
+      --radius: 24px;
+      --max-width: 1200px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #f4f6fb 100%);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 24px 80px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero__label {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.3;
+      margin-bottom: 16px;
+      font-weight: 900;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--sub);
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(24, 32, 43, 0.12);
+    }
+
+    .card__visual {
+      height: 180px;
+      padding: 24px;
+      display: flex;
+      align-items: flex-end;
+      color: #fff;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1.4;
+    }
+
+    .card--a .card__visual {
+      background: linear-gradient(135deg, #E8713A 0%, #D4A574 100%);
+    }
+
+    .card--b .card__visual {
+      background: linear-gradient(135deg, #1A1A2E 0%, #4A7C6F 100%);
+    }
+
+    .card--c .card__visual {
+      background: linear-gradient(135deg, #FF6B35 0%, #2EC4B6 100%);
+    }
+
+    .card__body {
+      padding: 24px;
+    }
+
+    .card__eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sub);
+      margin-bottom: 10px;
+    }
+
+    .card__title {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .card__desc {
+      color: var(--sub);
+      font-size: 14px;
+      min-height: 72px;
+      margin-bottom: 20px;
+    }
+
+    .card__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--primary {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .btn--secondary {
+      background: #f3f5f9;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .note {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 24px;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .note strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card__desc {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="hero__label">GitHub Pages Preview</div>
+      <h1>OIKOS トップページ<br>デザイン3パターン</h1>
+      <p>各パターンをブラウザで見比べられるようにした一覧ページです。GitHub Pagesではこのページが入口になり、それぞれの案へ遷移できます。</p>
+    </section>
+
+    <section class="grid">
+      <article class="card card--a">
+        <div class="card__visual">Pattern A<br>ぬくもり</div>
+        <div class="card__body">
+          <div class="card__eyebrow">Warm / Trust</div>
+          <h2 class="card__title">やわらかく安心感のある案</h2>
+          <p class="card__desc">温かみと信頼感を重視した、やさしいトーンのトップページ。NPOとしての親しみやすさを前面に出したパターンです。</p>
+          <div class="card__actions">
+            <a class="btn btn--primary" href="./pattern-a/">プレビューを見る</a>
+            <a class="btn btn--secondary" href="./pattern-a/DESIGN.md">設計メモ</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card--b">
+        <div class="card__visual">Pattern B<br>凛</div>
+        <div class="card__body">
+          <div class="card__eyebrow">Modern / Minimal</div>
+          <h2 class="card__title">洗練されたモダン案</h2>
+          <p class="card__desc">余白とタイポグラフィを活かした、知的でメッセージ性の強いトップページ。社会課題に向き合う力強さを表現したパターンです。</p>
+          <div class="card__actions">
+            <a class="btn btn--primary" href="./pattern-b/">プレビューを見る</a>
+            <a class="btn btn--secondary" href="./pattern-b/DESIGN.md">設計メモ</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card--c">
+        <div class="card__visual">Pattern C<br>つながり</div>
+        <div class="card__body">
+          <div class="card__eyebrow">Energetic / Friendly</div>
+          <h2 class="card__title">明るく行動を促す案</h2>
+          <p class="card__desc">カラフルでエネルギッシュな印象を持たせつつ、情報整理も意識したトップページ。学生と子どものつながりの明るさを表現したパターンです。</p>
+          <div class="card__actions">
+            <a class="btn btn--primary" href="./pattern-c/">プレビューを見る</a>
+            <a class="btn btn--secondary" href="./pattern-c/DESIGN.md">設計メモ</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="note">
+      <strong>公開メモ:</strong> GitHub Pages は <code>docs/</code> を公開元にすると、この <code>docs/index.html</code> がトップになります。
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPO法人OIKOS | すべての子どもたちが明日を楽しみにできる社会をつくる</title>
+  <meta name="description" content="NPO法人OIKOSは、大学生が主体となり子どもたちの居場所「ゆーすぽっと」を運営しています。すべての子どもたちが明日を楽しみにできる社会を目指します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1A1A2E;
+      --primary-accent: #E07B4C;
+      --secondary: #4A7C6F;
+      --bg: #FFFFFF;
+      --bg-dark: #1A1A2E;
+      --text: #1A1A2E;
+      --text-sub: #6B7280;
+      --border: #E5E7EB;
+      --text-on-dark: #FFFFFF;
+      --text-sub-on-dark: rgba(255,255,255,0.6);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary-accent);
+      margin-bottom: 16px;
+    }
+
+    .section-label--light {
+      color: var(--primary-accent);
+    }
+
+    .en-bg-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 120px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .en-bg-text--dark {
+      color: rgba(26,26,46,0.04);
+    }
+
+    /* ========== ANIMATIONS ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
+    /* ========== PATTERN LABEL ========== */
+    .pattern-label {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 10000;
+      background: var(--primary);
+      color: var(--text-on-dark);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.3s ease;
+    }
+
+    .header__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      letter-spacing: 0.12em;
+    }
+
+    .header__nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header__nav a {
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.3s ease;
+    }
+
+    .header__nav a:hover {
+      color: var(--text-on-dark);
+    }
+
+    .header__donate {
+      background: var(--primary-accent);
+      color: var(--text-on-dark) !important;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .header__donate:hover {
+      background: #c9693e;
+      transform: translateY(-1px);
+    }
+
+    .header__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+    }
+
+    .header__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-on-dark);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 40px 80px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(74, 124, 111, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(224, 123, 76, 0.08) 0%, transparent 50%);
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .hero__label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--primary-accent);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    .hero__heading {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1.25;
+      color: var(--text-on-dark);
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero__heading span {
+      display: inline;
+      background: linear-gradient(180deg, transparent 65%, rgba(224, 123, 76, 0.3) 65%);
+    }
+
+    .hero__sub {
+      font-size: 16px;
+      color: var(--text-sub-on-dark);
+      line-height: 2;
+      margin-bottom: 48px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-accent);
+      color: var(--text-on-dark);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #c9693e;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-on-dark);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: border-color 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-sub-on-dark);
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ========== NEWS BAR ========== */
+    .news-bar {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .news-bar__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .news-bar__tag {
+      flex-shrink: 0;
+      background: var(--primary);
+      color: var(--text-on-dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 5px 14px;
+      border-radius: 4px;
+    }
+
+    .news-bar__list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .news-bar__item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .news-bar__date {
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    .news-bar__text {
+      color: var(--text);
+    }
+
+    .news-bar__text a {
+      transition: color 0.3s ease;
+    }
+
+    .news-bar__text a:hover {
+      color: var(--primary-accent);
+    }
+
+    /* ========== VISION / MISSION ========== */
+    .vision {
+      padding: 160px 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .vision__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .vision__left {
+      position: relative;
+    }
+
+    .vision__en-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: rgba(26,26,46,0.05);
+      line-height: 1;
+      margin-bottom: -24px;
+      letter-spacing: -0.04em;
+    }
+
+    .vision__heading {
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .vision__heading::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--primary-accent);
+      margin-top: 24px;
+    }
+
+    .vision__desc {
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 2;
+    }
+
+    .vision__right {
+      padding-top: 40px;
+    }
+
+    .mission__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .mission__item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .mission__num {
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-accent);
+      line-height: 1;
+      width: 48px;
+    }
+
+    .mission__text {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.6;
+      padding-top: 4px;
+    }
+
+    .mission__label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 24px;
+    }
+
+    /* ========== YOUTH SPOT ========== */
+    .youthspot {
+      background: var(--bg-dark);
+      padding: 160px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .youthspot__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .youthspot__content {}
+
+    .youthspot__heading {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--text-on-dark);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .youthspot__concept {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--primary-accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+    }
+
+    .youthspot__desc {
+      font-size: 16px;
+      color: var(--text-sub-on-dark);
+      line-height: 2;
+      margin-bottom: 32px;
+    }
+
+    .youthspot__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .youthspot__tag {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-on-dark);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .youthspot__visual {
+      position: relative;
+    }
+
+    .youthspot__image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.1em;
+    }
+
+    /* ========== ACTIVITIES ========== */
+    .activities {
+      padding: 160px 0;
+      background: var(--bg);
+    }
+
+    .activities__header {
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .activities__en-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: rgba(26,26,46,0.04);
+      line-height: 1;
+      margin-bottom: -20px;
+      letter-spacing: -0.04em;
+    }
+
+    .activities__heading {
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .activities__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .activity-card {
+      padding: 48px 36px;
+      border-left: 3px solid var(--primary-accent);
+      background: var(--bg);
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .activity-card__num {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(26,26,46,0.08);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .activity-card__title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .activity-card__desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.9;
+    }
+
+    /* ========== STATS ========== */
+    .stats {
+      background: var(--bg-dark);
+      padding: 120px 0;
+      overflow: hidden;
+    }
+
+    .stats__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .stats__heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary-accent);
+      margin-bottom: 64px;
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-item__number {
+      font-family: 'Inter', sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-item__unit {
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .stat-item__label {
+      font-size: 14px;
+      color: var(--text-sub-on-dark);
+      font-weight: 400;
+    }
+
+    /* ========== VOICES ========== */
+    .voices {
+      padding: 160px 0;
+      background: var(--bg);
+    }
+
+    .voices__header {
+      margin-bottom: 80px;
+    }
+
+    .voices__en-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: rgba(26,26,46,0.04);
+      line-height: 1;
+      margin-bottom: -20px;
+      letter-spacing: -0.04em;
+    }
+
+    .voices__heading {
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .voices__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+
+    .voice-card {
+      padding: 48px;
+      position: relative;
+    }
+
+    .voice-card__quote {
+      font-size: 56px;
+      font-family: 'Inter', serif;
+      color: var(--primary-accent);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: -16px;
+      position: relative;
+      z-index: 0;
+    }
+
+    .voice-card__text {
+      font-size: 18px;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 2;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .voice-card__author {
+      font-size: 13px;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    .voice-card__border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ========== CTA ========== */
+    .cta {
+      padding: 160px 0;
+      background: #F8F8FA;
+    }
+
+    .cta__header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .cta__en-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: rgba(26,26,46,0.04);
+      line-height: 1;
+      margin-bottom: -20px;
+      letter-spacing: -0.04em;
+    }
+
+    .cta__heading {
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .cta__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .cta-card {
+      background: var(--bg);
+      padding: 56px 40px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .cta-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      border-color: var(--primary-accent);
+    }
+
+    .cta-card__icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 24px;
+      background: rgba(224, 123, 76, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .cta-card__title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .cta-card__desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .cta-card__link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.3s ease;
+    }
+
+    .cta-card:hover .cta-card__link {
+      gap: 12px;
+    }
+
+    /* ========== GREETING ========== */
+    .greeting {
+      padding: 160px 0;
+      background: var(--bg);
+    }
+
+    .greeting__inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .greeting__label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary-accent);
+      margin-bottom: 16px;
+    }
+
+    .greeting__heading {
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 48px;
+    }
+
+    .greeting__text {
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 2.2;
+      text-align: left;
+      margin-bottom: 48px;
+    }
+
+    .greeting__name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .greeting__role {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    .greeting__divider {
+      width: 48px;
+      height: 1px;
+      background: var(--border);
+      margin: 32px auto;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--bg-dark);
+      padding: 80px 0 40px;
+    }
+
+    .footer__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .footer__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer__brand {}
+
+    .footer__logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+
+    .footer__org-name {
+      font-size: 13px;
+      color: var(--text-sub-on-dark);
+      margin-bottom: 16px;
+    }
+
+    .footer__email {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-sub-on-dark);
+      transition: color 0.3s ease;
+    }
+
+    .footer__email:hover {
+      color: var(--primary-accent);
+    }
+
+    .footer__nav {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer__nav a {
+      font-size: 13px;
+      color: var(--text-sub-on-dark);
+      transition: color 0.3s ease;
+    }
+
+    .footer__nav a:hover {
+      color: var(--text-on-dark);
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-sub-on-dark);
+    }
+
+    .footer__address {
+      font-size: 12px;
+      color: var(--text-sub-on-dark);
+    }
+
+    /* ========== MOBILE NAV ========== */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(26, 26, 46, 0.98);
+      z-index: 9998;
+      padding: 40px;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: var(--text-on-dark);
+      font-size: 20px;
+      font-weight: 700;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .header__nav {
+        display: none;
+      }
+
+      .header__hamburger {
+        display: flex;
+      }
+
+      .header__inner {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding: 120px 20px 80px;
+      }
+
+      .hero__heading {
+        font-size: 36px;
+      }
+
+      .hero__label {
+        font-size: 11px;
+        margin-bottom: 24px;
+      }
+
+      .hero__sub {
+        font-size: 14px;
+      }
+
+      .hero__actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary, .btn-outline {
+        width: 100%;
+        justify-content: center;
+        max-width: 300px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .news-bar__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 20px;
+      }
+
+      .vision {
+        padding: 100px 0;
+      }
+
+      .vision__grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .vision__en-title {
+        font-size: 48px;
+      }
+
+      .vision__heading {
+        font-size: 28px;
+      }
+
+      .youthspot {
+        padding: 100px 0;
+      }
+
+      .youthspot__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 0 20px;
+      }
+
+      .activities {
+        padding: 100px 0;
+      }
+
+      .activities__en-title {
+        font-size: 48px;
+      }
+
+      .activities__heading {
+        font-size: 28px;
+      }
+
+      .activities__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        padding: 80px 0;
+      }
+
+      .stats__inner {
+        padding: 0 20px;
+      }
+
+      .stats__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .stat-item__number {
+        font-size: 64px;
+      }
+
+      .voices {
+        padding: 100px 0;
+      }
+
+      .voices__en-title {
+        font-size: 48px;
+      }
+
+      .voices__heading {
+        font-size: 28px;
+      }
+
+      .voices__grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .voice-card {
+        padding: 32px 0;
+      }
+
+      .cta {
+        padding: 100px 0;
+      }
+
+      .cta__en-title {
+        font-size: 48px;
+      }
+
+      .cta__heading {
+        font-size: 28px;
+      }
+
+      .cta__grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+
+      .greeting {
+        padding: 100px 0;
+      }
+
+      .greeting__heading {
+        font-size: 28px;
+      }
+
+      .greeting__inner {
+        padding: 0 20px;
+      }
+
+      .footer__inner {
+        padding: 0 20px;
+      }
+
+      .footer__top {
+        flex-direction: column;
+      }
+
+      .footer__nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .en-bg-text {
+        font-size: 60px;
+      }
+
+      .pattern-label {
+        top: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pattern Label -->
+  <div class="pattern-label">Pattern B: 凛</div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#" class="header__logo">OIKOS</a>
+      <nav class="header__nav">
+        <a href="#vision">ビジョン</a>
+        <a href="#youthspot">ゆーすぽっと</a>
+        <a href="#activities">活動内容</a>
+        <a href="#cta">参加・支援</a>
+        <a href="#greeting">代表あいさつ</a>
+        <a href="#" class="header__donate">寄付する</a>
+      </nav>
+      <button class="header__hamburger" id="hamburger" aria-label="メニュー">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#vision" onclick="closeMobileNav()">ビジョン</a>
+    <a href="#youthspot" onclick="closeMobileNav()">ゆーすぽっと</a>
+    <a href="#activities" onclick="closeMobileNav()">活動内容</a>
+    <a href="#cta" onclick="closeMobileNav()">参加・支援</a>
+    <a href="#greeting" onclick="closeMobileNav()">代表あいさつ</a>
+    <a href="#" class="header__donate" style="text-align:center;margin-top:16px;">寄付する</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <div class="hero__label fade-in">NPO法人OIKOS</div>
+      <h1 class="hero__heading fade-in stagger-1">
+        すべての子どもたちが<br><span>明日を楽しみにできる</span><br>社会をつくる
+      </h1>
+      <p class="hero__sub fade-in stagger-2">
+        大学生が主体となり、子どもたちの居場所「ゆーすぽっと」を運営。<br>
+        年齢の近い学生だからこそ生まれる安心感で、子どもたちの「いま」を支えます。
+      </p>
+      <div class="hero__actions fade-in stagger-3">
+        <a href="#cta" class="btn-primary">活動を支援する →</a>
+        <a href="#vision" class="btn-outline">私たちについて</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- News Bar -->
+  <div class="news-bar">
+    <div class="news-bar__inner">
+      <span class="news-bar__tag">NEWS</span>
+      <div class="news-bar__list">
+        <div class="news-bar__item">
+          <span class="news-bar__date">2026.02.06</span>
+          <span class="news-bar__text"><a href="#">ANRI大学生向け起業プログラム「STARTLINE」に採択されました</a></span>
+        </div>
+        <div class="news-bar__item">
+          <span class="news-bar__date">2026.01.18</span>
+          <span class="news-bar__text"><a href="#">OIKOS科学大 拠点設立のお知らせ</a></span>
+        </div>
+        <div class="news-bar__item">
+          <span class="news-bar__date">2025.06.28</span>
+          <span class="news-bar__text"><a href="#">OIKOS東大 拠点設立のお知らせ</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vision / Mission -->
+  <section class="vision" id="vision">
+    <div class="container">
+      <div class="vision__grid">
+        <div class="vision__left fade-in">
+          <div class="vision__en-title">VISION</div>
+          <div class="section-label">Our Vision</div>
+          <h2 class="vision__heading">
+            すべての子どもたちが<br>明日を楽しみにできる<br>社会をつくる
+          </h2>
+          <p class="vision__desc">
+            学校と家庭の間に、安心して通い続けられる居場所が不足しています。<br>
+            気軽に話せる年上の存在がいない子どもたちの問題は、見えにくいまま進行します。<br>
+            私たちOIKOSは、その「制度の手前」にある子どもたちに向き合います。
+          </p>
+        </div>
+        <div class="vision__right fade-in stagger-2">
+          <div class="mission__label">Mission</div>
+          <ul class="mission__list">
+            <li class="mission__item fade-in stagger-1">
+              <span class="mission__num">01</span>
+              <span class="mission__text">「またね」と言えるオフラインの居場所をふやす</span>
+            </li>
+            <li class="mission__item fade-in stagger-2">
+              <span class="mission__num">02</span>
+              <span class="mission__text">子どもが気軽に話せるナナメ上の学生とのつながりを増やす</span>
+            </li>
+            <li class="mission__item fade-in stagger-3">
+              <span class="mission__num">03</span>
+              <span class="mission__text">ありのままでいいんだと思える子どもを増やす</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Youth Spot -->
+  <section class="youthspot" id="youthspot">
+    <div class="youthspot__inner">
+      <div class="youthspot__content fade-in">
+        <div class="section-label section-label--light">Key Concept</div>
+        <h2 class="youthspot__heading">ゆーすぽっと</h2>
+        <p class="youthspot__concept">YOUTH × SPOT / YOUR × SPOT</p>
+        <p class="youthspot__desc">
+          大学生など若い担い手が、子どもたちとの距離の近さを活かしてつくる居場所。<br><br>
+          <strong style="color:var(--text-on-dark);">YOUTH SPOT</strong> — 年齢の近い学生だからこそ生まれる安心感のある関わり<br><br>
+          <strong style="color:var(--text-on-dark);">YOUR SPOT</strong> — 「ここはあなたの場所」。自分のままでいられる場所
+        </p>
+        <div class="youthspot__tags">
+          <span class="youthspot__tag">食事</span>
+          <span class="youthspot__tag">遊び</span>
+          <span class="youthspot__tag">学び</span>
+          <span class="youthspot__tag">おしゃべり</span>
+        </div>
+      </div>
+      <div class="youthspot__visual fade-in-right">
+        <div class="youthspot__image-placeholder">
+          PHOTO
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities -->
+  <section class="activities" id="activities">
+    <div class="container">
+      <div class="activities__header fade-in">
+        <div class="activities__en-title">ACTIVITY</div>
+        <div class="section-label">What We Do</div>
+        <h2 class="activities__heading">3つの活動</h2>
+      </div>
+      <div class="activities__grid">
+        <div class="activity-card fade-in stagger-1">
+          <div class="activity-card__num">01</div>
+          <h3 class="activity-card__title">ゆーすぽっとの<br>設計と運営</h3>
+          <p class="activity-card__desc">
+            大学キャンパスや地域の既存資源を活用した学生主体の子どもの居場所。主に10代までの子ども・若者を対象に、東京大学、慶應義塾大学、東京科学大学などを拠点として食事・遊び・学び・おしゃべりの場を提供します。
+          </p>
+        </div>
+        <div class="activity-card fade-in stagger-2">
+          <div class="activity-card__num">02</div>
+          <h3 class="activity-card__title">他拠点の立ち上げ・<br>伴走支援</h3>
+          <p class="activity-card__desc">
+            立ち上げの設計支援、運営マニュアル提供、研修の実施。安全基準の策定、引き継ぎ体制の構築、関係機関との橋渡し。OIKOSの伴走なしでも自走できる状態を目指します。
+          </p>
+        </div>
+        <div class="activity-card fade-in stagger-3">
+          <div class="activity-card__num">03</div>
+          <h3 class="activity-card__title">ネットワーク形成・<br>調査・発信</h3>
+          <p class="activity-card__desc">
+            地域・行政・大学・NPO・企業等との連携ネットワーク構築。社会福祉協議会との連携や学生子ども食堂ネットワーク会議の開催、勉強会・報告会の開催、SNSでの情報発信に取り組みます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" id="stats">
+    <div class="stats__inner">
+      <div class="stats__heading fade-in">Results — 2026年1月時点</div>
+      <div class="stats__grid">
+        <div class="stat-item fade-in stagger-1">
+          <div class="stat-item__number">423<span class="stat-item__unit">人</span></div>
+          <div class="stat-item__label">のべ来訪子ども・若者数</div>
+        </div>
+        <div class="stat-item fade-in stagger-2">
+          <div class="stat-item__number">5<span class="stat-item__unit">拠点</span></div>
+          <div class="stat-item__label">連携している大学・団体の数</div>
+        </div>
+        <div class="stat-item fade-in stagger-3">
+          <div class="stat-item__number">97<span class="stat-item__unit">%</span></div>
+          <div class="stat-item__label">子ども・若者の満足度</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voices -->
+  <section class="voices" id="voices">
+    <div class="container">
+      <div class="voices__header fade-in">
+        <div class="voices__en-title">VOICES</div>
+        <div class="section-label">子どもたちの声</div>
+        <h2 class="voices__heading">届いた声</h2>
+      </div>
+      <div class="voices__grid">
+        <div class="voice-card fade-in stagger-1">
+          <div class="voice-card__border"></div>
+          <div class="voice-card__quote">"</div>
+          <p class="voice-card__text">
+            お兄さんたちがいるから、ここに来るのが楽しみ。学校のことも話せるし、ごはんもおいしい。
+          </p>
+          <span class="voice-card__author">— 小学5年生</span>
+        </div>
+        <div class="voice-card fade-in stagger-2">
+          <div class="voice-card__border"></div>
+          <div class="voice-card__quote">"</div>
+          <p class="voice-card__text">
+            家でも学校でもない場所があるって、なんか安心する。自分のままでいていいって思える。
+          </p>
+          <span class="voice-card__author">— 中学2年生</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="cta__header">
+      <div class="container">
+        <div class="cta__en-title fade-in">SUPPORT</div>
+        <div class="section-label fade-in">Get Involved</div>
+        <h2 class="cta__heading fade-in">参加・支援する</h2>
+      </div>
+    </div>
+    <div class="cta__grid">
+      <div class="cta-card fade-in stagger-1">
+        <div class="cta-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 class="cta-card__title">寄付で支援する</h3>
+        <p class="cta-card__desc">
+          1,000円で子ども一人に食事を提供。5,000円で活動備品の一部を支え、30,000円で一回の子ども食堂を運営できます。
+        </p>
+        <span class="cta-card__link">詳しく見る →</span>
+      </div>
+      <div class="cta-card fade-in stagger-2">
+        <div class="cta-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="cta-card__title">学生として参加する</h3>
+        <p class="cta-card__desc">
+          特別なスキルは不要。資金援助やノウハウ提供など伴走支援があります。月1回以上の開催を推奨しています。
+        </p>
+        <span class="cta-card__link">詳しく見る →</span>
+      </div>
+      <div class="cta-card fade-in stagger-3">
+        <div class="cta-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3 class="cta-card__title">企業・団体として連携する</h3>
+        <p class="cta-card__desc">
+          規模の大小は問いません。月1回の食材提供から年間の協賛まで、さまざまな形で連携できます。
+        </p>
+        <span class="cta-card__link">詳しく見る →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Greeting -->
+  <section class="greeting" id="greeting">
+    <div class="greeting__inner">
+      <div class="greeting__label fade-in">Message</div>
+      <h2 class="greeting__heading fade-in">代表あいさつ</h2>
+      <p class="greeting__text fade-in stagger-1">
+        原点は、2年前に立ち上げた荒川区の子ども食堂でした。<br><br>
+        そこで気づいたのは、子どもたちにとって食事以上に大切なものがあるということ。安心して過ごせる時間と、信頼できる関係が、子どもの心を支えているのだと。<br><br>
+        現在、大学3年生です。学生である今だからこそ、子どもたちとの距離が近い。その強みを活かして、持続可能な「居場所」の仕組みを創りたい。<br><br>
+        すべての子どもたちが「明日が楽しみだ」と思える社会を、一緒につくりませんか。
+      </p>
+      <div class="greeting__divider"></div>
+      <div class="greeting__name fade-in stagger-2">古川 陽登</div>
+      <div class="greeting__role fade-in stagger-2">NPO法人OIKOS 代表理事</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">OIKOS</div>
+          <div class="footer__org-name">特定非営利活動法人OIKOS</div>
+          <a href="mailto:oikos.npo@gmail.com" class="footer__email">oikos.npo@gmail.com</a>
+        </div>
+        <nav class="footer__nav">
+          <a href="#hero">ホーム</a>
+          <a href="#vision">私たちについて</a>
+          <a href="#activities">活動内容</a>
+          <a href="#cta">参加・支援</a>
+          <a href="#">お知らせ</a>
+          <a href="#">お問い合わせ</a>
+          <a href="#">団体情報</a>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 NPO法人OIKOS. All rights reserved.</span>
+        <span class="footer__address">東京都杉並区高井戸西3-4-22-314</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // IntersectionObserver for fade-in animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
+        observer.observe(el);
+      });
+
+      // Hamburger menu
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobileNav');
+
+      hamburger.addEventListener('click', function() {
+        mobileNav.classList.toggle('active');
+        var spans = hamburger.querySelectorAll('span');
+        if (mobileNav.classList.contains('active')) {
+          spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+    });
+
+    function closeMobileNav() {
+      var mobileNav = document.getElementById('mobileNav');
+      var hamburger = document.getElementById('hamburger');
+      mobileNav.classList.remove('active');
+      var spans = hamburger.querySelectorAll('span');
+      spans[0].style.transform = 'none';
+      spans[1].style.opacity = '1';
+      spans[2].style.transform = 'none';
+    }
+  </script>
+</body>
+</html>

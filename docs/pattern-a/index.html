@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPO法人OIKOS | すべての子どもたちが明日を楽しみにできる社会をつくる</title>
+  <meta name="description" content="NPO法人OIKOSは、すべての子どもたちが明日を楽しみにできる社会をつくるため、大学生が主体となり子どもの居場所「ゆーすぽっと」を運営しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #E8713A;
+      --primary-light: #FFF4ED;
+      --secondary: #5B8C6B;
+      --bg: #FFFBF7;
+      --bg-section: #FDF6EE;
+      --text: #2D2A26;
+      --text-sub: #7A7570;
+      --accent: #D4A574;
+      --radius-card: 16px;
+      --radius-btn: 24px;
+      --shadow-card: 0 2px 16px rgba(45, 42, 38, 0.06);
+      --shadow-hover: 0 8px 30px rgba(45, 42, 38, 0.12);
+      --max-width: 1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Headings */
+    h1, h2, h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .section-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--text-sub);
+      font-size: 16px;
+      max-width: 640px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius-btn);
+      font-size: 16px;
+      font-weight: 500;
+      font-family: 'Noto Sans JP', sans-serif;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #d4652f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 113, 58, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Photo placeholders */
+    .photo-placeholder {
+      background-color: var(--bg-section);
+      border-radius: var(--radius-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-sub);
+      font-size: 14px;
+      aspect-ratio: 16 / 9;
+      border: 2px dashed var(--accent);
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pattern label */
+    .pattern-label {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      z-index: 1001;
+      box-shadow: 0 2px 8px rgba(232, 113, 58, 0.3);
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 251, 247, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .nav .btn {
+      padding: 10px 24px;
+      font-size: 14px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%);
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.3;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-sub);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.9;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========== NEWS TICKER ========== */
+    .news-section {
+      padding: 60px 0;
+      background: #fff;
+      border-top: 1px solid rgba(45, 42, 38, 0.06);
+      border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .news-card {
+      padding: 24px;
+      border-radius: var(--radius-card);
+      background: var(--bg);
+      border: 1px solid rgba(45, 42, 38, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .news-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .news-date {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .news-title {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ========== VISION / MISSION ========== */
+    .vision-section {
+      padding: 100px 0;
+    }
+
+    .vision-block {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .vision-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .mission-card {
+      text-align: center;
+      padding: 40px 24px;
+      border-radius: var(--radius-card);
+      background: #fff;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+    }
+
+    .mission-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .mission-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .mission-card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .mission-card p {
+      color: var(--text-sub);
+      font-size: 14px;
+    }
+
+    /* ========== KEY CONCEPT ========== */
+    .concept-section {
+      padding: 100px 0;
+      background: var(--bg-section);
+    }
+
+    .concept-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .concept-text h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .concept-text p {
+      color: var(--text-sub);
+      margin-bottom: 16px;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .concept-tags {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .concept-tag {
+      background: #fff;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--secondary);
+      border: 1px solid rgba(91, 140, 107, 0.2);
+    }
+
+    .concept-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 4px;
+      text-align: center;
+    }
+
+    .concept-logo-sub {
+      font-size: 16px;
+      color: var(--text-sub);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ========== ACTIVITIES ========== */
+    .activities-section {
+      padding: 100px 0;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .activity-card {
+      border-radius: var(--radius-card);
+      background: #fff;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .activity-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .activity-card .photo-placeholder {
+      border-radius: 0;
+      border: none;
+      border-bottom: 2px dashed var(--accent);
+    }
+
+    .activity-body {
+      padding: 28px 24px;
+    }
+
+    .activity-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .activity-body h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .activity-body p {
+      color: var(--text-sub);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* ========== STATS ========== */
+    .stats-section {
+      padding: 80px 0;
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+    }
+
+    .stats-section .section-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .stats-section .section-title {
+      color: #fff;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat-item .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-item .stat-unit {
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .stat-item .stat-desc {
+      font-size: 15px;
+      opacity: 0.85;
+    }
+
+    /* ========== VOICE ========== */
+    .voice-section {
+      padding: 100px 0;
+      background: var(--bg-section);
+    }
+
+    .voice-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 48px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      position: relative;
+    }
+
+    .voice-card::before {
+      content: "\201C";
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      color: var(--primary-light);
+      position: absolute;
+      top: -10px;
+      left: 24px;
+      line-height: 1;
+    }
+
+    .voice-card blockquote {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .voice-card cite {
+      font-style: normal;
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    /* ========== SUPPORT CTA ========== */
+    .support-section {
+      padding: 100px 0;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .support-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 40px 28px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .support-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .support-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 20px;
+    }
+
+    .support-card:nth-child(1) .support-icon {
+      background: var(--primary-light);
+    }
+
+    .support-card:nth-child(2) .support-icon {
+      background: rgba(91, 140, 107, 0.1);
+    }
+
+    .support-card:nth-child(3) .support-icon {
+      background: rgba(212, 165, 116, 0.15);
+    }
+
+    .support-card h3 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .support-card p {
+      color: var(--text-sub);
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .support-card .btn {
+      width: 100%;
+    }
+
+    /* ========== MESSAGE ========== */
+    .message-section {
+      padding: 100px 0;
+      background: var(--bg-section);
+    }
+
+    .message-content {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .message-photo .photo-placeholder {
+      aspect-ratio: 3 / 4;
+    }
+
+    .message-text h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .message-text .message-role {
+      color: var(--text-sub);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .message-text p {
+      color: var(--text-sub);
+      font-size: 15px;
+      line-height: 2;
+      margin-bottom: 16px;
+    }
+
+    .message-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 24px;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 64px 0 32px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer .logo {
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .footer-about p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-nav h4,
+    .footer-contact h4 {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .footer-nav ul {
+      list-style: none;
+    }
+
+    .footer-nav li {
+      margin-bottom: 10px;
+    }
+
+    .footer-nav a {
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover {
+      color: #fff;
+    }
+
+    .footer-contact p,
+    .footer-contact a {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-contact a:hover {
+      color: #fff;
+    }
+
+    .footer-sns {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .footer-sns a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .footer-sns a:hover {
+      background: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 32px;
+      font-size: 13px;
+    }
+
+    /* ========== MOBILE ========== */
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 251, 247, 0.98);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(45, 42, 38, 0.1);
+      }
+
+      .nav.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero {
+        padding: 130px 0 72px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .news-grid,
+      .mission-grid,
+      .activities-grid,
+      .stats-grid,
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .concept-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .concept-visual {
+        order: -1;
+      }
+
+      .stat-item .stat-number {
+        font-size: 48px;
+      }
+
+      .message-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .message-photo {
+        max-width: 240px;
+        margin: 0 auto;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .vision-statement {
+        font-size: 22px;
+      }
+
+      .voice-card {
+        padding: 32px 24px;
+      }
+
+      .voice-card blockquote {
+        font-size: 17px;
+      }
+
+      .pattern-label {
+        top: auto;
+        bottom: 16px;
+        left: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Pattern Label -->
+<div class="pattern-label">Pattern A: ぬくもり</div>
+
+<!-- ========== HEADER ========== -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">OIKOS</a>
+    <nav class="nav" id="nav">
+      <a href="#about">OIKOSについて</a>
+      <a href="#activities">活動内容</a>
+      <a href="#support">参加・支援</a>
+      <a href="#news">お知らせ</a>
+      <a href="#support" class="btn btn-primary">寄付で応援する</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">NPO法人OIKOS</div>
+    <h1 class="fade-in">
+      すべての子どもたちが<br>
+      <span class="highlight">明日を楽しみ</span>にできる<br>
+      社会をつくる
+    </h1>
+    <p class="fade-in">
+      大学生が主体となり、子どもたちが安心して通い続けられる居場所「ゆーすぽっと」を全国に広げています。
+    </p>
+    <div class="hero-cta fade-in">
+      <a href="#support" class="btn btn-primary">活動を支援する</a>
+      <a href="#about" class="btn btn-outline">OIKOSについて知る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NEWS ========== -->
+<section class="news-section" id="news">
+  <div class="container">
+    <div class="news-grid fade-in">
+      <div class="news-card">
+        <div class="news-date">2026.02.06</div>
+        <div class="news-title">ANRI大学生向け起業プログラム「STARTLINE」に採択されました</div>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2026.01.18</div>
+        <div class="news-title">OIKOS科学大 拠点設立のお知らせ</div>
+      </div>
+      <div class="news-card">
+        <div class="news-date">2025.06.28</div>
+        <div class="news-title">OIKOS東大 拠点設立のお知らせ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== VISION / MISSION ========== -->
+<section class="vision-section" id="about">
+  <div class="container">
+    <div class="vision-block fade-in">
+      <div class="section-label">Vision</div>
+      <div class="vision-statement">
+        すべての子どもたちが<br>明日を楽しみにできる社会をつくる
+      </div>
+    </div>
+
+    <div class="section-header fade-in">
+      <div class="section-label">Mission</div>
+      <h2 class="section-title">3つのミッション</h2>
+      <p class="section-subtitle">ビジョン実現のために、OIKOSは3つの使命を掲げています。</p>
+    </div>
+
+    <div class="mission-grid">
+      <div class="mission-card fade-in">
+        <div class="mission-number">1</div>
+        <h3>「またね」と言える<br>居場所をふやす</h3>
+        <p>学校と家庭の間に、安心して通い続けられるオフラインの居場所をつくります。</p>
+      </div>
+      <div class="mission-card fade-in">
+        <div class="mission-number">2</div>
+        <h3>ナナメ上の<br>つながりを増やす</h3>
+        <p>子どもが気軽に話せる、年齢の近い学生との関わりを大切にします。</p>
+      </div>
+      <div class="mission-card fade-in">
+        <div class="mission-number">3</div>
+        <h3>ありのままで<br>いいんだと思える子を増やす</h3>
+        <p>自分のままでいられる場所があることで、子どもたちの心を支えます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KEY CONCEPT ========== -->
+<section class="concept-section">
+  <div class="container">
+    <div class="concept-content fade-in">
+      <div class="concept-text">
+        <div class="section-label">Key Concept</div>
+        <h2 class="section-title">「ゆーすぽっと」とは</h2>
+        <p>
+          大学生など若い担い手が、子どもたちとの距離の近さを活かしてつくる居場所。それが「ゆーすぽっと」です。
+        </p>
+        <p>
+          <strong>YOUTH SPOT</strong> -- 年齢の近い学生だからこそ生まれる安心感のある関わり。<br>
+          <strong>YOUR SPOT</strong> -- 「ここはあなたの場所」。自分のままでいられる場所。
+        </p>
+        <div class="concept-tags">
+          <span class="concept-tag">YOUTH x SPOT</span>
+          <span class="concept-tag">YOUR x SPOT</span>
+          <span class="concept-tag">食事・遊び・学び</span>
+          <span class="concept-tag">大学キャンパス</span>
+        </div>
+      </div>
+      <div class="concept-visual">
+        <div class="concept-logo">youth<br>spot</div>
+        <div class="concept-logo-sub">ゆーすぽっと</div>
+        <div class="photo-placeholder" style="margin-top: 32px;">
+          大学キャンパスでの活動の様子
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ACTIVITIES ========== -->
+<section class="activities-section" id="activities">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Activities</div>
+      <h2 class="section-title">3つの活動</h2>
+      <p class="section-subtitle">居場所づくりの実践から、全国展開の仕組みまで。</p>
+    </div>
+
+    <div class="activities-grid">
+      <div class="activity-card fade-in">
+        <div class="photo-placeholder">ゆーすぽっとでの食事風景</div>
+        <div class="activity-body">
+          <div class="activity-label">Activity 01</div>
+          <h3>ゆーすぽっとの設計と運営</h3>
+          <p>大学キャンパスや地域の既存資源を活用した学生主体の子どもの居場所。食事・遊び・学び・おしゃべりなど、子どもたちが安心して過ごせる時間を提供します。</p>
+        </div>
+      </div>
+      <div class="activity-card fade-in">
+        <div class="photo-placeholder">拠点立ち上げミーティングの様子</div>
+        <div class="activity-body">
+          <div class="activity-label">Activity 02</div>
+          <h3>他拠点の立ち上げ・伴走支援</h3>
+          <p>立ち上げの設計支援、運営マニュアル提供、研修の実施。大学を中心としつつ、公民館・空き家・地域施設も活用し、自走できる状態を目指します。</p>
+        </div>
+      </div>
+      <div class="activity-card fade-in">
+        <div class="photo-placeholder">ネットワーク会議・勉強会の様子</div>
+        <div class="activity-body">
+          <div class="activity-label">Activity 03</div>
+          <h3>ネットワーク形成・調査・発信</h3>
+          <p>地域・行政・大学・NPO・企業等との連携ネットワーク構築。学生子ども食堂ネットワーク会議の開催や、SNSでの情報発信に取り組んでいます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS ========== -->
+<section class="stats-section">
+  <div class="container fade-in">
+    <div class="section-label">Impact</div>
+    <h2 class="section-title">OIKOSの実績</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">423<span class="stat-unit">人</span></div>
+        <div class="stat-desc">のべ来訪子ども・若者数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5<span class="stat-unit">拠点</span></div>
+        <div class="stat-desc">連携している大学・団体の数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">97<span class="stat-unit">%</span></div>
+        <div class="stat-desc">子ども・若者の満足度</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== VOICE ========== -->
+<section class="voice-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Voice</div>
+      <h2 class="section-title">子どもたちの声</h2>
+    </div>
+    <div class="voice-card fade-in">
+      <blockquote>
+        ここに来ると、なんか安心する。<br>
+        お兄さんお姉さんが気軽に話してくれるから、<br>
+        学校のこととかも相談できる。<br>
+        「またね」って言ってもらえるのがうれしい。
+      </blockquote>
+      <cite>-- ゆーすぽっと利用者（中学2年生）</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SUPPORT CTA ========== -->
+<section class="support-section" id="support">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Support</div>
+      <h2 class="section-title">参加・支援する</h2>
+      <p class="section-subtitle">あなたの力で、子どもたちの居場所を一緒にひろげませんか。</p>
+    </div>
+
+    <div class="support-grid">
+      <div class="support-card fade-in">
+        <div class="support-icon">&#x1F9E1;</div>
+        <h3>寄付で支援する</h3>
+        <p>1,000円で子ども一人に食事を、5,000円でプログラム備品を、30,000円で一回の子ども食堂を運営できます。</p>
+        <a href="#" class="btn btn-primary">寄付する</a>
+      </div>
+      <div class="support-card fade-in">
+        <div class="support-icon">&#x1F393;</div>
+        <h3>学生として活動に参加する</h3>
+        <p>特別なスキルは不要。資金援助やノウハウ提供など伴走支援があるので、月1回からの参加で居場所をつくれます。</p>
+        <a href="#" class="btn btn-outline" style="border-color: var(--secondary); color: var(--secondary);">参加について知る</a>
+      </div>
+      <div class="support-card fade-in">
+        <div class="support-icon">&#x1F3E2;</div>
+        <h3>企業・団体として連携する</h3>
+        <p>規模の大小は問いません。月1回の食材提供から年間の協賛まで、さまざまな形でご一緒できます。</p>
+        <a href="#" class="btn btn-outline" style="border-color: var(--accent); color: var(--accent);">連携のご相談</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MESSAGE ========== -->
+<section class="message-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Message</div>
+      <h2 class="section-title">代表あいさつ</h2>
+    </div>
+
+    <div class="message-content fade-in">
+      <div class="message-photo">
+        <div class="photo-placeholder">代表・古川陽登の写真</div>
+      </div>
+      <div class="message-text">
+        <h3>古川 陽登</h3>
+        <div class="message-role">代表理事 / 大学3年生</div>
+        <p>
+          原点は2年前に立ち上げた荒川区の子ども食堂でした。そこで気づいたのは、食事以上に、安心して過ごせる時間と関係が子どもの心を支えているということです。
+        </p>
+        <p>
+          学校でも家庭でもない、第三の場所。そこに年齢の近い学生がいることで、子どもたちは「ありのままの自分でいていいんだ」と感じることができます。
+        </p>
+        <p>
+          学生である今だからこそできる仕組みを創りたい。OIKOSは、子どもたちが「またね」と言える居場所を全国に広げていきます。
+        </p>
+        <div class="message-name">古川 陽登</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-about">
+        <div class="logo">OIKOS</div>
+        <p>特定非営利活動法人OIKOS<br>すべての子どもたちが明日を楽しみにできる社会をつくる</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#">ホーム</a></li>
+          <li><a href="#about">OIKOSについて</a></li>
+          <li><a href="#activities">活動内容</a></li>
+          <li><a href="#support">参加・支援したい方へ</a></li>
+          <li><a href="#news">お知らせ</a></li>
+          <li><a href="#">団体情報</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>
+          東京都杉並区高井戸西3-4-22-314<br>
+          <a href="mailto:oikos.npo@gmail.com">oikos.npo@gmail.com</a>
+        </p>
+        <div class="footer-sns">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="X (Twitter)">X</a>
+          <a href="#" aria-label="Note">No</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 NPO法人OIKOS. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+  // Hamburger menu
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('nav').classList.toggle('active');
+  });
+
+  // Close menu on link click
+  document.querySelectorAll('.nav a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('nav').classList.remove('active');
+    });
+  });
+
+  // Fade-in on scroll with IntersectionObserver
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
