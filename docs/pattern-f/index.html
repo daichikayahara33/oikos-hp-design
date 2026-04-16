@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPO法人OIKOS | ストーリーテリング</title>
+  <meta name="description" content="NPO法人OIKOSの新ホームページ案『ストーリーテリング』。写真、言葉、余韻で、子どもたちと大学生の出会いを物語として伝えるデザインです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #8C4A32;
+      --secondary: #355C5A;
+      --accent: #D9A25F;
+      --bg: #F7F1E8;
+      --bg-soft: #EDE4D6;
+      --bg-deep: #2A2623;
+      --paper: #FBF6EF;
+      --text: #2E2925;
+      --text-sub: #6F655D;
+      --line: rgba(46, 41, 37, 0.14);
+      --shadow: 0 24px 60px rgba(42, 38, 35, 0.16);
+      --max-width: 1160px;
+      --radius: 24px;
+      --transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 12px;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; object-fit: cover; }
+
+    .pattern-label {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 9999;
+      background: rgba(42, 38, 35, 0.82);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      backdrop-filter: blur(10px);
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      transition: background var(--transition), box-shadow var(--transition), border-color var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+
+    .header.scrolled {
+      background: rgba(247, 241, 232, 0.88);
+      border-color: var(--line);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 28px rgba(42, 38, 35, 0.09);
+    }
+
+    .header-inner {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+      height: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      font-family: 'EB Garamond', serif;
+      font-size: 36px;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.16em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-sub);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform .25s, background .25s, border-color .25s, color .25s;
+      font-family: inherit;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 16px 30px rgba(140, 74, 50, 0.24); }
+    .btn-outline { border-color: rgba(46, 41, 37, 0.18); color: var(--text); background: rgba(255,255,255,0.38); }
+    .btn-outline:hover { background: rgba(255,255,255,0.6); }
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 78px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(247,241,232,0.86), rgba(247,241,232,0.98)),
+        url('../images/K3M33180.jpg') center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(247,241,232,0.93) 0%, rgba(247,241,232,0.7) 46%, rgba(247,241,232,0.12) 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 80px 0;
+      display: grid;
+      grid-template-columns: 0.95fr 0.85fr;
+      gap: 34px;
+      align-items: end;
+    }
+
+    .chapter {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-family: 'EB Garamond', serif;
+      font-size: 24px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+
+    .chapter::before {
+      content: 'Chapter 1';
+      font-size: 13px;
+      font-family: 'Noto Sans JP', sans-serif;
+      letter-spacing: 0.18em;
+      color: var(--text-sub);
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(42px, 6.3vw, 82px);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+
+    .hero p {
+      max-width: 560px;
+      color: var(--text-sub);
+      font-size: 17px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .hero-leadline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.46);
+      border: 1px solid rgba(46, 41, 37, 0.08);
+      color: var(--text-sub);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-quote {
+      align-self: end;
+      padding: 26px 28px;
+      border-radius: 24px;
+      background: rgba(42, 38, 35, 0.72);
+      color: #fff;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      max-width: 420px;
+      margin-left: auto;
+      transform: translateY(36px);
+    }
+
+    .hero-quote::before {
+      content: 'Field note';
+      display: block;
+      margin-bottom: 10px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .hero-quote p {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 24px;
+      line-height: 1.72;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .hero-quote span {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.68);
+    }
+
+    .section-contrast {
+      background: linear-gradient(180deg, rgba(251,246,239,0.96), rgba(244,235,224,0.96));
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 20px 20px 18px 74px;
+      background: rgba(255,255,255,0.38);
+      border-radius: 20px;
+      border: 1px solid rgba(46, 41, 37, 0.08);
+      backdrop-filter: blur(6px);
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 38px;
+      top: 58px;
+      bottom: -16px;
+      width: 1px;
+      background: rgba(140, 74, 50, 0.18);
+    }
+
+    .timeline-item:last-child::after { display: none; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr 0.9fr;
+      gap: 22px;
+    }
+
+    .metrics-card.featured {
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+      box-shadow: 0 18px 34px rgba(0,0,0,0.12);
+    }
+
+    .metrics-card.featured strong { font-size: 68px; }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .quote-card h3 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+    }
+
+    .support-panel {
+      border-radius: 28px;
+      padding: 44px;
+      background: linear-gradient(135deg, rgba(140,74,50,0.96), rgba(58,47,41,0.96));
+      color: #fff;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .support-panel::after {
+      content: '';
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .support-note {
+      margin-top: 14px;
+      font-size: 13px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.72);
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .story-grid,
+      .story-grid.reverse,
+      .metrics,
+      .quote-grid { grid-template-columns: 1fr; }
+      .story-grid.reverse .story-image,
+      .story-grid.reverse .story-copy { order: initial; }
+      .hero-quote { margin-top: 20px; transform: none; max-width: none; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero { min-height: auto; }
+      .hero-inner { padding: 64px 0; }
+      .story-image { min-height: 300px; }
+      .container, .header-inner, .hero-inner { width: min(var(--max-width), calc(100% - 32px)); }
+      .section { padding: 84px 0; }
+      .support-panel { padding: 32px 26px; }
+      .hero-quote { padding: 22px 22px; }
+      .timeline-item { padding-left: 68px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .btn:hover {
+        transform: none;
+      }
+    }
+
+    .hero-quote p {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 28px;
+      line-height: 1.75;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .hero-quote span {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-soft { background: var(--bg-soft); }
+    .section-deep { background: var(--bg-deep); color: #fff; }
+
+    .section-head {
+
+    .hero-quote p {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 28px;
+      line-height: 1.75;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .hero-quote span {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-soft { background: var(--bg-soft); }
+    .section-deep { background: var(--bg-deep); color: #fff; }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-family: 'EB Garamond', serif;
+      font-size: 26px;
+      color: var(--accent);
+    }
+
+    .section-label::before {
+      content: attr(data-chapter);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--text-sub);
+      text-transform: uppercase;
+    }
+
+    .section-deep .section-label::before { color: rgba(255,255,255,0.6); }
+
+    .section-head h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .section-head p { color: var(--text-sub); }
+    .section-deep .section-head p { color: rgba(255,255,255,0.74); }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .story-grid.reverse { grid-template-columns: 0.95fr 1.05fr; }
+    .story-grid.reverse .story-image { order: 2; }
+    .story-grid.reverse .story-copy { order: 1; }
+
+    .story-image {
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 520px;
+      box-shadow: var(--shadow);
+    }
+
+    .story-image img { width: 100%; height: 100%; }
+
+    .story-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 8px 0;
+    }
+
+    .story-copy h3 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 38px;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .story-copy p { color: var(--text-sub); }
+    .section-deep .story-copy p { color: rgba(255,255,255,0.74); }
+
+    .story-quote {
+      padding: 22px 26px;
+      border-left: 2px solid var(--accent);
+      background: rgba(255,255,255,0.46);
+      border-radius: 0 16px 16px 0;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 22px;
+      line-height: 1.8;
+    }
+
+    .section-deep .story-quote {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 20px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 22px 24px 22px 76px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 20px;
+      border: 1px solid rgba(46, 41, 37, 0.08);
+    }
+
+    .timeline-item::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 24px;
+      top: 24px;
+      font-family: 'EB Garamond', serif;
+      font-size: 30px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .timeline-item h3,
+    .metrics-card h3,
+    .support-panel h3,
+    .quote-card h3 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 26px;
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+
+    .timeline-item p,
+    .metrics-card p,
+    .support-panel p,
+    .quote-card p { color: var(--text-sub); }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .metrics-card {
+      padding: 30px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .metrics-card strong {
+      display: block;
+      font-family: 'EB Garamond', serif;
+      font-size: 54px;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .metrics-card h3,
+    .metrics-card p { color: #fff; }
+    .metrics-card p { opacity: 0.76; }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .quote-card {
+      padding: 32px;
+      border-radius: 22px;
+      background: var(--paper);
+      border: 1px solid rgba(46, 41, 37, 0.08);
+      box-shadow: 0 16px 38px rgba(42, 38, 35, 0.08);
+    }
+
+    .quote-card p {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 24px;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .quote-meta {
+      font-size: 12px;
+      color: var(--text-sub);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .support-panel {
+      border-radius: 28px;
+      padding: 44px;
+      background: linear-gradient(135deg, rgba(140,74,50,0.96), rgba(58,47,41,0.96));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .support-panel .section-label { color: #f1c690; }
+    .support-panel .section-label::before { color: rgba(255,255,255,0.66); }
+    .support-panel h3, .support-panel p { color: #fff; }
+    .support-panel p { opacity: 0.82; }
+
+    .support-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .support-panel .btn-outline { border-color: rgba(255,255,255,0.28); color: #fff; background: transparent; }
+    .support-panel .btn-outline:hover { background: rgba(255,255,255,0.08); }
+    .support-panel .btn-primary { background: var(--accent); color: #2A2623; box-shadow: 0 18px 30px rgba(0,0,0,0.16); }
+
+    .footer {
+      padding: 42px 0 58px;
+      border-top: 1px solid var(--line);
+      color: var(--text-sub);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .story-grid,
+      .story-grid.reverse,
+      .metrics,
+      .quote-grid { grid-template-columns: 1fr; }
+      .story-grid.reverse .story-image,
+      .story-grid.reverse .story-copy { order: initial; }
+      .hero-quote { margin-top: 20px; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero { min-height: auto; }
+      .hero-inner { padding: 64px 0; }
+      .story-image { min-height: 380px; }
+      .container, .header-inner, .hero-inner { width: min(var(--max-width), calc(100% - 32px)); }
+      .section { padding: 84px 0; }
+      .support-panel { padding: 32px 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern-label">Pattern F / ストーリーテリング</div>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">OIKOS</span>
+        <span class="logo-sub">A STORY OF PLACE</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="#about">なぜこの活動か</a></li>
+          <li><a href="#activities">どんな変化があるか</a></li>
+          <li><a href="#support">どう関われるか</a></li>
+        </ul>
+        <a href="#support" class="btn btn-outline">参加・支援する</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="chapter">Story begins here</div>
+          <h1>帰る場所が増えると、<br>明日を待つ気持ちも増えていく。</h1>
+          <p>OIKOSがつくるのは、子どもたちと大学生が出会い、同じ時間を重ねる場所。この案では、活動を説明するのではなく、そこに生まれる変化を物語として追体験できるトップページを目指します。</p>
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">物語を読む</a>
+            <a href="#support" class="btn btn-outline">次の章へ参加する</a>
+          </div>
+          <div class="hero-leadline">課題 → 出会い → 変化 → 参加 の流れで、OIKOSの価値を体験として見せる。</div>
+        </div>
+        <aside class="hero-quote">
+          <p>「また来るね」と言って帰っていく子の背中を見送るたびに、この場所には意味があると思う。</p>
+          <span>University student / youth spot</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container story-grid">
+        <div class="story-image">
+          <img src="../images/K3M32985.jpg" alt="子どもと大学生が一緒に活動する写真">
+        </div>
+        <div class="story-copy">
+          <div class="section-label" data-chapter="Chapter 2">Why we start</div>
+          <h3>学校や家庭とは別に、安心していていい場所が必要だった。</h3>
+          <p>子どもが何かを頑張るための場所ではなく、ただそのまま来ていい場所。OIKOSの活動は、そうした空白に小さな灯りを置くところから始まります。</p>
+          <div class="story-quote">「何も話さなくても、ここに座っていていいと思えた日があった。」</div>
+          <p>この案では、理念や事業説明をひと息で読ませるのではなく、写真と短い言葉をつなぎながら、なぜこの活動が必要なのかを静かに伝えていきます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft section-contrast" id="activities">
+      <div class="container story-grid reverse">
+        <div class="story-image">
+          <img src="../images/K3M33168.jpg" alt="居場所で笑い合う子どもたちと大学生">
+        </div>
+        <div class="story-copy">
+          <div class="section-label" data-chapter="Chapter 3">What happens here</div>
+          <h3>出会って、話して、少しずつ安心が積み重なっていく。</h3>
+          <p>居場所の時間は、大きな出来事ではなく、小さなやり取りの連続でできています。大学生が近い存在としてそこにいることが、子どもたちにとっての安心につながります。</p>
+          <div class="timeline">
+            <article class="timeline-item" data-step="01">
+              <h3>まずは来てみる</h3>
+              <p>勉強しても、遊んでも、話さなくてもいい。自分のペースでいられる入口があります。</p>
+            </article>
+            <article class="timeline-item" data-step="02">
+              <h3>顔なじみが増える</h3>
+              <p>何度か通ううちに、学生スタッフや他の子どもたちとの関係が少しずつ育っていきます。</p>
+            </article>
+            <article class="timeline-item" data-step="03">
+              <h3>明日を考えられるようになる</h3>
+              <p>安心できる場所があることで、学校や日常のことを少し前向きに見られるようになることがあります。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-deep">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label" data-chapter="Chapter 4">Impact</div>
+          <h2>数字も、ひとつひとつの物語の集まりとして見せる。</h2>
+          <p>大きな成果を誇示するのではなく、積み重なった変化の輪郭として実績を置くセクションです。</p>
+        </div>
+        <div class="metrics">
+          <article class="metrics-card featured">
+            <strong>423</strong>
+            <h3>出会ってきた子どもたち</h3>
+            <p>一度きりではなく、繰り返し訪れた関係の積み重ねです。</p>
+          </article>
+          <article class="metrics-card">
+            <strong>5</strong>
+            <h3>ひろがる拠点</h3>
+            <p>大学生の想いが、地域ごとの新しい居場所へとつながっています。</p>
+          </article>
+          <article class="metrics-card">
+            <strong>97%</strong>
+            <h3>また来たい</h3>
+            <p>安心して戻ってこられる場所になっていることを示す数字です。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label" data-chapter="Chapter 5">Voices</div>
+          <h2>その場にいた人の言葉が、いちばん正確に活動を語る。</h2>
+          <p>説明文より先に届くような、短い言葉の強さを活かす見せ方です。</p>
+        </div>
+        <div class="quote-grid">
+          <article class="quote-card">
+            <h3>子どもの声</h3>
+            <p>「ここで会ったお姉さんに、また話したいことがある。」</p>
+            <span class="quote-meta">中学生参加者</span>
+          </article>
+          <article class="quote-card">
+            <h3>学生スタッフの声</h3>
+            <p>「支援しているつもりだったけれど、むしろ自分の方が居場所をもらっていた。」</p>
+            <span class="quote-meta">大学生ボランティア</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="support">
+      <div class="container">
+        <div class="support-panel">
+          <div class="section-label" data-chapter="Final chapter">Support</div>
+          <h3>この物語の続きは、支えてくれる人と一緒に書いていく。</h3>
+          <p>寄付、連携、ボランティア参加。OIKOSの居場所づくりは、誰かひとりの力ではなく、関わる人の想いが重なって続いていきます。最後に行動を促すセクションも、強い販促ではなく、余韻のある呼びかけとして設計します。</p>
+          <div class="support-actions">
+            <a href="#top" class="btn btn-outline">最初から読む</a>
+            <a href="#activities" class="btn btn-outline">変化を見る</a>
+            <a href="#support" class="btn btn-primary">寄付・参加を考える</a>
+          </div>
+          <div class="support-note">この案では、最後の行動喚起も販促ではなく「物語の続きに加わる」感覚で設計しています。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>NPO法人OIKOS — Pattern F「ストーリーテリング」</p>
+      <p>Editorial, emotional, memorable.</p>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    });
+  </script>
+</body>
+</html>

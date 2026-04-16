@@ -4,208 +4,514 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OIKOS HP デザイン投票</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f4f1eb;
+    --paper: rgba(255,255,255,0.86);
+    --paper-strong: rgba(255,255,255,0.94);
+    --text: #1a1a2e;
+    --text-sub: #6b7280;
+    --line: rgba(26,26,46,0.08);
+    --shadow: 0 14px 40px rgba(17, 24, 39, 0.08);
+    --shadow-hover: 0 24px 60px rgba(17, 24, 39, 0.14);
+  }
+
   body {
     font-family: 'Noto Sans JP', sans-serif;
-    background: #f8f8f6;
-    color: #1a1a2e;
+    background:
+      radial-gradient(circle at top, rgba(255,255,255,0.92), transparent 35%),
+      linear-gradient(180deg, #f7f3ee 0%, var(--bg) 100%);
+    color: var(--text);
     min-height: 100vh;
   }
+
+  .shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
   .header {
     text-align: center;
-    padding: 60px 24px 40px;
+    padding: 84px 0 28px;
   }
+
+  .header-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-sub);
+  }
+
+  .header-kicker::before,
+  .header-kicker::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: rgba(26,26,46,0.16);
+  }
+
   .header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 12px;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.18;
+    letter-spacing: -0.05em;
+    margin-bottom: 16px;
   }
+
   .header p {
     font-size: 16px;
-    color: #6b7280;
-    max-width: 600px;
+    color: var(--text-sub);
+    max-width: 760px;
     margin: 0 auto;
-    line-height: 1.8;
+    line-height: 1.95;
   }
+
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+
+  .header-pill {
+    font-size: 12px;
+    color: #4b5563;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--line);
+  }
+
+  .compare-note {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 0 2px 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .compare-note strong {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .compare-note span {
+    font-size: 13px;
+    color: var(--text-sub);
+  }
+
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 32px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 24px 80px;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 28px;
+    padding: 8px 0 88px;
   }
+
   .card {
-    background: #fff;
-    border-radius: 16px;
+    background: var(--paper);
+    border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
     text-decoration: none;
     color: inherit;
     display: block;
   }
+
   .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(26,26,46,0.14);
   }
+
+  .card:focus-visible {
+    outline: 3px solid #1A1A2E;
+    outline-offset: 4px;
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px rgba(26,26,46,0.18);
+  }
+
   .card-preview {
-    height: 220px;
+    height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
   }
+
+  .card-preview::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 84px;
+    background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2));
+    pointer-events: none;
+  }
+
   .card-a .card-preview { background: #FFFBF7; }
   .card-b .card-preview { background: #1A1A2E; }
   .card-c .card-preview { background: #FFF8F0; }
-  .card-preview .pattern-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
+  .card-d .card-preview { background: #F8F6F1; }
+  .card-e .card-preview { background: #F4F7FA; }
+  .card-f .card-preview { background: #F7F1E8; }
+  .card-b .card-preview::after { background: linear-gradient(180deg, transparent, rgba(26,26,46,0.34)); }
+
+  .card-d .card-preview::before,
+  .card-e .card-preview::before,
+  .card-f .card-preview::before {
+    content: '';
+    position: absolute;
+    inset: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(26,26,46,0.06);
+    pointer-events: none;
+  }
+
+  .card-d .card-preview::before { border-color: rgba(47,79,74,0.12); }
+  .card-e .card-preview::before { border-color: rgba(16,35,63,0.1); }
+  .card-f .card-preview::before { border-color: rgba(140,74,50,0.14); }
+
+  .pattern-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     position: absolute;
-    top: 16px;
-    left: 16px;
-    padding: 4px 12px;
-    border-radius: 4px;
+    top: 18px;
+    left: 18px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    z-index: 1;
   }
+
   .card-a .pattern-label { color: #E8713A; background: rgba(232,113,58,0.1); }
-  .card-b .pattern-label { color: #E07B4C; background: rgba(224,123,76,0.15); }
+  .card-b .pattern-label { color: #E9B194; background: rgba(255,255,255,0.08); }
   .card-c .pattern-label { color: #FF6B35; background: rgba(255,107,53,0.1); }
-  .card-preview .concept { font-size: 48px; font-weight: 700; }
+  .card-d .pattern-label { color: #2F4F4A; background: rgba(47,79,74,0.08); }
+  .card-e .pattern-label { color: #10233F; background: rgba(16,35,63,0.08); }
+  .card-f .pattern-label { color: #8C4A32; background: rgba(140,74,50,0.1); }
+
+  .concept {
+    font-size: clamp(42px, 5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    transform: translateY(10px);
+  }
+
   .card-a .concept { color: #E8713A; }
   .card-b .concept { color: #fff; }
   .card-c .concept { color: #FF6B35; }
-  .card-body { padding: 28px 24px; }
-  .card-body h2 { font-size: 22px; margin-bottom: 8px; }
-  .card-body .subtitle {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #9ca3af;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
+  .card-d .concept { color: #2F4F4A; }
+  .card-e .concept { color: #10233F; }
+  .card-f .concept { color: #8C4A32; }
+
+  .card-body { padding: 30px 26px 22px; }
+
+  .card-body h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    letter-spacing: -0.03em;
   }
-  .card-body p { font-size: 14px; line-height: 1.8; color: #4b5563; }
-  .card-body .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+  .subtitle {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    color: #9ca3af;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .card-body p {
+    font-size: 14px;
+    line-height: 1.88;
+    color: #4b5563;
+    min-height: 84px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
   .tag {
     font-size: 12px;
-    padding: 4px 10px;
+    padding: 5px 10px;
     border-radius: 999px;
     background: #f3f4f6;
     color: #6b7280;
   }
+
   .card-a .tag { background: #FFF4ED; color: #E8713A; }
-  .card-b .tag { background: #f0f0f8; color: #1A1A2E; }
+  .card-b .tag { background: rgba(240,240,248,0.9); color: #1A1A2E; }
   .card-c .tag { background: #FFF8F0; color: #FF6B35; }
+  .card-d .tag { background: #EFEBE3; color: #2F4F4A; }
+  .card-e .tag { background: #EAF1F7; color: #10233F; }
+  .card-f .tag { background: #F0E5D8; color: #8C4A32; }
+
+  .swatches {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    z-index: 1;
+  }
+
+  .swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.55);
+  }
+
   .card-cta {
-    display: block;
-    text-align: center;
-    padding: 16px;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px 18px 26px;
+    font-weight: 700;
     font-size: 15px;
     border-top: 1px solid #f3f4f6;
     transition: background 0.2s;
   }
+
+  .card-cta::after {
+    content: '→';
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+  }
+
   .card-a .card-cta { color: #E8713A; }
   .card-a .card-cta:hover { background: #FFF4ED; }
   .card-b .card-cta { color: #E07B4C; }
   .card-b .card-cta:hover { background: #f0f0f8; }
   .card-c .card-cta { color: #FF6B35; }
   .card-c .card-cta:hover { background: #FFF8F0; }
-  .footer { text-align: center; padding: 40px 24px; font-size: 13px; color: #9ca3af; }
-  .swatches {
-    display: flex; gap: 8px;
-    position: absolute; bottom: 16px; right: 16px;
+  .card-d .card-cta { color: #2F4F4A; }
+  .card-d .card-cta:hover { background: #EFEBE3; }
+  .card-e .card-cta { color: #10233F; }
+  .card-e .card-cta:hover { background: #EAF1F7; }
+  .card-f .card-cta { color: #8C4A32; }
+  .card-f .card-cta:hover { background: #F0E5D8; }
+
+  .footer {
+    text-align: center;
+    padding: 42px 24px 46px;
+    font-size: 13px;
+    color: #9ca3af;
   }
-  .swatch {
-    width: 24px; height: 24px; border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.5);
+
+  @media (max-width: 760px) {
+    .shell { padding: 0 16px; }
+    .header { padding: 66px 0 24px; }
+    .header h1 { font-size: 34px; }
+    .compare-note { padding-bottom: 14px; }
+    .cards { gap: 22px; padding: 6px 0 76px; }
+    .card-preview { height: 214px; }
+    .card-body p { min-height: auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
+    .card:hover,
+    .card:focus-visible { transform: none; }
   }
 </style>
 </head>
 <body>
-  <div class="header">
-    <h1>OIKOS HP デザイン投票</h1>
-    <p>NPO法人OIKOSの新しいホームページのデザインを3パターン用意しました。<br>気に入ったデザインをクリックして確認し、投票してください。</p>
-  </div>
-  <div class="cards">
-    <a href="pattern-a/" class="card card-a">
-      <div class="card-preview">
-        <span class="pattern-label">Pattern A</span>
-        <span class="concept">ぬくもり</span>
-        <div class="swatches">
-          <div class="swatch" style="background:#E8713A"></div>
-          <div class="swatch" style="background:#5B8C6B"></div>
-          <div class="swatch" style="background:#FFFBF7"></div>
-        </div>
+  <div class="shell">
+    <div class="header">
+      <span class="header-kicker">OIKOS Homepage Taste Comparison</span>
+      <h1>6つの方向性から、<br>OIKOSらしさを選ぶ。</h1>
+      <p>NPO法人OIKOSの新しいホームページ候補を、テイスト比較のために6パターン用意しました。<br>気に入った案を見るだけでなく、どの方向がいちばん団体らしく見えるかを比べてください。</p>
+      <div class="header-meta">
+        <span class="header-pill">あたたかさ</span>
+        <span class="header-pill">洗練</span>
+        <span class="header-pill">信頼感</span>
+        <span class="header-pill">物語性</span>
       </div>
-      <div class="card-body">
-        <h2>Pattern A: ぬくもり</h2>
-        <div class="subtitle">WARM &amp; TRUSTWORTHY</div>
-        <p>温かみと信頼感を重視。クリーム色の背景に明朝体の見出し、やわらかな角丸とたっぷりの余白。サイト自体が「居心地の良い場所」であることを体現します。</p>
-        <div class="tags">
-          <span class="tag">明朝体</span>
-          <span class="tag">クリーム背景</span>
-          <span class="tag">やわらかい角丸</span>
-          <span class="tag">Airbnb風</span>
+    </div>
+
+    <div class="compare-note">
+      <strong>比較の見どころ</strong>
+      <span>ヒーローの印象 / 色の温度 / 情報の見せ方 / 支援したくなる空気感</span>
+    </div>
+
+    <div class="cards">
+      <a href="pattern-a/" class="card card-a">
+        <div class="card-preview">
+          <span class="pattern-label">Pattern A</span>
+          <span class="concept">ぬくもり</span>
+          <div class="swatches">
+            <div class="swatch" style="background:#E8713A"></div>
+            <div class="swatch" style="background:#5B8C6B"></div>
+            <div class="swatch" style="background:#FFFBF7"></div>
+          </div>
         </div>
-      </div>
-      <div class="card-cta">このデザインを見る →</div>
-    </a>
-    <a href="pattern-b/" class="card card-b">
-      <div class="card-preview">
-        <span class="pattern-label">Pattern B</span>
-        <span class="concept">凛</span>
-        <div class="swatches">
-          <div class="swatch" style="background:#E07B4C"></div>
-          <div class="swatch" style="background:#4A7C6F"></div>
-          <div class="swatch" style="background:#1A1A2E"></div>
+        <div class="card-body">
+          <h2>Pattern A: ぬくもり</h2>
+          <div class="subtitle">Warm &amp; Trustworthy</div>
+          <p>温かみと信頼感を重視。クリーム色の背景に明朝体の見出し、やわらかな角丸とたっぷりの余白。サイト自体が「居心地の良い場所」であることを体現します。</p>
+          <div class="tags">
+            <span class="tag">明朝体</span>
+            <span class="tag">クリーム背景</span>
+            <span class="tag">やわらかい角丸</span>
+            <span class="tag">Airbnb風</span>
+          </div>
         </div>
-      </div>
-      <div class="card-body">
-        <h2>Pattern B: 凛</h2>
-        <div class="subtitle">MODERN &amp; REFINED</div>
-        <p>モダンで洗練されたミニマルデザイン。ネイビーとホワイトの交互セクション、大胆なタイポグラフィで「社会を変える」強いメッセージを伝えます。</p>
-        <div class="tags">
-          <span class="tag">ミニマル</span>
-          <span class="tag">ダーク/ライト交互</span>
-          <span class="tag">大胆な文字</span>
-          <span class="tag">カタリバ風</span>
+        <div class="card-cta">このデザインを見る</div>
+      </a>
+
+      <a href="pattern-b/" class="card card-b">
+        <div class="card-preview">
+          <span class="pattern-label">Pattern B</span>
+          <span class="concept">凛</span>
+          <div class="swatches">
+            <div class="swatch" style="background:#E07B4C"></div>
+            <div class="swatch" style="background:#4A7C6F"></div>
+            <div class="swatch" style="background:#1A1A2E"></div>
+          </div>
         </div>
-      </div>
-      <div class="card-cta">このデザインを見る →</div>
-    </a>
-    <a href="pattern-c/" class="card card-c">
-      <div class="card-preview">
-        <span class="pattern-label">Pattern C</span>
-        <span class="concept">つながり</span>
-        <div class="swatches">
-          <div class="swatch" style="background:#FF6B35"></div>
-          <div class="swatch" style="background:#2EC4B6"></div>
-          <div class="swatch" style="background:#FFD166"></div>
+        <div class="card-body">
+          <h2>Pattern B: 凛</h2>
+          <div class="subtitle">Modern &amp; Refined</div>
+          <p>モダンで洗練されたミニマルデザイン。ネイビーとホワイトの交互セクション、大胆なタイポグラフィで「社会を変える」強いメッセージを伝えます。</p>
+          <div class="tags">
+            <span class="tag">ミニマル</span>
+            <span class="tag">ダーク/ライト交互</span>
+            <span class="tag">大胆な文字</span>
+            <span class="tag">カタリバ風</span>
+          </div>
         </div>
-      </div>
-      <div class="card-body">
-        <h2>Pattern C: つながり</h2>
-        <div class="subtitle">COLORFUL &amp; ENERGETIC</div>
-        <p>カラフルでエネルギッシュ、でも品のある楽しさ。丸ゴシック体と3色のアクセントカラーで「大学生×子ども」の若いエネルギーを表現します。</p>
-        <div class="tags">
-          <span class="tag">丸ゴシック</span>
-          <span class="tag">3色カラフル</span>
-          <span class="tag">波線装飾</span>
-          <span class="tag">むすびえ風</span>
+        <div class="card-cta">このデザインを見る</div>
+      </a>
+
+      <a href="pattern-c/" class="card card-c">
+        <div class="card-preview">
+          <span class="pattern-label">Pattern C</span>
+          <span class="concept">つながり</span>
+          <div class="swatches">
+            <div class="swatch" style="background:#FF6B35"></div>
+            <div class="swatch" style="background:#2EC4B6"></div>
+            <div class="swatch" style="background:#FFD166"></div>
+          </div>
         </div>
-      </div>
-      <div class="card-cta">このデザインを見る →</div>
-    </a>
-  </div>
-  <div class="footer">
-    <p>NPO法人OIKOS ホームページデザイン選定 — 2026年4月</p>
+        <div class="card-body">
+          <h2>Pattern C: つながり</h2>
+          <div class="subtitle">Colorful &amp; Energetic</div>
+          <p>カラフルでエネルギッシュ、でも品のある楽しさ。丸ゴシック体と3色のアクセントカラーで「大学生×子ども」の若いエネルギーを表現します。</p>
+          <div class="tags">
+            <span class="tag">丸ゴシック</span>
+            <span class="tag">3色カラフル</span>
+            <span class="tag">波線装飾</span>
+            <span class="tag">むすびえ風</span>
+          </div>
+        </div>
+        <div class="card-cta">このデザインを見る</div>
+      </a>
+
+      <a href="pattern-d/" class="card card-d">
+        <div class="card-preview">
+          <span class="pattern-label">Pattern D</span>
+          <span class="concept">静かな洗練</span>
+          <div class="swatches">
+            <div class="swatch" style="background:#2F4F4A"></div>
+            <div class="swatch" style="background:#C98E5B"></div>
+            <div class="swatch" style="background:#F8F6F1"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h2>Pattern D: 静かな洗練</h2>
+          <div class="subtitle">Quiet &amp; Refined</div>
+          <p>余白、紙のような質感、上質な明朝体で静かな誠実さを伝える方向。やさしさを残しながら、OIKOSをより洗練して見せます。</p>
+          <div class="tags">
+            <span class="tag">静かな余白</span>
+            <span class="tag">明朝体</span>
+            <span class="tag">グレージュ</span>
+            <span class="tag">無印/Notion系</span>
+          </div>
+        </div>
+        <div class="card-cta">このデザインを見る</div>
+      </a>
+
+      <a href="pattern-e/" class="card card-e">
+        <div class="card-preview">
+          <span class="pattern-label">Pattern E</span>
+          <span class="concept">信頼</span>
+          <div class="swatches">
+            <div class="swatch" style="background:#10233F"></div>
+            <div class="swatch" style="background:#0F766E"></div>
+            <div class="swatch" style="background:#F08A4B"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h2>Pattern E: 信頼コーポレート</h2>
+          <div class="subtitle">Structured &amp; Credible</div>
+          <p>整理された情報設計と強い数値訴求で、企業・大学・寄付者に信頼を伝える方向。しっかりした団体感を前面に出します。</p>
+          <div class="tags">
+            <span class="tag">ネイビー基調</span>
+            <span class="tag">数値訴求</span>
+            <span class="tag">グリッド構成</span>
+            <span class="tag">Stripe/Sony系</span>
+          </div>
+        </div>
+        <div class="card-cta">このデザインを見る</div>
+      </a>
+
+      <a href="pattern-f/" class="card card-f">
+        <div class="card-preview">
+          <span class="pattern-label">Pattern F</span>
+          <span class="concept">物語</span>
+          <div class="swatches">
+            <div class="swatch" style="background:#8C4A32"></div>
+            <div class="swatch" style="background:#355C5A"></div>
+            <div class="swatch" style="background:#F7F1E8"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h2>Pattern F: ストーリーテリング</h2>
+          <div class="subtitle">Editorial &amp; Emotional</div>
+          <p>写真、言葉、余韻で活動を物語として見せる方向。理念や実績を、感情移入できる体験として伝える構成です。</p>
+          <div class="tags">
+            <span class="tag">物語構成</span>
+            <span class="tag">写真主導</span>
+            <span class="tag">エディトリアル</span>
+            <span class="tag">charity: water系</span>
+          </div>
+        </div>
+        <div class="card-cta">このデザインを見る</div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>NPO法人OIKOS ホームページデザイン選定 — 2026年4月</p>
+    </div>
   </div>
 </body>
 </html>

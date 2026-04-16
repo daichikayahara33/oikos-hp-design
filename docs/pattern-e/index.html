@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPO法人OIKOS | 信頼コーポレート</title>
+  <meta name="description" content="NPO法人OIKOSの新ホームページ案『信頼コーポレート』。整理された情報設計と明快な数値訴求で、支援者・企業・大学に信頼を伝えるデザインです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #10233F;
+      --secondary: #0F766E;
+      --accent: #F08A4B;
+      --bg: #FFFFFF;
+      --bg-soft: #F4F7FA;
+      --bg-dark: #0D1B2A;
+      --text: #132238;
+      --text-sub: #61758A;
+      --line: #D8E1EA;
+      --shadow: 0 22px 55px rgba(16, 35, 63, 0.12);
+      --max-width: 1280px;
+      --radius: 18px;
+      --transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 12px;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; object-fit: cover; }
+
+    .pattern-label {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 9999;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      padding: 7px 12px;
+      border-radius: 999px;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.88);
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(16px);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .header.scrolled {
+      border-color: var(--line);
+      box-shadow: 0 8px 26px rgba(16, 35, 63, 0.08);
+    }
+
+    .header-inner {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+      height: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+    }
+
+    .logo-mark {
+      font-size: 30px;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+    }
+
+    .logo-badge {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--secondary);
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-sub);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: transform .25s, background .25s, color .25s, border-color .25s, box-shadow .25s;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 14px 30px rgba(16, 35, 63, 0.18); }
+    .btn-primary:hover { background: #0c1c31; }
+    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 14px 30px rgba(240, 138, 75, 0.26); }
+    .btn-outline { border-color: var(--line); color: var(--primary); background: #fff; }
+    .btn-outline:hover { border-color: var(--primary); }
+
+    .hero {
+      padding: 138px 0 84px;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(15, 118, 110, 0.07), transparent 24%),
+        radial-gradient(circle at 88% 18%, rgba(240, 138, 75, 0.09), transparent 20%),
+        linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 42px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      padding: 18px 0;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--secondary);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .section-kicker::before {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: rgba(15, 118, 110, 0.4);
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 74px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      max-width: 720px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--text-sub);
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-proofline {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .hero-proofline span {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(16,35,63,0.05);
+      color: var(--text-sub);
+      font-size: 12px;
+      border: 1px solid rgba(16,35,63,0.08);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .hero-meta article.primary-proof {
+      background: linear-gradient(135deg, rgba(16,35,63,0.98), rgba(25,55,92,0.94));
+      color: #fff;
+      box-shadow: 0 16px 34px rgba(16,35,63,0.18);
+    }
+
+    .hero-meta article.primary-proof strong,
+    .hero-meta article.primary-proof span { color: #fff; }
+
+    .hero-meta article.primary-proof span { opacity: 0.82; }
+
+    .hero-summary {
+      margin-top: 18px;
+      padding: 18px 18px 0;
+      border-top: 1px solid var(--line);
+      color: var(--text-sub);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .hero-summary strong { color: var(--primary); font-family: 'Manrope', sans-serif; }
+
+    .hero-panel {
+      background: var(--bg-dark);
+      color: #fff;
+      border-radius: 22px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .hero-panel article {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .hero-panel article:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .hero-panel article strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: -0.04em;
+      min-width: 62px;
+    }
+
+    .hero-panel p { font-size: 13px; color: rgba(255,255,255,0.72); max-width: 240px; }
+
+    .section-shell { display: grid; gap: 30px; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 0;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-bridge {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+
+    .section-caption {
+      max-width: 280px;
+      color: var(--text-sub);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .section-caption strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.98fr 1.02fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .feature-stat-band {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .feature-stat {
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+    }
+
+    .feature-stat strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 26px;
+      letter-spacing: -0.05em;
+      color: var(--primary);
+    }
+
+    .feature-stat span {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .program-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .program-card ul {
+      list-style: none;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--text-sub);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .program-card li + li { margin-top: 10px; }
+
+    .program-card .program-foot {
+      margin-top: auto;
+      padding-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .program-card .program-foot::after {
+      content: '→';
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+    }
+
+    .stats-grid { grid-template-columns: 1.25fr 0.9fr 0.9fr 0.9fr; }
+
+    .stat-card.featured {
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+      box-shadow: 0 18px 34px rgba(0,0,0,0.12);
+    }
+
+    .stat-card.featured .number { font-size: 60px; }
+
+    .support-main,
+    .support-side {
+      border-radius: 24px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .support-note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.8;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .support-grid,
+      .split,
+      .section-head { grid-template-columns: 1fr; display: grid; }
+      .news-grid,
+      .program-grid,
+      .stats-grid,
+      .voices-grid { grid-template-columns: 1fr 1fr; }
+      .section-caption { max-width: none; }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 126px; }
+      .hero-grid,
+      .news-grid,
+      .program-grid,
+      .stats-grid,
+      .voices-grid,
+      .support-grid,
+      .hero-meta,
+      .hero-panel,
+      .feature-stat-band { grid-template-columns: 1fr; }
+      .hero-image { min-height: 360px; }
+      .section-head { gap: 18px; }
+      .container, .header-inner { width: min(var(--max-width), calc(100% - 32px)); }
+      .section { padding: 82px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .btn:hover,
+      .card:hover {
+        transform: none;
+      }
+    }
+
+    .section-dark .section-head { border-color: rgba(255,255,255,0.14); }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      max-width: 760px;
+    }
+
+    .section-head p { max-width: 420px; color: var(--text-sub); }
+    .section-dark .section-head p { color: rgba(255,255,255,0.72); }
+
+    .news-grid,
+    .program-grid,
+    .voices-grid,
+    .stats-grid,
+    .support-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .news-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .program-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .voices-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .support-grid { grid-template-columns: 1.1fr 0.9fr; }
+
+    .hero-meta article {
+      padding: 18px 18px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-meta span { color: var(--text-sub); font-size: 12px; line-height: 1.65; }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 18px;
+    }
+
+    .hero-image {
+      overflow: hidden;
+      border-radius: 24px;
+      min-height: 520px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image img { width: 100%; height: 100%; }
+
+    .hero-panel {
+      background: var(--bg-dark);
+      color: #fff;
+      border-radius: 22px;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .hero-panel article strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 28px;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-panel p { font-size: 13px; color: rgba(255,255,255,0.72); }
+
+    .section { padding: 100px 0; }
+    .section-soft { background: var(--bg-soft); }
+    .section-dark { background: var(--bg-dark); color: #fff; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-dark .section-head { border-color: rgba(255,255,255,0.14); }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      max-width: 760px;
+    }
+
+    .section-head p { max-width: 420px; color: var(--text-sub); }
+    .section-dark .section-head p { color: rgba(255,255,255,0.72); }
+
+    .news-grid,
+    .program-grid,
+    .voices-grid,
+    .stats-grid,
+    .support-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .news-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .program-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .voices-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .support-grid { grid-template-columns: 1.1fr 0.9fr; }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 36px rgba(16, 35, 63, 0.09);
+    }
+
+    .news-date {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 23px;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .card p { color: var(--text-sub); font-size: 14px; }
+
+    .program-card .number,
+    .stat-card .number {
+      font-family: 'Manrope', sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .program-card ul {
+      list-style: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--text-sub);
+      font-size: 13px;
+    }
+
+    .program-card li + li { margin-top: 6px; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .feature-panel {
+      background: #fff;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-panel img {
+      width: 100%;
+      height: 360px;
+    }
+
+    .feature-copy { padding: 28px; }
+    .feature-copy p { color: var(--text-sub); margin-top: 12px; }
+
+    .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 26px;
+    }
+
+    .stat-card .number { color: #fff; }
+    .stat-card h3 { color: #fff; font-size: 20px; margin-bottom: 10px; }
+    .stat-card p { color: rgba(255,255,255,0.72); }
+
+    .voices-grid .card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .voice-meta {
+      font-size: 12px;
+      font-family: 'Manrope', sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--secondary);
+    }
+
+    .support-main,
+    .support-side {
+      border-radius: 24px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .support-main h3,
+    .support-side h3 {
+      font-size: 34px;
+      line-height: 1.3;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      font-weight: 900;
+    }
+
+    .support-main p,
+    .support-side p { color: var(--text-sub); }
+
+    .support-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .footer {
+      padding: 42px 0 54px;
+      border-top: 1px solid var(--line);
+      color: var(--text-sub);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .support-grid,
+      .split,
+      .section-head { grid-template-columns: 1fr; display: grid; }
+      .news-grid,
+      .program-grid,
+      .stats-grid,
+      .voices-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 126px; }
+      .hero-grid,
+      .news-grid,
+      .program-grid,
+      .stats-grid,
+      .voices-grid,
+      .support-grid,
+      .hero-meta,
+      .hero-panel { grid-template-columns: 1fr; }
+      .hero-image { min-height: 420px; }
+      .section-head { gap: 18px; }
+      .container, .header-inner { width: min(var(--max-width), calc(100% - 32px)); }
+      .section { padding: 82px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .btn:hover,
+      .card:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern-label">Pattern E / Trust</div>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">OIKOS</span>
+        <span class="logo-badge">NPO</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="#about">私たちについて</a></li>
+          <li><a href="#activities">活動</a></li>
+          <li><a href="#support">支援する</a></li>
+        </ul>
+        <a href="#support" class="btn btn-accent">今すぐ支援</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Trusted youth support platform</div>
+          <h1>子どもの居場所を、<br>継続可能な仕組みとして広げていく。</h1>
+          <p>OIKOSは大学生主体の居場所「ゆーすぽっと」を運営し、その立ち上げと継続を各地で伴走しています。この案では、活動の意義だけでなく、運営の信頼性・継続性・連携しやすさがひと目で伝わる構造を目指します。</p>
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">活動を知る</a>
+            <a href="#support" class="btn btn-outline">連携を相談する</a>
+          </div>
+          <div class="hero-proofline">
+            <span>大学生主体</span>
+            <span>地域連携</span>
+            <span>継続運営モデル</span>
+          </div>
+          <div class="hero-meta">
+            <article class="primary-proof"><strong>423</strong><span>これまでに出会った子ども・若者</span></article>
+            <article><strong>5</strong><span>現在運営・伴走する大学拠点</span></article>
+            <article><strong>97%</strong><span>「また来たい」と答えた参加者割合</span></article>
+          </div>
+          <div class="hero-summary"><strong>POINT</strong> 感情的な共感だけでなく、連携先が安心して判断できる構造と証拠を最初に提示します。</div>
+        </div>
+        <div class="hero-side">
+          <div class="hero-image">
+            <img src="../images/K3M33049.jpg" alt="大学生と子どもたちの集合写真">
+          </div>
+          <div class="hero-panel">
+            <article>
+              <strong>寄付</strong>
+              <p>月次・単発の両方で支援を受け付け、運営費の見通しを高めます。</p>
+            </article>
+            <article>
+              <strong>連携</strong>
+              <p>大学・企業・地域団体との協働を前提に、説明責任のある導線を設計します。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="news">
+      <div class="container section-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">News & updates</div>
+            <h2>最新情報と組織の動きが、整然と見える。</h2>
+          </div>
+          <p>ニュース、採用、報告、支援募集など、外部向けに重要な情報を見つけやすく整理します。</p>
+        </div>
+        <div class="section-bridge">
+          <span></span>
+          <div class="section-caption"><strong>External trust</strong> 最初に必要なのは、団体の現在地が整理されていること。</div>
+        </div>
+        <div class="news-grid">
+          <article class="card">
+            <span class="news-date">2026.04.14</span>
+            <h3>2025年度活動報告書を公開しました</h3>
+            <p>拠点別の取り組み、参加者数、寄付活用内訳などを一覧で確認できます。</p>
+          </article>
+          <article class="card">
+            <span class="news-date">2026.04.05</span>
+            <h3>新拠点立ち上げの相談受付を開始</h3>
+            <p>大学生チーム向けに、初期設計や地域連携の相談窓口を開設しました。</p>
+          </article>
+          <article class="card">
+            <span class="news-date">2026.03.22</span>
+            <h3>春の寄付募集キャンペーンを開始</h3>
+            <p>新年度の継続運営に必要な寄付目標額と用途を、わかりやすく公開しています。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container split">
+        <article class="feature-panel">
+          <img src="../images/K3M33171.jpg" alt="活動中の打ち合わせ風景">
+          <div class="feature-copy">
+            <div class="section-kicker">Mission</div>
+            <h3>学生の熱量を、地域で続く仕組みに変える。</h3>
+            <p>OIKOSは、学生主体の温度感を大切にしつつ、団体としては説明責任と継続可能性を強く意識しています。熱意だけで終わらず、次年度以降も続く運営モデルを築くことが特徴です。</p>
+          </div>
+        </article>
+        <article class="feature-panel">
+          <div class="feature-copy">
+            <div class="section-kicker">Why trust matters</div>
+            <h3>支援者・企業・大学にとって判断しやすいホームページへ。</h3>
+            <p>このデザインでは、感情訴求だけでなく、何をしている団体か・どのように運営されているか・どう関われるかを即座に理解できるようにします。初見の人が安心して問い合わせや寄付に進めることを重視します。</p>
+            <p>ページ全体を通じて、情報の階層、数値の置き方、行動導線の明確さを強め、信頼できるNPOとしての印象を作ります。</p>
+            <div class="feature-stat-band">
+              <div class="feature-stat"><strong>3</strong><span>主要な関わり方を明確に提示</span></div>
+              <div class="feature-stat"><strong>1</strong><span>最上位CTAで支援導線を一本化</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="activities">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Programs</div>
+            <h2>活動を、3つの柱で明快に提示する。</h2>
+          </div>
+          <p>取り組みを体系立てて整理し、外部から見ても事業構造が理解しやすいページにします。</p>
+        </div>
+        <div class="program-grid">
+          <article class="card program-card">
+            <span class="number">01</span>
+            <h3>居場所の運営</h3>
+            <p>放課後・休日のゆーすぽっとを学生主体で運営し、子どもたちが安心して過ごせる環境をつくります。</p>
+            <ul>
+              <li>週次の場づくり</li>
+              <li>学習・対話支援</li>
+              <li>保護者・地域連携</li>
+            </ul>
+            <div class="program-foot">継続運営の基盤</div>
+          </article>
+          <article class="card program-card">
+            <span class="number">02</span>
+            <h3>立ち上げ伴走</h3>
+            <p>新しく活動を始めたい学生チームに向けて、運営ノウハウや初期設計を伴走支援します。</p>
+            <ul>
+              <li>拠点立ち上げ設計</li>
+              <li>マニュアル・研修提供</li>
+              <li>初年度の伴走支援</li>
+            </ul>
+            <div class="program-foot">新拠点の再現性</div>
+          </article>
+          <article class="card program-card">
+            <span class="number">03</span>
+            <h3>ネットワーク形成</h3>
+            <p>大学・地域・企業をつなぎ、孤立しない運営体制をつくることで、継続可能性を高めます。</p>
+            <ul>
+              <li>協賛・寄付連携</li>
+              <li>地域団体との協働</li>
+              <li>横断的な学び合い</li>
+            </ul>
+            <div class="program-foot">連携先を広げる</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Impact data</div>
+            <h2>数字で見ても、継続してきたことがわかる。</h2>
+          </div>
+          <p>定性的な価値とあわせて、団体としての蓄積がひと目で見える実績セクションです。</p>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card featured">
+            <span class="number">423</span>
+            <h3>参加人数</h3>
+            <p>これまで関わってきた子ども・若者の累計人数。</p>
+          </article>
+          <article class="stat-card">
+            <span class="number">5</span>
+            <h3>大学拠点</h3>
+            <p>運営中または伴走中の拠点数。</p>
+          </article>
+          <article class="stat-card">
+            <span class="number">97%</span>
+            <h3>再訪意向</h3>
+            <p>「また来たい」と回答した割合。</p>
+          </article>
+          <article class="stat-card">
+            <span class="number">12</span>
+            <h3>年間研修</h3>
+            <p>学生スタッフ向けに実施した研修回数。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Voices</div>
+            <h2>信頼は、現場の実感から生まれる。</h2>
+          </div>
+          <p>支援者・学生・子ども、複数の視点から団体の価値を補強するセクションです。</p>
+        </div>
+        <div class="voices-grid">
+          <article class="card">
+            <span class="voice-meta">Student staff</span>
+            <h3>「場が続いていく仕組みがあるから、安心して後輩に託せる。」</h3>
+            <p>熱意だけではなく、運営ノウハウや相談体制が整っていることが、継続の支えになっています。</p>
+          </article>
+          <article class="card">
+            <span class="voice-meta">Partner</span>
+            <h3>「地域と大学をつなぐハブとして、連携しやすい団体だと感じる。」</h3>
+            <p>活動の見え方と説明の明快さが、協働先にとっての安心感につながります。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="support">
+      <div class="container support-grid">
+        <article class="support-main">
+          <div class="section-kicker">Support</div>
+          <h3>支援も、連携も、判断しやすく。</h3>
+          <p>この案では、寄付・法人協賛・大学連携・ボランティア参加など、関わり方ごとの入口を明快に整理します。初めての人が迷わないことを、行動導線の中心に置きます。</p>
+          <div class="support-actions">
+            <a href="#top" class="btn btn-outline">トップへ戻る</a>
+            <a href="#activities" class="btn btn-outline">活動を見る</a>
+            <a href="#support" class="btn btn-accent">寄付・連携を検討する</a>
+          </div>
+          <div class="support-note">寄付、法人協賛、大学連携、学生参加。外部の人が次のアクションを判断しやすい終わり方を意識しています。</div>
+        </article>
+        <article class="support-side">
+          <div class="section-kicker">For partners</div>
+          <h3>企業・大学との協働にも強い構成。</h3>
+          <p>ロゴ掲載、実績、活動領域、問い合わせ動線を整理しやすいため、協賛提案や面談時の説明資料としても使いやすいトップページ案です。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>NPO法人OIKOS — Pattern E「信頼コーポレート」</p>
+      <p>Structured, credible, partnership-ready.</p>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    });
+  </script>
+</body>
+</html>

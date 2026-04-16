@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPO法人OIKOS | 静かな洗練</title>
+  <meta name="description" content="NPO法人OIKOSの新ホームページ案『静かな洗練』。余白と上質なタイポグラフィで、子どもの居場所づくりを静かに深く伝えるデザインです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #2F4F4A;
+      --secondary: #7B8C87;
+      --accent: #C98E5B;
+      --bg: #F8F6F1;
+      --bg-soft: #EFEBE3;
+      --paper: #FCFBF8;
+      --text: #2B2A28;
+      --text-sub: #736E68;
+      --line: rgba(43, 42, 40, 0.12);
+      --shadow: 0 18px 45px rgba(47, 79, 74, 0.08);
+      --max-width: 1180px;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 12px;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; object-fit: cover; }
+
+    .pattern-label {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 9999;
+      background: rgba(47, 79, 74, 0.86);
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.08em;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      border-bottom: 1px solid transparent;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .header.scrolled {
+      background: rgba(248, 246, 241, 0.9);
+      border-color: var(--line);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(43, 42, 40, 0.06);
+    }
+
+    .header-inner {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.12em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-sub);
+      position: relative;
+      transition: color .2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 100%;
+      height: 1px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      transition: transform .25s, background .25s, color .25s, border-color .25s, box-shadow .25s;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 10px 24px rgba(47, 79, 74, 0.18); }
+    .btn-primary:hover { background: #27413d; }
+    .btn-outline { border-color: var(--line); color: var(--primary); background: rgba(255,255,255,0.45); }
+    .btn-outline:hover { border-color: rgba(47, 79, 74, 0.3); background: #fff; }
+
+    .hero {
+      padding: 146px 0 90px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(201, 142, 91, 0.12), transparent 28%),
+        radial-gradient(circle at 82% 24%, rgba(123, 140, 135, 0.16), transparent 26%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      letter-spacing: 0.06em;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      max-width: 560px;
+      color: var(--text-sub);
+      font-size: 17px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 34px;
+    }
+
+    .hero-note {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      max-width: 520px;
+      opacity: 0.88;
+    }
+
+    .hero-note > div {
+      padding-right: 8px;
+    }
+
+    .hero-note > div:not(:last-child) {
+      border-right: 1px solid rgba(43, 42, 40, 0.08);
+    }
+
+    .hero-note .meta-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+
+    .hero-note strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .hero-note span {
+      color: var(--text-sub);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .hero-storyline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.52);
+      border: 1px solid rgba(43, 42, 40, 0.08);
+      color: var(--text-sub);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-storyline::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 18px 0 0 rgba(201, 142, 91, 0.5), 36px 0 0 rgba(201, 142, 91, 0.25);
+      margin-right: 38px;
+    }
+
+    .hero-storyline em {
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .hero-trace {
+      margin-top: 18px;
+      color: var(--text-sub);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-trace strong { color: var(--primary); font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+
+    .hero-card-anchor {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      left: auto;
+      width: 300px;
+    }
+
+    .hero-card {
+      position: static;
+      width: 100%;
+      background: rgba(252, 251, 248, 0.94);
+      border: 1px solid rgba(43, 42, 40, 0.08);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 45px rgba(43, 42, 40, 0.1);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card .micro {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--primary);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-aside {
+      color: var(--text-sub);
+      font-size: 12px;
+      line-height: 1.8;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-aside strong {
+      display: block;
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .journal-section .news-list {
+      grid-template-columns: 1.2fr 0.9fr 0.9fr;
+    }
+
+    .journal-section .news-item:first-child {
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 16px 30px rgba(43, 42, 40, 0.06);
+    }
+
+    .about-visual {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .about-visual img:first-child { height: 520px; }
+    .about-visual img:last-child { height: 360px; transform: translateY(34px); }
+
+    .about-visual img {
+      border-radius: 22px;
+      width: 100%;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-card {
+      padding: 30px;
+      border-radius: 20px;
+      background: var(--paper);
+      border: 1px solid rgba(43, 42, 40, 0.08);
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(43, 42, 40, 0.08);
+      border-color: rgba(43, 42, 40, 0.14);
+    }
+
+    .activity-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(43, 42, 40, 0.08);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .activity-link::after {
+      content: '→';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .support {
+      background: linear-gradient(135deg, rgba(47, 79, 74, 0.96), rgba(88, 111, 104, 0.96));
+      color: #fff;
+      border-radius: 28px;
+      padding: 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .support-eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .support .btn-primary { background: var(--accent); color: #2B2A28; box-shadow: 0 14px 28px rgba(0,0,0,0.16); }
+    .support .btn-primary:hover { background: #ddb182; }
+
+    .support-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+
+    @media (max-width: 980px) {
+      .section-intro,
+      .hero-grid,
+      .about-grid,
+      .impact-grid,
+      .support { grid-template-columns: 1fr; }
+      .hero-main { height: 520px; }
+      .journal-section .news-list,
+      .activities-grid,
+      .voices-grid,
+      .about-visual { grid-template-columns: 1fr; }
+      .support-actions { justify-content: flex-start; }
+      .hero-card-anchor { position: static; width: auto; margin-top: 16px; }
+      .about-visual img:first-child,
+      .about-visual img:last-child { height: auto; transform: none; }
+      .section-aside { max-width: 240px; }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner { height: 70px; }
+      .nav-links { display: none; }
+      .hero { padding-top: 128px; }
+      .hero-note { grid-template-columns: 1fr; max-width: none; }
+      .hero-note > div:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(43, 42, 40, 0.08); padding-bottom: 12px; margin-bottom: 4px; }
+      .impact-table li { grid-template-columns: 1fr; gap: 10px; }
+      .support { padding: 34px 28px; }
+      .section { padding: 86px 0; }
+      .container, .header-inner { width: min(var(--max-width), calc(100% - 32px)); }
+      .hero-main { height: 420px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .btn:hover,
+      .news-item:hover,
+      .activity-card:hover {
+        transform: none;
+      }
+    }
+
+    .hero-visual {
+      position: relative;
+      padding-top: 36px;
+    }
+
+    .hero-main {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 680px;
+    }
+
+    .hero-main img { width: 100%; height: 100%; }
+
+    .hero-card .label,
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-card p { font-size: 14px; color: var(--text-sub); margin-bottom: 0; }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-soft { background: var(--bg-soft); }
+    .section-paper { background: var(--paper); }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 46px;
+    }
+
+    .section-head h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(28px, 4vw, 46px);
+      margin-bottom: 16px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .section-head p { color: var(--text-sub); font-size: 16px; }
+
+    .news-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .news-item {
+      padding: 24px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(43, 42, 40, 0.08);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .news-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(43, 42, 40, 0.08);
+    }
+
+    .news-date { display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 10px; letter-spacing: 0.08em; }
+    .news-item h3 { font-size: 19px; line-height: 1.55; margin-bottom: 10px; font-family: 'Noto Serif JP', serif; font-weight: 600; }
+    .news-item p { color: var(--text-sub); font-size: 14px; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+
+    .about-copy p + p { margin-top: 18px; }
+
+    .quote-box {
+      margin-top: 28px;
+      padding: 26px 30px;
+      border-left: 2px solid var(--accent);
+      background: rgba(255,255,255,0.58);
+      border-radius: 0 18px 18px 0;
+    }
+
+    .quote-box p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 24px;
+      line-height: 1.7;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .activity-card {
+      padding: 30px;
+      border-radius: 20px;
+      background: var(--paper);
+      border: 1px solid rgba(43, 42, 40, 0.08);
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .activity-card span {
+      color: var(--accent);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .activity-card h3 { font-family: 'Noto Serif JP', serif; font-size: 24px; margin-bottom: 14px; }
+    .activity-card p { color: var(--text-sub); }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: stretch;
+    }
+
+    .impact-table,
+    .impact-panel {
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(43, 42, 40, 0.08);
+      border-radius: 22px;
+      padding: 34px;
+    }
+
+    .impact-table ul { list-style: none; }
+
+    .impact-table li {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .impact-table li:last-child { border-bottom: none; }
+
+    .impact-table strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .impact-panel h3,
+    .voices h3,
+    .support h3 { font-family: 'Noto Serif JP', serif; font-size: 30px; margin-bottom: 16px; }
+    .impact-panel p,
+    .voices p,
+    .support p { color: var(--text-sub); }
+
+    .voices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .voice-card {
+      padding: 30px;
+      background: rgba(255,255,255,0.68);
+      border-radius: 20px;
+      border: 1px solid rgba(43, 42, 40, 0.08);
+    }
+
+    .voice-card p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .voice-meta { color: var(--text-sub); font-size: 13px; letter-spacing: 0.05em; }
+
+    .support {
+      background: linear-gradient(135deg, rgba(47, 79, 74, 0.96), rgba(88, 111, 104, 0.96));
+      color: #fff;
+      border-radius: 28px;
+      padding: 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .support .section-label,
+    .support h3,
+    .support p { color: #fff; }
+    .support p { opacity: 0.85; }
+    .support-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .support .btn-outline { color: #fff; border-color: rgba(255,255,255,0.45); background: transparent; }
+    .support .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .support .btn-primary { background: var(--accent); box-shadow: 0 14px 28px rgba(0,0,0,0.16); }
+
+    .footer {
+      padding: 42px 0 56px;
+      color: var(--text-sub);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      margin-top: 110px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-grid,
+      .impact-grid,
+      .support { grid-template-columns: 1fr; }
+      .hero-main { height: 520px; }
+      .news-list,
+      .activities-grid,
+      .voices-grid { grid-template-columns: 1fr; }
+      .support-actions { justify-content: flex-start; }
+      .hero-card { position: static; width: auto; margin-top: 16px; }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner { height: 70px; }
+      .nav-links { display: none; }
+      .hero { padding-top: 128px; }
+      .hero-note { grid-template-columns: 1fr; }
+      .impact-table li { grid-template-columns: 1fr; gap: 10px; }
+      .support { padding: 34px 28px; }
+      .section { padding: 86px 0; }
+      .container, .header-inner { width: min(var(--max-width), calc(100% - 32px)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .btn:hover,
+      .news-item:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern-label">Pattern D / 静かな洗練</div>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">OIKOS</span>
+        <span class="logo-sub">NPO HOMEPAGE CONCEPT</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="#about">私たちについて</a></li>
+          <li><a href="#activities">活動</a></li>
+          <li><a href="#support">支援する</a></li>
+        </ul>
+        <a href="#support" class="btn btn-outline">寄付・参加</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Quietly, but deeply.</span>
+          <h1>すべての子どもが、<br>明日を楽しみに眠れる社会へ。</h1>
+          <p>OIKOSは、大学生が子どもたちと日常をともにしながら、ほっとできる居場所「ゆーすぽっと」を各地で育てています。静かな言葉と丁寧な写真で、その時間の尊さを伝えるトップページ案です。</p>
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">活動を知る</a>
+            <a href="#support" class="btn btn-outline">支援を考える</a>
+          </div>
+          <div class="hero-storyline"><em>課題</em>から<em>居場所</em>へ、静かにつながる物語</div>
+          <div class="hero-note">
+            <div><small class="meta-label">拠点</small><strong>5</strong><span>大学生と地域がともに育てる、継続的な居場所づくり</span></div>
+            <div><small class="meta-label">参加者</small><strong>423</strong><span>これまでに出会ってきた子どもたちと若者たち</span></div>
+            <div><small class="meta-label">再訪意向</small><strong>97%</strong><span>「また来たい」と答えた参加者の割合</span></div>
+          </div>
+          <div class="hero-trace"><strong>Quiet trace</strong> 日常に残る変化を、強く語りすぎずに見せる。</div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-main">
+            <img src="../images/K3M33169.jpg" alt="子どもたちと大学生が穏やかに過ごす様子">
+          </div>
+          <div class="hero-card-anchor">
+            <div class="hero-card">
+              <div class="label">Place to breathe</div>
+              <p>派手ではなくても、確かに残る時間。OIKOSの活動を、紙のような静かな質感で見せる方向です。</p>
+              <span class="micro">Quiet refinement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft journal-section" id="news">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-head">
+            <div class="section-label">Journal</div>
+            <h2>小さなできごとを、丁寧に積み重ねる。</h2>
+            <p>日々の活動報告も、単なる更新情報ではなく、場の空気が伝わる読み物として見せていく構成です。</p>
+          </div>
+          <div class="section-aside"><strong>Quiet feed</strong> 声量を上げずに、活動の継続性を静かに伝える更新枠。</div>
+        </div>
+        <div class="news-list">
+          <article class="news-item">
+            <span class="news-date">2026.04.12</span>
+            <h3>新学期のゆーすぽっとが始まりました</h3>
+            <p>新しく来た子も、久しぶりの子も、それぞれのペースで過ごせる時間をつくっています。</p>
+          </article>
+          <article class="news-item">
+            <span class="news-date">2026.03.28</span>
+            <h3>学生スタッフ研修を実施しました</h3>
+            <p>子どもの声を聴くこと、地域と連携すること、寄り添い方をあらためて学び直しました。</p>
+          </article>
+          <article class="news-item">
+            <span class="news-date">2026.03.09</span>
+            <h3>春の寄付キャンペーンを公開しました</h3>
+            <p>新年度の居場所運営を支えるため、月次寄付の募集を始めています。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-paper" id="about">
+      <div class="container about-grid">
+        <div class="about-visual">
+          <img src="../images/K3M33052.jpg" alt="大学生と子どもが向き合う写真">
+          <img src="../images/K3M33178.jpg" alt="居場所で静かに本を読む子どもたちの様子">
+        </div>
+        <div class="about-copy">
+          <div class="section-label">About</div>
+          <div class="section-head">
+            <h2>OIKOSがつくっているのは、<br>「答え」ではなく、安心して過ごせる時間です。</h2>
+          </div>
+          <p>子どもが何かを達成する場所ではなく、ただ安心して過ごせる場所。大学生が近い存在としてそばにいて、学校でも家庭でもない第三の居場所をつくること。それがOIKOSの活動の中心にあります。</p>
+          <p>この案では、強く叫ぶのではなく、静かな余白の中で信頼感を積み上げます。NPOとしての誠実さと、子どもたちとのやわらかな関係性を両立させる見せ方です。</p>
+          <div class="quote-box">
+            <p>「ここに来ると、少しだけ明日のことを考えられる。」</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="activities">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Activities</div>
+          <h2>地域の中で、静かに続いていく支援のかたち。</h2>
+          <p>活動内容はシンプルに見せつつ、それぞれの継続性が伝わるように整理します。</p>
+        </div>
+        <div class="activities-grid">
+          <article class="activity-card">
+            <div>
+              <span>01</span>
+              <h3>ゆーすぽっと運営</h3>
+              <p>放課後や休日に、子どもがそのまま来られる居場所を大学生が運営します。</p>
+            </div>
+            <a href="#support" class="activity-link">活動を支える</a>
+          </article>
+          <article class="activity-card">
+            <div>
+              <span>02</span>
+              <h3>立ち上げ伴走</h3>
+              <p>新しい拠点を始めたい学生・地域団体に向けて、運営ノウハウを共有します。</p>
+            </div>
+            <a href="#support" class="activity-link">連携について</a>
+          </article>
+          <article class="activity-card">
+            <div>
+              <span>03</span>
+              <h3>関係者の育成</h3>
+              <p>学生スタッフが子ども理解や場づくりを学び続けられる研修・対話の機会を設けています。</p>
+            </div>
+            <a href="#support" class="activity-link">参加する</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container impact-grid">
+        <div class="impact-table">
+          <div class="section-label">Impact</div>
+          <ul>
+            <li>
+              <strong>423</strong>
+              <div>
+                <h3>これまでに出会った子どもたち</h3>
+                <p>短期のイベントではなく、日常の中で出会いを重ねてきた人数です。</p>
+              </div>
+            </li>
+            <li>
+              <strong>5</strong>
+              <div>
+                <h3>大学生主体の拠点</h3>
+                <p>現場ごとに地域の文脈を大切にしながら、各大学で展開しています。</p>
+              </div>
+            </li>
+            <li>
+              <strong>97%</strong>
+              <div>
+                <h3>「また来たい」と答えた割合</h3>
+                <p>安心して戻ってこられる場所になっているかを示す指標として掲載します。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <aside class="impact-panel">
+          <div class="section-label">Why it matters</div>
+          <h3>数字も、静かに語る。</h3>
+          <p>大きな実績を前面に押し出すのではなく、活動の継続性や関係性の深さを伝える文脈の中で数字を見せます。派手さよりも、信頼がゆっくり積み上がる印象を目指します。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-paper">
+      <div class="container voices">
+        <div class="section-head">
+          <div class="section-label">Voices</div>
+          <h2>そこにいた人の言葉が、場の輪郭をつくる。</h2>
+          <p>写真と同じくらい、短い言葉の余韻を大切にしたい方向です。</p>
+        </div>
+        <div class="voices-grid">
+          <article class="voice-card">
+            <p>「学校でも家でもないけれど、ここにはいていいと思えた。」</p>
+            <span class="voice-meta">中学生参加者</span>
+          </article>
+          <article class="voice-card">
+            <p>「支援する側とされる側ではなく、同じ時間を一緒に過ごしている感覚がある。」</p>
+            <span class="voice-meta">大学生スタッフ</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="container">
+        <div class="support">
+          <div>
+            <span class="support-eyebrow">Quiet action</span>
+            <div class="section-label">Support</div>
+            <h3>この静かな時間を、次の地域へ。</h3>
+            <p>OIKOSの居場所づくりは、寄付、連携、参加によって支えられています。目立たないけれど大切な時間を、これからも続けていくために。</p>
+          </div>
+          <div class="support-actions">
+            <a href="#top" class="btn btn-outline">トップへ戻る</a>
+            <a href="#news" class="btn btn-outline">日々の活動を見る</a>
+            <a href="#support" class="btn btn-primary">寄付・参加を考える</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>NPO法人OIKOS — Pattern D「静かな洗練」</p>
+      <p>Quiet, refined, trustworthy.</p>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 12);
+    });
+  </script>
+</body>
+</html>
