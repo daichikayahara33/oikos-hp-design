@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+*.log
+
+# cloned reference repos (not part of the project)
+agent-skills/
+awesome-design-md/
+claude-plugins-official/
+claude-skills/
+playwright-mcp/
+skills/
+ui-ux-pro-max-skill/
+image_test/

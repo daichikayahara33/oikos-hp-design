@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ===== RESET & BASE ===== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -28,15 +29,11 @@
       --shadow: 0 8px 32px rgba(27, 36, 50, 0.08);
       --shadow-hover: 0 20px 48px rgba(27, 36, 50, 0.14);
       --max-width: 1200px;
-      --radius-xl: 28px;
       --radius-lg: 20px;
       --radius-pill: 999px;
     }
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
@@ -47,15 +44,8 @@
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
 
     .container {
       max-width: var(--max-width);
@@ -63,604 +53,656 @@
       padding: 0 24px;
     }
 
+    /* ===== PATTERN LABEL ===== */
     .pattern-label {
       position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 1001;
+      top: 12px;
+      left: 12px;
       background: var(--primary);
       color: #fff;
       font-family: 'Quicksand', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 8px 14px;
+      padding: 4px 10px;
       border-radius: var(--radius-pill);
-      box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+      z-index: 9999;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
     }
 
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-
-    .section-kicker::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--tertiary);
-      box-shadow: 18px 0 0 var(--secondary);
-      margin-right: 14px;
-    }
-
-    .section-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 34px;
-      line-height: 1.45;
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      color: var(--text-sub);
-      max-width: 720px;
-      font-size: 16px;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .pill-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border-radius: var(--radius-pill);
-      padding: 15px 28px;
-      font-weight: 700;
-      font-size: 15px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    }
-
-    .pill-btn:hover {
-      transform: translateY(-2px) scale(1.02);
-    }
-
-    .pill-btn--primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(255, 107, 53, 0.25);
-    }
-
-    .pill-btn--primary:hover {
-      box-shadow: 0 16px 30px rgba(255, 107, 53, 0.3);
-    }
-
-    .pill-btn--secondary {
-      background: #fff;
-      color: var(--text);
-      border: 2px solid rgba(27, 36, 50, 0.08);
-    }
-
-    .pill-btn--secondary:hover {
-      box-shadow: var(--shadow);
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    /* ===== HEADER ===== */
     .header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(254, 254, 254, 0.9);
-      backdrop-filter: blur(14px);
+      background: rgba(254, 254, 254, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
     }
 
-    .header__inner {
-      max-width: var(--max-width);
-      height: 76px;
-      margin: 0 auto;
-      padding: 0 24px;
+    .header.scrolled {
+      box-shadow: 0 4px 24px rgba(27, 36, 50, 0.08);
+    }
+
+    .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      height: 68px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .header__logo {
+    .logo {
       font-family: 'Quicksand', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.06em;
-    }
-
-    .header__nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .header__nav a {
-      font-size: 14px;
+      font-size: 26px;
       font-weight: 700;
       color: var(--text);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 2px;
     }
 
-    .header__nav a:hover {
-      color: var(--primary);
+    .logo-o { color: var(--primary); }
+    .logo-i { color: var(--secondary); }
+    .logo-k { color: var(--tertiary); }
+    .logo-o2 { color: var(--primary); }
+    .logo-s { color: var(--secondary); }
+
+    .logo-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-sub);
+      margin-left: 8px;
+      letter-spacing: 0.05em;
     }
 
-    .header__menu {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
     }
 
-    .header__menu span {
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: all 0.3s ease;
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
     }
 
-    .hero {
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-sub);
+      transition: color 0.2s;
       position: relative;
-      padding: 140px 0 88px;
-      background:
-        radial-gradient(circle at top left, rgba(255, 209, 102, 0.35) 0%, transparent 28%),
-        radial-gradient(circle at top right, rgba(46, 196, 182, 0.22) 0%, transparent 32%),
-        linear-gradient(180deg, var(--bg-warm) 0%, #fff 100%);
-      overflow: hidden;
     }
 
-    .hero::before,
-    .hero::after {
+    .nav-links a::after {
       content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 24px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      border: none;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .btn:hover { transform: scale(1.04); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 28px rgba(255, 107, 53, 0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2.5px solid var(--primary);
+    }
+
+    .btn-outline:hover { background: var(--bg-warm); }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(46, 196, 182, 0.35);
+    }
+
+    .btn-lg {
+      padding: 14px 32px;
+      font-size: 16px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: var(--bg-warm);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+
+    .hero-deco {
       position: absolute;
       border-radius: 50%;
       pointer-events: none;
     }
 
-    .hero::before {
-      width: 320px;
-      height: 320px;
-      background: rgba(46, 196, 182, 0.08);
-      top: -80px;
-      right: -60px;
+    .hero-deco-1 {
+      width: 300px; height: 300px;
+      background: var(--primary);
+      opacity: 0.15;
+      top: -80px; right: 30%;
     }
 
-    .hero::after {
-      width: 240px;
-      height: 240px;
-      background: rgba(255, 107, 53, 0.08);
-      bottom: -80px;
-      left: -60px;
+    .hero-deco-2 {
+      width: 200px; height: 200px;
+      background: var(--secondary);
+      opacity: 0.2;
+      bottom: 10%; left: -60px;
     }
 
-    .hero__inner {
+    .hero-deco-3 {
+      width: 120px; height: 120px;
+      background: var(--tertiary);
+      opacity: 0.3;
+      top: 20%; left: 8%;
+    }
+
+    .hero-deco-4 {
+      width: 80px; height: 80px;
+      background: var(--secondary);
+      opacity: 0.2;
+      top: 60%; right: 5%;
+    }
+
+    .hero-deco-5 {
+      width: 50px; height: 50px;
+      background: var(--primary);
+      opacity: 0.25;
+      top: 75%; left: 30%;
+    }
+
+    .hero-deco-6 {
+      width: 180px; height: 180px;
+      background: var(--tertiary);
+      opacity: 0.15;
+      bottom: -40px; right: -40px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 24px;
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 48px;
-      align-items: center;
+      width: 100%;
       position: relative;
       z-index: 1;
     }
 
-    .hero__badge {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
+      gap: 8px;
+      background: rgba(255, 107, 53, 0.1);
+      border: 1.5px solid rgba(255, 107, 53, 0.25);
       border-radius: var(--radius-pill);
-      background: #fff;
-      box-shadow: var(--shadow);
-      font-family: 'Quicksand', sans-serif;
+      padding: 6px 16px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 600;
+      color: var(--primary);
       margin-bottom: 24px;
     }
 
-    .hero__badge-dot {
-      width: 10px;
-      height: 10px;
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      background: var(--primary);
       border-radius: 50%;
-      background: var(--secondary);
-      box-shadow: 18px 0 0 var(--tertiary);
-      margin-right: 14px;
+      animation: pulse 2s infinite;
     }
 
-    .hero__title {
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    .hero-title {
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 56px;
-      line-height: 1.3;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
       margin-bottom: 20px;
     }
 
-    .hero__title .accent {
-      color: var(--primary);
-      position: relative;
-      display: inline-block;
-    }
+    .hero-title-accent { color: var(--primary); }
 
-    .hero__title .accent::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 4px;
-      height: 14px;
-      background: rgba(255, 209, 102, 0.55);
-      z-index: -1;
-      border-radius: 10px;
-    }
-
-    .hero__text {
-      font-size: 17px;
+    .hero-sub {
+      font-size: 16px;
       color: var(--text-sub);
-      max-width: 600px;
-      margin-bottom: 32px;
-    }
-
-    .hero__actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+      line-height: 1.9;
       margin-bottom: 36px;
+      max-width: 480px;
     }
 
-    .hero__stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      max-width: 640px;
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
-    .hero-stat {
+    .hero-image-wrap {
+      position: relative;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(27, 36, 50, 0.16);
+    }
+
+    .hero-image-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
       background: #fff;
-      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 18px 16px;
+      padding: 16px 20px;
       box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .hero-stat__num {
+    .hero-image-badge-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--primary), var(--tertiary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image-badge-icon svg { width: 24px; height: 24px; fill: #fff; }
+
+    .hero-image-badge-text strong {
       display: block;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 28px;
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 4px;
+      color: var(--text);
+      line-height: 1;
     }
 
-    .hero-stat:nth-child(1) .hero-stat__num { color: var(--primary); }
-    .hero-stat:nth-child(2) .hero-stat__num { color: var(--secondary); }
-    .hero-stat:nth-child(3) .hero-stat__num { color: #E3A500; }
-
-    .hero-stat__label {
-      font-size: 12px;
+    .hero-image-badge-text span {
+      font-size: 11px;
       color: var(--text-sub);
-      line-height: 1.6;
     }
 
-    .hero__visual {
-      position: relative;
+    .hero-image-tag {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--secondary);
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.05em;
     }
 
-    .hero-card {
-      position: relative;
-      background: #fff;
-      border-radius: var(--radius-xl);
-      padding: 24px;
-      box-shadow: var(--shadow-hover);
-      border: 1px solid var(--border);
+    /* ===== WAVE SEPARATOR ===== */
+    .wave-sep {
+      line-height: 0;
       overflow: hidden;
     }
 
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 10px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+    .wave-sep svg {
+      display: block;
+      width: 100%;
     }
 
-    .hero-card__photo {
-      aspect-ratio: 4 / 3;
-      border-radius: 22px;
-      background:
-        linear-gradient(135deg, rgba(255, 107, 53, 0.18), rgba(46, 196, 182, 0.16)),
-        var(--bg-cool);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--text-sub);
-      font-weight: 700;
-      padding: 24px;
-      margin-bottom: 20px;
+    /* ===== SECTION COMMON ===== */
+    .section {
+      padding: 88px 0;
     }
 
-    .hero-card__bubbles {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
+    .section-bg-warm { background: var(--bg-warm); }
+    .section-bg-cool { background: var(--bg-cool); }
+    .section-bg-white { background: var(--bg); }
 
-    .bubble {
-      padding: 14px 16px;
-      border-radius: 18px;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.6;
-    }
-
-    .bubble--orange { background: rgba(255, 107, 53, 0.12); }
-    .bubble--blue { background: rgba(46, 196, 182, 0.12); }
-    .bubble--yellow { background: rgba(255, 209, 102, 0.22); }
-    .bubble--white { background: #F8FAFC; border: 1px solid var(--border); }
-
-    .news {
-      padding: 28px 0;
-      background: #fff;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .news__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .news__tag {
-      flex-shrink: 0;
-      background: var(--text);
-      color: #fff;
-      border-radius: var(--radius-pill);
-      padding: 8px 14px;
+    .section-label {
       font-family: 'Quicksand', sans-serif;
       font-size: 12px;
       font-weight: 700;
-    }
-
-    .news__items {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .news__item {
-      background: var(--bg-warm);
-      border: 1px solid rgba(255, 107, 53, 0.08);
-      border-radius: var(--radius-pill);
-      padding: 9px 16px;
-      font-size: 14px;
-    }
-
-    .news__date {
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--primary);
-      margin-right: 8px;
+      margin-bottom: 8px;
     }
 
-    .vision {
-      padding: 110px 0;
-      background: var(--bg);
-    }
+    .section-label.teal { color: var(--secondary); }
+    .section-label.yellow { color: #D4A800; }
 
-    .vision__grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .vision__statement {
+    .section-title {
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 40px;
-      line-height: 1.6;
-      margin-bottom: 20px;
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 12px;
     }
 
-    .vision__statement strong {
-      color: var(--primary);
+    .section-title-underline {
+      display: inline-block;
+      position: relative;
     }
 
-    .vision__text {
+    .section-title-underline::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--tertiary);
+      border-radius: 3px;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    .section-desc {
       color: var(--text-sub);
-      font-size: 16px;
+      font-size: 15px;
+      line-height: 1.9;
+      max-width: 600px;
     }
 
-    .mission-list {
-      display: grid;
-      gap: 18px;
+    .section-header {
+      margin-bottom: 52px;
     }
 
-    .mission-item {
+    /* ===== NEWS ===== */
+    .news-grid {
       display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 16px;
-      padding: 20px;
-      border-radius: var(--radius-lg);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .news-card {
       background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
       box-shadow: var(--shadow);
-      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .mission-item__num {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
+    .news-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .news-card-border {
+      height: 5px;
+    }
+
+    .news-card-border.orange { background: var(--primary); }
+    .news-card-border.teal { background: var(--secondary); }
+    .news-card-border.yellow { background: var(--tertiary); }
+
+    .news-card-body {
+      padding: 24px;
+    }
+
+    .news-date {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .news-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .news-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+
+    .news-link:hover { gap: 8px; }
+
+    /* ===== VISION / MISSION ===== */
+    .vision-block {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .vision-en {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .vision-underline {
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+      margin: 12px auto 24px;
+    }
+
+    .vision-text {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .mission-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .mission-card:nth-child(1)::before { background: var(--primary); }
+    .mission-card:nth-child(2)::before { background: var(--secondary); }
+    .mission-card:nth-child(3)::before { background: var(--tertiary); }
+
+    .mission-icon {
+      width: 68px; height: 68px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .mission-icon.orange { background: rgba(255, 107, 53, 0.12); }
+    .mission-icon.teal { background: rgba(46, 196, 182, 0.12); }
+    .mission-icon.yellow { background: rgba(255, 209, 102, 0.2); }
+
+    .mission-icon svg { width: 34px; height: 34px; }
+
+    .mission-num {
       font-family: 'Quicksand', sans-serif;
-      font-size: 20px;
+      font-size: 11px;
       font-weight: 700;
-      color: #fff;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
     }
 
-    .mission-item:nth-child(1) .mission-item__num { background: var(--primary); }
-    .mission-item:nth-child(2) .mission-item__num { background: var(--secondary); }
-    .mission-item:nth-child(3) .mission-item__num { background: #E3A500; }
+    .mission-num.orange { color: var(--primary); }
+    .mission-num.teal { color: var(--secondary); }
+    .mission-num.yellow { color: #C8960A; }
 
-    .mission-item__title {
+    .mission-title {
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 18px;
-      margin-bottom: 6px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 12px;
     }
 
-    .mission-item__desc {
-      font-size: 14px;
+    .mission-desc {
+      font-size: 13px;
       color: var(--text-sub);
       line-height: 1.8;
     }
 
-    .concept {
-      padding: 110px 0;
-      background: var(--bg-cool);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .concept::before {
-      content: '';
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: rgba(255, 209, 102, 0.22);
-      top: -80px;
-      left: -80px;
-    }
-
-    .concept__grid {
-      position: relative;
-      z-index: 1;
+    /* ===== YOUTH SPOT ===== */
+    .yspot-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 64px;
       align-items: center;
     }
 
-    .concept__logo {
-      background: #fff;
-      border-radius: var(--radius-xl);
-      padding: 44px 32px;
-      text-align: center;
-      box-shadow: var(--shadow-hover);
-      border: 1px solid rgba(46, 196, 182, 0.14);
+    .yspot-image img {
+      border-radius: 24px;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      box-shadow: 0 16px 48px rgba(27, 36, 50, 0.12);
     }
 
-    .concept__wordmark {
+    .yspot-concept {
       font-family: 'Quicksand', sans-serif;
-      font-size: 58px;
-      line-height: 1;
+      font-size: clamp(22px, 3vw, 36px);
       font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.03em;
-      margin-bottom: 12px;
+      color: var(--secondary);
+      margin-bottom: 8px;
+      line-height: 1.2;
     }
 
-    .concept__sub {
-      color: var(--text-sub);
-      font-size: 16px;
-      margin-bottom: 24px;
-    }
-
-    .concept__chips {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .concept__chip {
-      padding: 8px 14px;
-      border-radius: var(--radius-pill);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .chip--orange { background: rgba(255, 107, 53, 0.12); color: var(--primary); }
-    .chip--green { background: rgba(46, 196, 182, 0.14); color: #148378; }
-    .chip--yellow { background: rgba(255, 209, 102, 0.28); color: #9A6B00; }
-
-    .concept__text p {
-      color: var(--text-sub);
-      margin-bottom: 16px;
-    }
-
-    .concept-points {
-      display: grid;
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .concept-point {
-      background: #fff;
-      border-radius: var(--radius-lg);
-      padding: 18px 20px;
-      border-left: 8px solid var(--primary);
-      box-shadow: var(--shadow);
-    }
-
-    .concept-point:nth-child(2) {
-      border-left-color: var(--secondary);
-    }
-
-    .concept-point__title {
+    .yspot-concept-sub {
       font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .concept-point__desc {
       font-size: 14px;
       color: var(--text-sub);
+      margin-bottom: 28px;
+      line-height: 1.6;
     }
 
-    .activities {
-      padding: 110px 0;
-      background: #fff;
+    .yspot-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
     }
 
-    .activities__grid {
+    .yspot-point {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .yspot-point-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--secondary);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .yspot-point-icon svg { width: 14px; height: 14px; fill: #fff; }
+
+    .yspot-point-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .yspot-point-text strong { color: var(--secondary); }
+
+    /* ===== ACTIVITIES ===== */
+    .activities-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
@@ -668,782 +710,1251 @@
 
     .activity-card {
       background: #fff;
-      border-radius: var(--radius-xl);
+      border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .activity-card:hover {
-      transform: translateY(-6px);
+      transform: scale(1.02);
       box-shadow: var(--shadow-hover);
     }
 
-    .activity-card__bar {
-      height: 10px;
+    .activity-card-top {
+      height: 5px;
     }
 
-    .activity-card:nth-child(1) .activity-card__bar { background: var(--primary); }
-    .activity-card:nth-child(2) .activity-card__bar { background: var(--secondary); }
-    .activity-card:nth-child(3) .activity-card__bar { background: var(--tertiary); }
+    .activity-card-top.orange { background: var(--primary); }
+    .activity-card-top.teal { background: var(--secondary); }
+    .activity-card-top.yellow { background: var(--tertiary); }
 
-    .activity-card__body {
-      padding: 28px 24px 30px;
+    .activity-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
     }
 
-    .activity-card__num {
+    .activity-card-body {
+      padding: 24px;
+    }
+
+    .activity-num {
       font-family: 'Quicksand', sans-serif;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-      color: var(--text-sub);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
     }
 
-    .activity-card__title {
+    .activity-num.orange { color: var(--primary); }
+    .activity-num.teal { color: var(--secondary); }
+    .activity-num.yellow { color: #C8960A; }
+
+    .activity-title {
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 22px;
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .activity-card__desc {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin-bottom: 18px;
-    }
-
-    .activity-card__tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .activity-card__tag {
-      font-size: 12px;
+      font-size: 18px;
       font-weight: 700;
-      padding: 7px 12px;
-      border-radius: var(--radius-pill);
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-    }
-
-    .impact {
-      padding: 110px 0;
-      background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-cool) 100%);
-    }
-
-    .impact__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .impact-card {
-      border-radius: var(--radius-xl);
-      padding: 32px 24px;
-      color: #fff;
-      text-align: center;
-      box-shadow: var(--shadow-hover);
-    }
-
-    .impact-card:nth-child(1) { background: linear-gradient(135deg, #FF6B35, #FF8A5C); }
-    .impact-card:nth-child(2) { background: linear-gradient(135deg, #2EC4B6, #49D7CB); }
-    .impact-card:nth-child(3) { background: linear-gradient(135deg, #F4B400, #FFD166); color: #5C4300; }
-
-    .impact-card__num {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 62px;
-      line-height: 1;
-      font-weight: 700;
+      color: var(--text);
       margin-bottom: 10px;
+      line-height: 1.4;
     }
 
-    .impact-card__label {
-      font-size: 15px;
-      line-height: 1.7;
-      font-weight: 700;
-    }
-
-    .voices {
-      padding: 110px 0;
-      background: #fff;
-    }
-
-    .voices__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .voice-card {
-      background: #fff;
-      border-radius: var(--radius-xl);
-      padding: 32px 28px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .voice-card::before {
-      content: '“';
-      position: absolute;
-      top: 14px;
-      left: 20px;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 72px;
-      line-height: 1;
-      color: rgba(255, 107, 53, 0.16);
-    }
-
-    .voice-card__text {
-      position: relative;
-      z-index: 1;
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 20px;
-      line-height: 1.9;
+    .activity-desc {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.8;
       margin-bottom: 20px;
     }
 
-    .voice-card__author {
-      font-size: 14px;
-      color: var(--text-sub);
+    .activity-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 16px;
+    }
+
+    .activity-tag.orange { background: rgba(255,107,53,0.1); color: var(--primary); }
+    .activity-tag.teal { background: rgba(46,196,182,0.1); color: var(--secondary); }
+    .activity-tag.yellow { background: rgba(255,209,102,0.2); color: #C8960A; }
+
+    .activity-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
       font-weight: 700;
+      border-radius: var(--radius-pill);
+      padding: 8px 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #fff;
     }
 
-    .support {
-      padding: 110px 0;
-      background: var(--bg-warm);
-    }
+    .activity-link:hover { transform: scale(1.04); }
+    .activity-link.orange { background: var(--primary); }
+    .activity-link.teal { background: var(--secondary); }
+    .activity-link.yellow { background: var(--tertiary); color: #1B2432; }
 
-    .support__grid {
+    /* ===== STATS ===== */
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 32px;
     }
 
-    .support-card {
+    .stat-card {
       background: #fff;
-      border-radius: var(--radius-xl);
-      padding: 32px 28px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border-radius: 50%;
+      aspect-ratio: 1;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 32px;
+      text-align: center;
     }
 
-    .support-card:hover {
-      transform: translateY(-6px);
+    .stat-card:hover {
       box-shadow: var(--shadow-hover);
     }
 
-    .support-card__icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin-bottom: 18px;
+    .stat-card.bounce {
+      animation: bounceIn 0.7s ease both;
     }
 
-    .support-card:nth-child(1) .support-card__icon { background: rgba(255, 107, 53, 0.12); }
-    .support-card:nth-child(2) .support-card__icon { background: rgba(46, 196, 182, 0.14); }
-    .support-card:nth-child(3) .support-card__icon { background: rgba(255, 209, 102, 0.3); }
-
-    .support-card__title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 22px;
-      margin-bottom: 14px;
+    @keyframes bounceIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      60% { transform: scale(1.1); }
+      80% { transform: scale(0.95); }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    .support-card__desc {
-      font-size: 14px;
-      color: var(--text-sub);
-      line-height: 1.9;
-      margin-bottom: 24px;
-      flex: 1;
-    }
-
-    .message {
-      padding: 110px 0;
-      background: var(--bg-cool);
-    }
-
-    .message__grid {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 36px;
-      align-items: start;
-    }
-
-    .message__photo {
-      background: linear-gradient(135deg, rgba(255, 107, 53, 0.16), rgba(46, 196, 182, 0.2));
-      border-radius: var(--radius-xl);
-      aspect-ratio: 4 / 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
+    .stat-num {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(38px, 5vw, 58px);
       font-weight: 700;
-      color: var(--text-sub);
-      box-shadow: var(--shadow);
-    }
-
-    .message__box {
-      background: #fff;
-      border-radius: var(--radius-xl);
-      padding: 34px 30px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .message__name {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 28px;
+      line-height: 1;
       margin-bottom: 6px;
     }
 
-    .message__role {
-      color: var(--text-sub);
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
+    .stat-num.orange { color: var(--primary); }
+    .stat-num.teal { color: var(--secondary); }
+    .stat-num.yellow { color: #C8960A; }
 
-    .message__text {
-      color: var(--text-sub);
-      font-size: 15px;
-      margin-bottom: 14px;
-    }
-
-    .footer {
-      background: var(--text);
-      color: rgba(255,255,255,0.74);
-      padding: 64px 0 28px;
-    }
-
-    .footer__top {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr 1fr;
-      gap: 28px;
-      padding-bottom: 36px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .footer__logo {
+    .stat-unit {
       font-family: 'Quicksand', sans-serif;
-      font-size: 30px;
+      font-size: 18px;
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 10px;
     }
 
-    .footer__lead {
+    .stat-label {
+      font-family: 'Zen Maru Gothic', sans-serif;
       font-size: 14px;
-      line-height: 1.9;
+      font-weight: 500;
+      color: var(--text-sub);
+      line-height: 1.5;
     }
 
-    .footer__heading {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 18px;
-    }
-
-    .footer__links {
+    /* ===== VOICE ===== */
+    .voice-wrap {
       display: grid;
-      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
     }
 
-    .footer__links a,
-    .footer__contact a,
-    .footer__contact p {
-      font-size: 14px;
-      line-height: 1.8;
+    .voice-image img {
+      border-radius: 24px;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      box-shadow: 0 12px 40px rgba(27,36,50,0.1);
     }
 
-    .footer__links a:hover,
-    .footer__contact a:hover {
-      color: #fff;
-    }
-
-    .footer__sns {
+    .voice-bubbles {
       display: flex;
-      gap: 10px;
-      margin-top: 16px;
+      flex-direction: column;
+      gap: 24px;
     }
 
-    .footer__sns a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .voice-bubble {
+      background: var(--bg-cool);
+      border-radius: 20px 20px 20px 4px;
+      padding: 24px 28px;
+      position: relative;
+      border-left: 4px solid var(--secondary);
+      transition: transform 0.3s;
+    }
+
+    .voice-bubble:hover { transform: translateX(6px); }
+
+    .voice-bubble-text {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .voice-bubble-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .voice-tag {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.1);
+      gap: 5px;
+      background: var(--secondary);
       color: #fff;
-      font-family: 'Quicksand', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .voice-tag svg { width: 12px; height: 12px; fill: #fff; }
+
+    /* ===== CTA ===== */
+    .cta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .cta-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card:hover {
+      transform: scale(1.03);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+    }
+
+    .cta-card:nth-child(1)::before { background: var(--primary); }
+    .cta-card:nth-child(2)::before { background: var(--secondary); }
+    .cta-card:nth-child(3)::before { background: var(--tertiary); }
+
+    .cta-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .cta-icon.orange { background: rgba(255,107,53,0.1); }
+    .cta-icon.teal { background: rgba(46,196,182,0.1); }
+    .cta-icon.yellow { background: rgba(255,209,102,0.2); }
+
+    .cta-icon svg { width: 36px; height: 36px; }
+
+    .cta-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .cta-desc {
       font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .cta-amount {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    /* ===== GREETING ===== */
+    .greeting-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .greeting-photo {
+      width: 220px;
+      flex-shrink: 0;
+    }
+
+    .greeting-photo img {
+      width: 220px; height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 12px 40px rgba(27,36,50,0.14);
+      border: 5px solid #fff;
+    }
+
+    .greeting-photo-name {
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .greeting-photo-name strong {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+    }
+
+    .greeting-photo-name span {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .greeting-quote {
+      font-size: 28px;
+      color: var(--secondary);
+      line-height: 1;
+      margin-bottom: 16px;
+      font-family: 'Quicksand', sans-serif;
       font-weight: 700;
     }
 
-    .footer__sns a:hover {
-      background: var(--primary);
+    .greeting-text {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 12px;
     }
 
-    .footer__bottom {
-      padding-top: 24px;
-      text-align: center;
+    .greeting-sig {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 14px;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .footer-gradient {
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+    }
+
+    .footer-main {
+      padding: 64px 0 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .footer-tagline {
       font-size: 13px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
     }
 
-    @media (max-width: 900px) {
-      .hero__inner,
-      .vision__grid,
-      .concept__grid,
-      .message__grid,
-      .footer__top {
+    .footer-contact a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--tertiary); }
+
+    .footer-nav-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.2s;
+    }
+
+    .footer-nav-links a:hover { color: #fff; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .footer-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ===== ANIMATION ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav { display: none; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 24px;
+        text-align: center;
+      }
+
+      .hero-btns { justify-content: center; }
+
+      .hero-image-badge {
+        bottom: -16px;
+        left: 12px;
+      }
+
+      .news-grid,
+      .mission-grid,
+      .activities-grid,
+      .stats-grid,
+      .cta-grid {
         grid-template-columns: 1fr;
       }
 
-      .activities__grid,
-      .impact__grid,
-      .support__grid,
-      .voices__grid {
+      .yspot-inner,
+      .voice-wrap,
+      .greeting-inner {
         grid-template-columns: 1fr;
+        gap: 36px;
       }
 
-      .hero__stats {
-        grid-template-columns: 1fr;
+      .greeting-photo {
+        width: 160px;
+        margin: 0 auto;
       }
 
-      .header__nav {
-        display: none;
-        position: absolute;
-        top: 76px;
-        left: 0;
-        right: 0;
-        background: rgba(254, 254, 254, 0.98);
-        flex-direction: column;
-        gap: 20px;
-        padding: 24px;
-        border-bottom: 1px solid var(--border);
+      .greeting-photo img {
+        width: 160px;
+        height: 160px;
       }
 
-      .header__nav.active {
-        display: flex;
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .header__menu {
-        display: flex;
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
+
+      .stat-card {
+        border-radius: var(--radius-lg);
+        aspect-ratio: auto;
+        padding: 28px;
+      }
+    }
+
+    /* ===== MOBILE NAV TOGGLE ===== */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
     }
 
     @media (max-width: 768px) {
-      .hero {
-        padding: 122px 0 72px;
-      }
-
-      .hero__title {
-        font-size: 36px;
-      }
-
-      .section-title,
-      .message__name {
-        font-size: 28px;
-      }
-
-      .vision__statement {
-        font-size: 30px;
-      }
-
-      .impact-card__num {
-        font-size: 48px;
-      }
-
-      .concept__wordmark {
-        font-size: 44px;
-      }
-
-      .hero__actions {
-        flex-direction: column;
-      }
-
-      .pill-btn {
-        width: 100%;
-      }
-
-      .pattern-label {
-        top: auto;
-        bottom: 16px;
-      }
+      .nav-toggle { display: flex; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Pattern Label -->
   <div class="pattern-label">Pattern C: つながり</div>
 
-  <header class="header">
-    <div class="header__inner">
-      <a href="#top" class="header__logo">OIKOS</a>
-      <nav class="header__nav" id="nav">
-        <a href="#vision">ビジョン</a>
-        <a href="#concept">ゆーすぽっと</a>
-        <a href="#activities">活動内容</a>
-        <a href="#support">参加・支援</a>
-        <a href="#message">代表あいさつ</a>
-        <a href="#support" class="pill-btn pill-btn--primary">応援する</a>
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#" class="logo" aria-label="OIKOS トップページへ">
+        <span class="logo-o">O</span><span class="logo-i">I</span><span class="logo-k">K</span><span class="logo-o2">O</span><span class="logo-s">S</span>
+        <span class="logo-sub">NPO法人</span>
+      </a>
+
+      <nav class="nav" aria-label="メインナビゲーション">
+        <ul class="nav-links">
+          <li><a href="#about">OIKOSについて</a></li>
+          <li><a href="#activities">活動内容</a></li>
+          <li><a href="#support">参加・支援</a></li>
+          <li><a href="#news">お知らせ</a></li>
+        </ul>
+        <a href="#support" class="btn btn-primary" style="font-size:13px; padding:9px 20px;">寄付で応援する</a>
       </nav>
-      <button class="header__menu" id="menuButton" aria-label="メニューを開く">
-        <span></span>
-        <span></span>
-        <span></span>
+
+      <button class="nav-toggle" aria-label="メニュー">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero__inner">
-        <div class="hero__content fade-in">
-          <div class="hero__badge">
-            <span class="hero__badge-dot"></span>
-            NPO法人OIKOS
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <!-- Decorative circles -->
+    <div class="hero-deco hero-deco-1" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-2" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-3" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-4" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-5" aria-hidden="true"></div>
+    <div class="hero-deco hero-deco-6" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <!-- Left: Text -->
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          2026年5月 NPO法人設立予定
+        </div>
+
+        <h1 class="hero-title">
+          すべての子どもたちが<br>
+          <span class="hero-title-accent">明日を楽しみに</span><br>
+          できる社会をつくる
+        </h1>
+
+        <p class="hero-sub">
+          大学生が主体となって子どもたちの居場所「ゆーすぽっと」を運営。<br>
+          学校でも家庭でもない、あなたの場所がここにある。
+        </p>
+
+        <div class="hero-btns">
+          <a href="#about" class="btn btn-primary btn-lg">OIKOSを知る</a>
+          <a href="#support" class="btn btn-outline btn-lg">支援・参加する</a>
+        </div>
+      </div>
+
+      <!-- Right: Image -->
+      <div class="hero-image-wrap">
+        <span class="hero-image-tag">Youth Spot</span>
+        <img src="../images/K3M33168.jpg" alt="子どもたちを囲む大学生ボランティア" loading="eager">
+        <div class="hero-image-badge">
+          <div class="hero-image-badge-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
           </div>
-          <h1 class="hero__title">
-            子どもたちが<br>
-            <span class="accent">明日を楽しみにできる</span><br>
-            社会をつくる
-          </h1>
-          <p class="hero__text">
-            大学生が主体となって、子どもたちの居場所「ゆーすぽっと」を運営。
-            年齢の近い学生だからこそ生まれる安心感で、学校でも家庭でもない第三の居場所を広げています。
+          <div class="hero-image-badge-text">
+            <strong><span id="hero-count">423</span>人</strong>
+            <span>のべ来訪子ども・若者数</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: Hero → News -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg-warm); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#FEFEFE"/>
+    </svg>
+  </div>
+
+  <!-- ===== NEWS ===== -->
+  <section class="section section-bg-white" id="news">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">NEWS</p>
+        <h2 class="section-title">お知らせ</h2>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card fade-up delay-1">
+          <div class="news-card-border yellow"></div>
+          <div class="news-card-body">
+            <p class="news-date">2025.06.28</p>
+            <h3 class="news-title">OIKOS東大 拠点設立のお知らせ</h3>
+            <a href="#" class="news-link">詳しく見る →</a>
+          </div>
+        </article>
+
+        <article class="news-card fade-up delay-2">
+          <div class="news-card-border teal"></div>
+          <div class="news-card-body">
+            <p class="news-date">2026.01.18</p>
+            <h3 class="news-title">OIKOS科学大 拠点設立のお知らせ</h3>
+            <a href="#" class="news-link" style="color: var(--secondary);">詳しく見る →</a>
+          </div>
+        </article>
+
+        <article class="news-card fade-up delay-3">
+          <div class="news-card-border orange"></div>
+          <div class="news-card-body">
+            <p class="news-date">2026.02.06</p>
+            <h3 class="news-title">ANRI大学生向け起業プログラム「STARTLINE」に採択されました</h3>
+            <a href="#" class="news-link">詳しく見る →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: News → Vision -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,20 C360,60 720,0 1080,40 C1260,56 1380,10 1440,20 L1440,60 L0,60 Z" fill="var(--bg-warm)"/>
+    </svg>
+  </div>
+
+  <!-- ===== VISION / MISSION ===== -->
+  <section class="section section-bg-warm" id="about">
+    <div class="container">
+      <!-- Vision -->
+      <div class="vision-block fade-up">
+        <p class="section-label teal" style="margin-bottom:4px;">OUR VISION</p>
+        <div class="vision-en">VISION</div>
+        <span class="vision-underline"></span>
+        <p class="vision-text">
+          すべての子どもたちが<br>明日を楽しみにできる社会をつくる
+        </p>
+      </div>
+
+      <!-- Mission -->
+      <div class="section-header fade-up" style="text-align:center;">
+        <p class="section-label" style="margin-bottom:4px;">MISSION</p>
+        <h2 class="section-title">3つのミッション</h2>
+      </div>
+
+      <div class="mission-grid">
+        <!-- Mission 1: 居場所 -->
+        <div class="mission-card fade-up delay-1">
+          <div class="mission-icon orange">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+              <path d="M9 21V12h6v9"/>
+            </svg>
+          </div>
+          <p class="mission-num orange">MISSION 01</p>
+          <h3 class="mission-title">「またね」と言える<br>オフラインの居場所をふやす</h3>
+          <p class="mission-desc">学校と家庭の間に、安心して継続的に通い続けられる場所をつくります。</p>
+        </div>
+
+        <!-- Mission 2: つながり -->
+        <div class="mission-card fade-up delay-2">
+          <div class="mission-icon teal">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2EC4B6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="12" r="3"/>
+              <circle cx="18" cy="8" r="2"/>
+              <circle cx="18" cy="16" r="2"/>
+              <line x1="11.8" y1="10.7" x2="16.2" y2="9.3"/>
+              <line x1="11.8" y1="13.3" x2="16.2" y2="14.7"/>
+            </svg>
+          </div>
+          <p class="mission-num teal">MISSION 02</p>
+          <h3 class="mission-title">気軽に話せる<br>ナナメ上の学生とのつながりを増やす</h3>
+          <p class="mission-desc">年齢の近い学生だからこそ生まれる距離感と安心感で、子どもに寄り添います。</p>
+        </div>
+
+        <!-- Mission 3: ありのまま -->
+        <div class="mission-card fade-up delay-3">
+          <div class="mission-icon yellow">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8960A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <p class="mission-num yellow">MISSION 03</p>
+          <h3 class="mission-title">ありのままでいいんだと<br>思える子どもを増やす</h3>
+          <p class="mission-desc">「ここはあなたの場所」。自分のままでいられる環境と関係をつくります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: Vision → Youth Spot -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg-warm); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="var(--bg-cool)"/>
+    </svg>
+  </div>
+
+  <!-- ===== YOUTH SPOT ===== -->
+  <section class="section section-bg-cool">
+    <div class="container">
+      <div class="yspot-inner">
+        <div class="yspot-image fade-up">
+          <img src="../images/K3M32971.jpg" alt="大学キャンパスを歩く子どもたちのグループ" loading="lazy">
+        </div>
+
+        <div class="fade-up delay-2">
+          <p class="section-label teal">KEY CONCEPT</p>
+          <div class="yspot-concept">YOUTH × SPOT<br>YOUR × SPOT</div>
+          <p class="yspot-concept-sub">
+            大学生など若い担い手が、子どもたちとの距離の近さを活かしてつくる居場所
           </p>
-          <div class="hero__actions">
-            <a href="#support" class="pill-btn pill-btn--primary">活動を支援する</a>
-            <a href="#vision" class="pill-btn pill-btn--secondary">OIKOSを知る</a>
-          </div>
-          <div class="hero__stats">
-            <div class="hero-stat">
-              <span class="hero-stat__num">423人</span>
-              <span class="hero-stat__label">のべ来訪子ども・若者数</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat__num">5拠点</span>
-              <span class="hero-stat__label">連携している大学・団体</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat__num">97%</span>
-              <span class="hero-stat__label">子ども・若者の満足度</span>
-            </div>
+
+          <ul class="yspot-points">
+            <li class="yspot-point">
+              <div class="yspot-point-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <p class="yspot-point-text">
+                <strong>YOUTH SPOT</strong> — 年齢の近い学生だからこそ生まれる、安心感のある関わり
+              </p>
+            </li>
+            <li class="yspot-point">
+              <div class="yspot-point-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <p class="yspot-point-text">
+                <strong>YOUR SPOT</strong> — 「ここはあなたの場所」。自分のままでいられる安心の場所
+              </p>
+            </li>
+            <li class="yspot-point">
+              <div class="yspot-point-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <p class="yspot-point-text">
+                東京大学・慶應義塾大学・東京科学大学などのキャンパスで開催中
+              </p>
+            </li>
+          </ul>
+
+          <a href="#activities" class="btn btn-secondary btn-lg">活動内容を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: Youth Spot → Activities -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg-cool); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,20 C360,60 720,0 1080,40 C1260,56 1380,16 1440,20 L1440,60 L0,60 Z" fill="var(--bg)"/>
+    </svg>
+  </div>
+
+  <!-- ===== ACTIVITIES ===== -->
+  <section class="section section-bg-white" id="activities">
+    <div class="container">
+      <div class="section-header fade-up" style="text-align:center;">
+        <p class="section-label">ACTIVITIES</p>
+        <h2 class="section-title">3つの<span class="section-title-underline">活動</span></h2>
+        <p class="section-desc" style="margin: 12px auto 0;">OIKOSは「つくる」「ひろげる」「つながる」の3つの柱で活動しています。</p>
+      </div>
+
+      <div class="activities-grid">
+        <!-- Activity 01 -->
+        <div class="activity-card fade-up delay-1">
+          <div class="activity-card-top orange"></div>
+          <img class="activity-card-img" src="../images/K3M32985.jpg" alt="折り紙を教えるシーン" loading="lazy">
+          <div class="activity-card-body">
+            <p class="activity-num orange">ACTIVITY 01</p>
+            <span class="activity-tag orange">つくる</span>
+            <h3 class="activity-title">ゆーすぽっとの設計と運営</h3>
+            <p class="activity-desc">大学キャンパスや地域の既存資源を活用した学生主体の子どもの居場所。食事・遊び・学び・おしゃべりなど、子どもが自由に過ごせる場所をつくります。</p>
+            <a href="#" class="activity-link orange">詳しく見る →</a>
           </div>
         </div>
-        <div class="hero__visual fade-in">
-          <div class="hero-card">
-            <div class="hero-card__photo">大学生と子どもたちが一緒に過ごす<br>活動風景のメインビジュアル</div>
-            <div class="hero-card__bubbles">
-              <div class="bubble bubble--orange">食事・遊び・学び・おしゃべり</div>
-              <div class="bubble bubble--blue">YOUTH × SPOT</div>
-              <div class="bubble bubble--yellow">大学生がつくる安心感</div>
-              <div class="bubble bubble--white">「またね」と言える居場所</div>
+
+        <!-- Activity 02 -->
+        <div class="activity-card fade-up delay-2">
+          <div class="activity-card-top teal"></div>
+          <img class="activity-card-img" src="../images/K3M33049.jpg" alt="緑の中での活動風景" loading="lazy">
+          <div class="activity-card-body">
+            <p class="activity-num teal">ACTIVITY 02</p>
+            <span class="activity-tag teal">ひろげる</span>
+            <h3 class="activity-title">他拠点の立ち上げ・伴走支援</h3>
+            <p class="activity-desc">立ち上げの設計支援、運営マニュアル提供、研修の実施。OIKOSの伴走なしでも自走できる状態を目指します。</p>
+            <a href="#" class="activity-link teal">詳しく見る →</a>
+          </div>
+        </div>
+
+        <!-- Activity 03 -->
+        <div class="activity-card fade-up delay-3">
+          <div class="activity-card-top yellow"></div>
+          <img class="activity-card-img" src="../images/K3M33170.jpg" alt="キャンパスを歩く子どもたちと学生" loading="lazy">
+          <div class="activity-card-body">
+            <p class="activity-num yellow">ACTIVITY 03</p>
+            <span class="activity-tag yellow">つながる</span>
+            <h3 class="activity-title">ネットワーク形成・調査・発信</h3>
+            <p class="activity-desc">地域・行政・大学・NPO・企業等との連携ネットワーク構築。勉強会・報告会の開催、SNSでの情報発信を行います。</p>
+            <a href="#" class="activity-link yellow">詳しく見る →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: Activities → Stats -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,10 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="var(--bg-warm)"/>
+    </svg>
+  </div>
+
+  <!-- ===== STATS ===== -->
+  <section class="section section-bg-warm">
+    <div class="container">
+      <div class="section-header fade-up" style="text-align:center;">
+        <p class="section-label">IMPACT</p>
+        <h2 class="section-title">これまでの<span class="section-title-underline">実績</span></h2>
+        <p class="section-desc" style="margin: 12px auto 0;">2026年1月時点の数字です</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card fade-up delay-1" data-target="423" data-suffix="人">
+          <div class="stat-num orange">
+            <span class="count-num">0</span><span class="stat-unit">人</span>
+          </div>
+          <p class="stat-label">のべ来訪<br>子ども・若者数</p>
+        </div>
+
+        <div class="stat-card fade-up delay-2" data-target="5" data-suffix="拠点">
+          <div class="stat-num teal">
+            <span class="count-num">0</span><span class="stat-unit">拠点</span>
+          </div>
+          <p class="stat-label">連携している<br>大学・団体数</p>
+        </div>
+
+        <div class="stat-card fade-up delay-3" data-target="97" data-suffix="%">
+          <div class="stat-num yellow">
+            <span class="count-num">0</span><span class="stat-unit">%</span>
+          </div>
+          <p class="stat-label">子ども・若者の<br>満足度</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: Stats → Voice -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg-warm); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,40 C360,0 720,60 1080,20 C1260,4 1380,50 1440,40 L1440,60 L0,60 Z" fill="var(--bg)"/>
+    </svg>
+  </div>
+
+  <!-- ===== VOICE ===== -->
+  <section class="section section-bg-white">
+    <div class="container">
+      <div class="voice-wrap">
+        <div class="voice-image fade-up">
+          <img src="../images/K3M33176.jpg" alt="学生と子どもの会話シーン" loading="lazy">
+        </div>
+
+        <div class="fade-up delay-2">
+          <p class="section-label teal">VOICES</p>
+          <h2 class="section-title" style="margin-bottom:32px;">子どもの<span class="section-title-underline">声</span></h2>
+
+          <div class="voice-bubbles">
+            <div class="voice-bubble">
+              <p class="voice-bubble-text">「ここに来ると、なんかホッとする。また来たいって思える場所だよ。」</p>
+              <div class="voice-bubble-footer">
+                <span class="voice-tag">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  子どもの声
+                </span>
+                <span style="font-size:12px; color:var(--text-sub);">小学5年生</span>
+              </div>
+            </div>
+
+            <div class="voice-bubble">
+              <p class="voice-bubble-text">「お兄ちゃんたちと話すの楽しい。なんでも聞いてくれるから。」</p>
+              <div class="voice-bubble-footer">
+                <span class="voice-tag">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  子どもの声
+                </span>
+                <span style="font-size:12px; color:var(--text-sub);">中学1年生</span>
+              </div>
+            </div>
+
+            <div class="voice-bubble">
+              <p class="voice-bubble-text">「大学のキャンパスに来るの、すごく特別な感じがして好き！」</p>
+              <div class="voice-bubble-footer">
+                <span class="voice-tag">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  子どもの声
+                </span>
+                <span style="font-size:12px; color:var(--text-sub);">小学3年生</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="news">
-      <div class="news__inner">
-        <span class="news__tag">NEWS</span>
-        <div class="news__items">
-          <div class="news__item"><span class="news__date">2026.02.06</span>STARTLINE採択</div>
-          <div class="news__item"><span class="news__date">2026.01.18</span>OIKOS科学大 拠点設立</div>
-          <div class="news__item"><span class="news__date">2025.06.28</span>OIKOS東大 拠点設立</div>
+  <!-- ===== GALLERY ===== -->
+  <section class="section section-bg-white" style="padding-top: 0;">
+    <div class="container">
+      <div class="gallery-grid">
+        <div class="gallery-item fade-up delay-1">
+          <img src="../images/K3M33180.jpg" alt="活動の様子1" loading="lazy">
+        </div>
+        <div class="gallery-item fade-up delay-2">
+          <img src="../images/K3M33181.jpg" alt="活動の様子2" loading="lazy">
+        </div>
+        <div class="gallery-item fade-up delay-3">
+          <img src="../images/K3M32975.jpg" alt="活動の様子3" loading="lazy">
+        </div>
+        <div class="gallery-item fade-up delay-4">
+          <img src="../images/K3M33052.jpg" alt="活動の様子4" loading="lazy">
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="vision" id="vision">
+  <!-- Wave separator: Voice → CTA -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,20 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="var(--bg-cool)"/>
+    </svg>
+  </div>
+
+  <!-- ===== SUPPORT CTA ===== -->
+  <section class="section section-bg-cool" id="support">
+    <div class="container">
+      <div class="section-header fade-up" style="text-align:center;">
+        <p class="section-label teal">JOIN US</p>
+        <h2 class="section-title">参加・<span class="section-title-underline">支援</span>する</h2>
+        <p class="section-desc" style="margin: 12px auto 0;">あなたのカタチで、子どもたちの明日を一緒につくりましょう。</p>
+      </div>
+
+      <div class="cta-grid">
+        <!-- 寄付 -->
+        <div class="cta-card fade-up delay-1">
+          <div class="cta-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="cta-title">寄付で支援する</h3>
+          <p class="cta-desc">金額に関わらず、すべての応援がOIKOSの活動を支えます。</p>
+          <div class="cta-amount">
+            🍱 1,000円 — 子ども一人に食事を提供<br>
+            🎨 5,000円 — 活動備品・消耗品を支援<br>
+            🏠 30,000円 — 子ども食堂1回分を運営
+          </div>
+          <a href="mailto:oikos.npo@gmail.com" class="btn btn-primary">寄付で応援する</a>
+        </div>
+
+        <!-- 学生 -->
+        <div class="cta-card fade-up delay-2">
+          <div class="cta-icon teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2EC4B6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="cta-title">学生として参加する</h3>
+          <p class="cta-desc">特別なスキルは不要。子どもたちと一緒に過ごすことが、一番の力になります。</p>
+          <p class="cta-amount" style="margin-bottom:20px;">
+            資金援助・ノウハウ提供など伴走支援あり<br>
+            月1回以上の開催を推奨
+          </p>
+          <a href="mailto:oikos.npo@gmail.com" class="btn btn-secondary">参加する</a>
+        </div>
+
+        <!-- 企業 -->
+        <div class="cta-card fade-up delay-3">
+          <div class="cta-icon yellow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C8960A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <h3 class="cta-title">企業・団体として連携する</h3>
+          <p class="cta-desc">規模の大小は問いません。食材提供から年間の協賛まで、さまざまな形の連携をお待ちしています。</p>
+          <p class="cta-amount" style="margin-bottom:20px;">
+            月1回の食材提供から<br>
+            年間の協賛まで幅広く
+          </p>
+          <a href="mailto:oikos.npo@gmail.com" class="btn" style="background: var(--tertiary); color: #1B2432; font-weight:700; border-radius: var(--radius-pill);">連携のご相談</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator: CTA → Greeting -->
+  <div class="wave-sep" aria-hidden="true" style="background: var(--bg-cool); margin-bottom: -1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,40 C360,0 720,60 1080,20 C1260,4 1380,50 1440,30 L1440,60 L0,60 Z" fill="var(--bg-warm)"/>
+    </svg>
+  </div>
+
+  <!-- ===== GREETING ===== -->
+  <section class="section section-bg-warm">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">MESSAGE</p>
+        <h2 class="section-title">代表あいさつ</h2>
+      </div>
+
+      <div class="greeting-inner fade-up">
+        <div class="greeting-photo">
+          <img src="../images/K3M33050.jpg" alt="代表理事 古川陽登" loading="lazy">
+          <div class="greeting-photo-name">
+            <strong>古川 陽登</strong>
+            <span>代表理事 / 大学3年生</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="greeting-quote">&ldquo;</div>
+          <p class="greeting-text">
+            2年前、荒川区で立ち上げた子ども食堂が私の原点です。そこで気づいたのは、食事以上に、安心して過ごせる時間と関係が、子どもの心を支えているということでした。
+          </p>
+          <p class="greeting-text">
+            学校と家庭の間に、もっと安心できる場所があれば。気軽に話せる、ちょっと年上の存在がいれば。子どもたちの「明日を楽しみにする力」はきっと育つ。そう信じて、OIKOSをつくりました。
+          </p>
+          <p class="greeting-text">
+            現在大学3年生。学生である今だからこそできる仕組みを、仲間たちと一緒に創っていきます。あなたの応援が、子どもたちの明日になります。
+          </p>
+          <p class="greeting-sig">— 特定非営利活動法人OIKOS 代表理事 古川陽登</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-gradient"></div>
+
+    <div class="footer-main">
       <div class="container">
-        <div class="vision__grid">
-          <div class="fade-in">
-            <div class="section-kicker">Vision</div>
-            <h2 class="vision__statement">
-              すべての子どもたちが<br>
-              <strong>明日を楽しみに</strong>できる<br>
-              社会をつくる
-            </h2>
-            <p class="vision__text">
-              学校と家庭の間に、安心して通い続けられる居場所が不足しています。
-              気軽に話せる年上の存在がいないまま、困りごとが見えにくく進んでしまうこともあります。
-              OIKOSは、制度の手前にいる子どもたちに向き合い、関係が続く居場所を育てます。
+        <div class="footer-grid">
+          <!-- Brand -->
+          <div>
+            <span class="footer-logo">
+              <span style="color:var(--primary)">O</span><span style="color:var(--secondary)">I</span><span style="color:var(--tertiary)">K</span><span style="color:var(--primary)">O</span><span style="color:var(--secondary)">S</span>
+            </span>
+            <p class="footer-tagline">
+              すべての子どもたちが明日を楽しみにできる社会をつくる。<br>
+              特定非営利活動法人OIKOS
+            </p>
+            <div class="footer-contact">
+              <a href="mailto:oikos.npo@gmail.com">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                oikos.npo@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <!-- Nav 1 -->
+          <div>
+            <p class="footer-nav-title">About</p>
+            <ul class="footer-nav-links">
+              <li><a href="#about">OIKOSについて</a></li>
+              <li><a href="#activities">活動内容</a></li>
+              <li><a href="#news">お知らせ</a></li>
+            </ul>
+          </div>
+
+          <!-- Nav 2 -->
+          <div>
+            <p class="footer-nav-title">Join</p>
+            <ul class="footer-nav-links">
+              <li><a href="#support">参加・支援</a></li>
+              <li><a href="mailto:oikos.npo@gmail.com">お問い合わせ</a></li>
+              <li><a href="#">団体情報</a></li>
+            </ul>
+          </div>
+
+          <!-- Address -->
+          <div>
+            <p class="footer-nav-title">Location</p>
+            <ul class="footer-nav-links">
+              <li><a href="#">OIKOS東大</a></li>
+              <li><a href="#">OIKOS科学大</a></li>
+            </ul>
+            <p style="font-size:11px; color:rgba(255,255,255,0.35); margin-top:16px; line-height:1.6;">
+              東京都杉並区高井戸西3-4-22-314
             </p>
           </div>
-          <div class="mission-list fade-in">
-            <div class="mission-item">
-              <div class="mission-item__num">01</div>
-              <div>
-                <h3 class="mission-item__title">「またね」と言えるオフラインの居場所をふやす</h3>
-                <p class="mission-item__desc">継続して通える場をつくり、子どもたちの日常に安心の拠点を増やします。</p>
-              </div>
-            </div>
-            <div class="mission-item">
-              <div class="mission-item__num">02</div>
-              <div>
-                <h3 class="mission-item__title">ナナメ上の学生とのつながりを増やす</h3>
-                <p class="mission-item__desc">年齢の近い大学生だからこそ生まれる、自然で話しやすい関係を大切にします。</p>
-              </div>
-            </div>
-            <div class="mission-item">
-              <div class="mission-item__num">03</div>
-              <div>
-                <h3 class="mission-item__title">ありのままでいいと思える子どもを増やす</h3>
-                <p class="mission-item__desc">自分のままで過ごせる時間と関係を通じて、自己肯定感を育みます。</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="concept" id="concept">
-      <div class="container concept__grid">
-        <div class="concept__text fade-in">
-          <div class="section-kicker">Key Concept</div>
-          <h2 class="section-title">「ゆーすぽっと」とは</h2>
-          <p>
-            大学生など若い担い手が、子どもたちとの距離の近さを活かしてつくる居場所です。
-            食事・遊び・学び・おしゃべりを通して、子どもたちがほっとできる時間を届けます。
-          </p>
-          <div class="concept-points">
-            <div class="concept-point">
-              <div class="concept-point__title">YOUTH SPOT</div>
-              <div class="concept-point__desc">年齢の近い学生だからこそ生まれる安心感のある関わり。</div>
-            </div>
-            <div class="concept-point">
-              <div class="concept-point__title">YOUR SPOT</div>
-              <div class="concept-point__desc">「ここはあなたの場所」。自分のままでいられる場所。</div>
-            </div>
-          </div>
-        </div>
-        <div class="concept__logo fade-in">
-          <div class="concept__wordmark">youth<br>spot</div>
-          <div class="concept__sub">ゆーすぽっと</div>
-          <div class="concept__chips">
-            <span class="concept__chip chip--orange">居場所</span>
-            <span class="concept__chip chip--green">つながり</span>
-            <span class="concept__chip chip--yellow">学生主体</span>
+        <div class="footer-bottom">
+          <p class="footer-copy">&copy; 2026 特定非営利活動法人OIKOS. All rights reserved.</p>
+          <div class="footer-dots">
+            <div class="footer-dot" style="background:var(--primary);"></div>
+            <div class="footer-dot" style="background:var(--secondary);"></div>
+            <div class="footer-dot" style="background:var(--tertiary);"></div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="activities" id="activities">
-      <div class="container">
-        <div class="section-header fade-in">
-          <div class="section-kicker">Activities</div>
-          <h2 class="section-title">3つの活動</h2>
-          <p class="section-subtitle">居場所の実践から、他拠点への伴走、ネットワーク形成まで。OIKOSは子どもたちを支える仕組みを広げています。</p>
-        </div>
-        <div class="activities__grid">
-          <article class="activity-card fade-in">
-            <div class="activity-card__bar"></div>
-            <div class="activity-card__body">
-              <div class="activity-card__num">ACTIVITY 01</div>
-              <h3 class="activity-card__title">ゆーすぽっとの<br>設計と運営</h3>
-              <p class="activity-card__desc">大学キャンパスや地域の既存資源を活用した、学生主体の子どもの居場所。主に10代までの子ども・若者を対象に、食事・遊び・学び・おしゃべりの場をつくります。</p>
-              <div class="activity-card__tags">
-                <span class="activity-card__tag">東京大学</span>
-                <span class="activity-card__tag">東京科学大</span>
-                <span class="activity-card__tag">食事・遊び</span>
-              </div>
-            </div>
-          </article>
-          <article class="activity-card fade-in">
-            <div class="activity-card__bar"></div>
-            <div class="activity-card__body">
-              <div class="activity-card__num">ACTIVITY 02</div>
-              <h3 class="activity-card__title">他拠点の立ち上げ・<br>伴走支援</h3>
-              <p class="activity-card__desc">立ち上げ設計、運営マニュアル提供、研修、安全基準の策定、引き継ぎ体制の構築まで伴走。OIKOSなしでも自走できる状態を目指します。</p>
-              <div class="activity-card__tags">
-                <span class="activity-card__tag">立ち上げ支援</span>
-                <span class="activity-card__tag">研修</span>
-                <span class="activity-card__tag">伴走</span>
-              </div>
-            </div>
-          </article>
-          <article class="activity-card fade-in">
-            <div class="activity-card__bar"></div>
-            <div class="activity-card__body">
-              <div class="activity-card__num">ACTIVITY 03</div>
-              <h3 class="activity-card__title">ネットワーク形成・<br>調査・発信</h3>
-              <p class="activity-card__desc">地域・行政・大学・NPO・企業との連携を広げ、勉強会や会議を開催。知見を集め、届け、次の居場所づくりにつなげます。</p>
-              <div class="activity-card__tags">
-                <span class="activity-card__tag">連携</span>
-                <span class="activity-card__tag">調査</span>
-                <span class="activity-card__tag">発信</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="impact">
-      <div class="container">
-        <div class="section-header fade-in">
-          <div class="section-kicker">Impact</div>
-          <h2 class="section-title">これまでの実績</h2>
-          <p class="section-subtitle">2026年1月時点で、OIKOSの活動は少しずつ広がっています。</p>
-        </div>
-        <div class="impact__grid">
-          <div class="impact-card fade-in">
-            <div class="impact-card__num">423<span style="font-size:28px;">人</span></div>
-            <div class="impact-card__label">のべ来訪子ども・若者数</div>
-          </div>
-          <div class="impact-card fade-in">
-            <div class="impact-card__num">5<span style="font-size:28px;">拠点</span></div>
-            <div class="impact-card__label">連携している大学・団体の数</div>
-          </div>
-          <div class="impact-card fade-in">
-            <div class="impact-card__num">97<span style="font-size:28px;">%</span></div>
-            <div class="impact-card__label">子ども・若者の満足度</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="voices">
-      <div class="container">
-        <div class="section-header fade-in">
-          <div class="section-kicker">Voices</div>
-          <h2 class="section-title">届いた声</h2>
-          <p class="section-subtitle">子どもたちが感じている安心やつながりの一部を紹介します。</p>
-        </div>
-        <div class="voices__grid">
-          <article class="voice-card fade-in">
-            <p class="voice-card__text">お兄さんたちがいるから、ここに来るのが楽しみ。学校のことも話せるし、ごはんもおいしい。</p>
-            <div class="voice-card__author">— 小学5年生</div>
-          </article>
-          <article class="voice-card fade-in">
-            <p class="voice-card__text">家でも学校でもない場所があるって安心する。ここなら自分のままでいていいって思える。</p>
-            <div class="voice-card__author">— 中学2年生</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="support" id="support">
-      <div class="container">
-        <div class="section-header fade-in">
-          <div class="section-kicker">Support</div>
-          <h2 class="section-title">参加・支援する</h2>
-          <p class="section-subtitle">寄付、学生参加、企業連携。あなたの関わり方で、子どもたちの居場所を一緒に広げられます。</p>
-        </div>
-        <div class="support__grid">
-          <article class="support-card fade-in">
-            <div class="support-card__icon">🧡</div>
-            <h3 class="support-card__title">寄付で支援する</h3>
-            <p class="support-card__desc">1,000円で子ども一人に食事を提供。5,000円で消耗品や備品を支え、30,000円で1回の子ども食堂を運営できます。</p>
-            <a href="#" class="pill-btn pill-btn--primary">寄付する</a>
-          </article>
-          <article class="support-card fade-in">
-            <div class="support-card__icon">🎓</div>
-            <h3 class="support-card__title">学生として参加する</h3>
-            <p class="support-card__desc">特別なスキルは不要です。資金援助やノウハウ提供などの伴走支援があり、月1回以上の開催を推奨しています。</p>
-            <a href="#" class="pill-btn pill-btn--secondary">参加について知る</a>
-          </article>
-          <article class="support-card fade-in">
-            <div class="support-card__icon">🏢</div>
-            <h3 class="support-card__title">企業・団体として連携する</h3>
-            <p class="support-card__desc">規模の大小は問いません。月1回の食材提供から年間の協賛まで、さまざまな形でご一緒できます。</p>
-            <a href="#" class="pill-btn pill-btn--secondary">連携を相談する</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="message" id="message">
-      <div class="container">
-        <div class="message__grid">
-          <div class="message__photo fade-in">代表・古川陽登の写真</div>
-          <div class="message__box fade-in">
-            <div class="section-kicker">Message</div>
-            <h2 class="message__name">古川 陽登</h2>
-            <div class="message__role">代表理事 / 大学3年生</div>
-            <p class="message__text">原点は、2年前に立ち上げた荒川区の子ども食堂でした。そこで気づいたのは、食事以上に、安心して過ごせる時間と関係が子どもの心を支えているということです。</p>
-            <p class="message__text">学生である今だからこそ、子どもたちとの距離が近い。その強みを活かして、持続可能な「居場所」の仕組みを創りたいと考えています。</p>
-            <p class="message__text">すべての子どもたちが「明日が楽しみだ」と思える社会を、一緒につくっていけたらうれしいです。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__top">
-        <div>
-          <div class="footer__logo">OIKOS</div>
-          <p class="footer__lead">特定非営利活動法人OIKOS<br>すべての子どもたちが明日を楽しみにできる社会をつくる</p>
-        </div>
-        <div>
-          <div class="footer__heading">Navigation</div>
-          <div class="footer__links">
-            <a href="#top">ホーム</a>
-            <a href="#vision">私たちについて</a>
-            <a href="#activities">活動内容</a>
-            <a href="#support">参加・支援したい方へ</a>
-            <a href="#message">代表あいさつ</a>
-          </div>
-        </div>
-        <div class="footer__contact">
-          <div class="footer__heading">Contact</div>
-          <p>東京都杉並区高井戸西3-4-22-314</p>
-          <a href="mailto:oikos.npo@gmail.com">oikos.npo@gmail.com</a>
-          <div class="footer__sns">
-            <a href="#" aria-label="Instagram">IG</a>
-            <a href="#" aria-label="X">X</a>
-            <a href="#" aria-label="Note">No</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer__bottom">&copy; 2026 NPO法人OIKOS. All rights reserved.</div>
     </div>
   </footer>
 
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    document.getElementById('menuButton').addEventListener('click', function() {
-      document.getElementById('nav').classList.toggle('active');
-    });
+    // ---- Header scroll effect ----
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
 
-    document.querySelectorAll('#nav a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        document.getElementById('nav').classList.remove('active');
-      });
-    });
-
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    // ---- IntersectionObserver: fade-up ----
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => fadeObserver.observe(el));
 
-    document.querySelectorAll('.fade-in').forEach(function(el) {
-      observer.observe(el);
-    });
+    // ---- Count-up animation ----
+    function countUp(el, target, duration) {
+      const start = performance.now();
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // easeOutQuart
+        const eased = 1 - Math.pow(1 - progress, 4);
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    const statCards = document.querySelectorAll('.stat-card');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const target = parseInt(card.dataset.target);
+          const numEl = card.querySelector('.count-num');
+          // Bounce effect
+          card.classList.add('bounce');
+          setTimeout(() => countUp(numEl, target, 1600), 200);
+          statObserver.unobserve(card);
+        }
+      });
+    }, { threshold: 0.3 });
+    statCards.forEach(card => statObserver.observe(card));
+
+    // ---- Mobile nav (simple toggle) ----
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    if (navToggle && nav) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = nav.style.display === 'flex';
+        nav.style.display = isOpen ? 'none' : 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '68px';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.background = '#fff';
+        nav.style.padding = '16px 24px';
+        nav.style.borderBottom = '1px solid var(--border)';
+        nav.style.gap = '16px';
+        nav.style.zIndex = '999';
+        if (isOpen) nav.style.display = 'none';
+      });
+    }
   </script>
 </body>
 </html>

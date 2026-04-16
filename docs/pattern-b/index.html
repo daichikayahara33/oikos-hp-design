@@ -3,352 +3,318 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NPO法人OIKOS | すべての子どもたちが明日を楽しみにできる社会をつくる</title>
-  <meta name="description" content="NPO法人OIKOSは、大学生が主体となり子どもたちの居場所「ゆーすぽっと」を運営しています。すべての子どもたちが明日を楽しみにできる社会を目指します。">
+  <title>NPO法人OIKOS — すべての子どもたちが明日を楽しみにできる社会をつくる</title>
+  <meta name="description" content="NPO法人OIKOSは、大学生が子どもたちとともにつくるオフラインの居場所「ゆーすぽっと」を運営しています。東京大学・慶應義塾大学・東京科学大学などに拠点を展開中。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    /* ========== RESET & BASE ========== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* ============================
+       CSS Variables / Design Tokens
+    ============================ */
     :root {
-      --primary: #1A1A2E;
-      --primary-accent: #E07B4C;
-      --secondary: #4A7C6F;
-      --bg: #FFFFFF;
-      --bg-dark: #1A1A2E;
-      --text: #1A1A2E;
-      --text-sub: #6B7280;
-      --border: #E5E7EB;
-      --text-on-dark: #FFFFFF;
-      --text-sub-on-dark: rgba(255,255,255,0.6);
+      --primary:        #1A1A2E;
+      --primary-light:  #252545;
+      --accent:         #E07B4C;
+      --accent-dark:    #C9693A;
+      --teal:           #4A7C6F;
+      --bg:             #FFFFFF;
+      --bg-off:         #F7F7F8;
+      --bg-dark:        #1A1A2E;
+      --text:           #1A1A2E;
+      --text-sub:       #6B7280;
+      --text-light:     rgba(255,255,255,0.8);
+      --border:         #E5E7EB;
+      --radius:         8px;
+      --max-w:          1280px;
+      --section-v:      120px;
+      --transition:     0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
+    /* ============================
+       Reset
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
       color: var(--text);
       background: var(--bg);
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.7;
       overflow-x: hidden;
     }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ========== UTILITY ========== */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    .section-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--primary-accent);
-      margin-bottom: 16px;
-    }
-
-    .section-label--light {
-      color: var(--primary-accent);
-    }
-
-    .en-bg-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 120px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.04);
-      position: absolute;
-      top: -20px;
-      left: -10px;
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    .en-bg-text--dark {
-      color: rgba(26,26,46,0.04);
-    }
-
-    /* ========== ANIMATIONS ========== */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-in-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .fade-in-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .stagger-1 { transition-delay: 0.1s; }
-    .stagger-2 { transition-delay: 0.2s; }
-    .stagger-3 { transition-delay: 0.3s; }
-    .stagger-4 { transition-delay: 0.4s; }
-
-    /* ========== PATTERN LABEL ========== */
+    /* ============================
+       Pattern Label
+    ============================ */
     .pattern-label {
       position: fixed;
       top: 16px;
       left: 16px;
-      z-index: 10000;
-      background: var(--primary);
-      color: var(--text-on-dark);
+      z-index: 9999;
+      background: var(--accent);
+      color: #fff;
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.1em;
-      padding: 6px 14px;
+      letter-spacing: 0.08em;
+      padding: 5px 10px;
       border-radius: 4px;
-      border: 1px solid rgba(255,255,255,0.15);
+      pointer-events: none;
     }
 
-    /* ========== HEADER ========== */
-    .header {
+    /* ============================
+       Utility
+    ============================ */
+    .section-en {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 0.85;
+      color: var(--border);
+      user-select: none;
+      pointer-events: none;
+    }
+    .section-en.dark {
+      color: rgba(255,255,255,0.06);
+    }
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* Animate-in classes */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+    .fade-up.delay-5 { transition-delay: 0.5s; }
+
+    /* ============================
+       Header
+    ============================ */
+    .site-header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-      background: rgba(26, 26, 46, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      transition: background 0.3s ease;
-    }
-
-    .header__inner {
-      max-width: 1280px;
-      margin: 0 auto;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
       padding: 0 40px;
       height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: background var(--transition), box-shadow var(--transition);
     }
-
-    .header__logo {
+    .site-header.scrolled {
+      background: var(--primary);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .header-logo {
       font-family: 'Inter', sans-serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
-      color: var(--text-on-dark);
-      letter-spacing: 0.12em;
+      color: #fff;
+      letter-spacing: 0.08em;
     }
-
-    .header__nav {
+    .header-nav {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
     }
-
-    .header__nav a {
-      color: rgba(255,255,255,0.7);
+    .header-nav a {
       font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.04em;
-      transition: color 0.3s ease;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
     }
-
-    .header__nav a:hover {
-      color: var(--text-on-dark);
-    }
-
-    .header__donate {
-      background: var(--primary-accent);
-      color: var(--text-on-dark) !important;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-weight: 700;
+    .header-nav a:hover { color: #fff; }
+    .btn-donate-header {
+      background: var(--accent);
+      color: #fff;
       font-size: 13px;
-      letter-spacing: 0.04em;
-      transition: background 0.3s ease, transform 0.2s ease;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      letter-spacing: 0.02em;
+      transition: background var(--transition), transform var(--transition);
+      display: inline-block;
     }
-
-    .header__donate:hover {
-      background: #c9693e;
+    .btn-donate-header:hover {
+      background: var(--accent-dark);
       transform: translateY(-1px);
     }
-
-    .header__hamburger {
+    .hamburger {
       display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      background: none;
-      border: none;
-      padding: 8px;
+      padding: 4px;
     }
-
-    .header__hamburger span {
+    .hamburger span {
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--text-on-dark);
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      background: #fff;
+      border-radius: 2px;
+      transition: var(--transition);
     }
 
-    /* ========== HERO ========== */
+    /* Mobile Nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--primary);
+      padding: 24px 40px 32px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .mobile-nav .btn-donate-header { align-self: flex-start; }
+
+    /* ============================
+       Hero
+    ============================ */
     .hero {
-      min-height: 100vh;
-      background: var(--bg-dark);
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
       overflow: hidden;
-      padding: 120px 40px 80px;
     }
-
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(74, 124, 111, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 30%, rgba(224, 123, 76, 0.08) 0%, transparent 50%);
+      inset: 0;
+      background-image: url('../images/K3M33006.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
     }
-
-    .hero__content {
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(26,26,46,0.82) 0%,
+        rgba(26,26,46,0.60) 60%,
+        rgba(26,26,46,0.42) 100%
+      );
+    }
+    .hero-content {
       position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 900px;
+      z-index: 2;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+      padding: 72px 40px 0;
     }
-
-    .hero__label {
+    .hero-eyebrow {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      color: var(--primary-accent);
-      margin-bottom: 40px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-
-    .hero__heading {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 72px;
-      font-weight: 900;
-      line-height: 1.25;
-      color: var(--text-on-dark);
-      margin-bottom: 32px;
-      letter-spacing: -0.02em;
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
     }
-
-    .hero__heading span {
-      display: inline;
-      background: linear-gradient(180deg, transparent 65%, rgba(224, 123, 76, 0.3) 65%);
+    .hero-title {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
     }
-
-    .hero__sub {
-      font-size: 16px;
-      color: var(--text-sub-on-dark);
-      line-height: 2;
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-subtitle {
+      font-size: clamp(14px, 1.6vw, 17px);
+      color: var(--text-light);
+      max-width: 520px;
+      line-height: 1.85;
       margin-bottom: 48px;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
     }
-
-    .hero__actions {
+    .hero-cta {
       display: flex;
       gap: 16px;
-      justify-content: center;
       flex-wrap: wrap;
     }
-
-    .btn-primary {
+    .btn-outline-white {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--primary-accent);
-      color: var(--text-on-dark);
-      padding: 16px 36px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      transition: background 0.3s ease, transform 0.2s ease;
-      border: none;
-      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      letter-spacing: 0.03em;
+      transition: background var(--transition), border-color var(--transition);
     }
-
-    .btn-primary:hover {
-      background: #c9693e;
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fff;
+    }
+    .btn-solid-orange {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      letter-spacing: 0.03em;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-solid-orange:hover {
+      background: var(--accent-dark);
       transform: translateY(-2px);
     }
-
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: var(--text-on-dark);
-      padding: 16px 36px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      border: 1px solid rgba(255,255,255,0.25);
-      transition: border-color 0.3s ease, background 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-outline:hover {
-      border-color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .hero__scroll {
+    .hero-scroll {
       position: absolute;
       bottom: 40px;
       left: 50%;
@@ -357,192 +323,176 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      color: var(--text-sub-on-dark);
-      font-size: 11px;
+      color: rgba(255,255,255,0.5);
       font-family: 'Inter', sans-serif;
-      letter-spacing: 0.15em;
+      font-size: 10px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-
-    .hero__scroll-line {
+    .scroll-arrow {
       width: 1px;
       height: 48px;
       background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-arrow::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.6);
+      animation: scroll-line 1.8s ease-in-out infinite;
+    }
+    @keyframes scroll-line {
+      0%   { top: -100%; }
+      100% { top: 100%; }
     }
 
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-      50% { opacity: 1; transform: scaleY(1); }
-    }
-
-    /* ========== NEWS BAR ========== */
+    /* ============================
+       News Bar
+    ============================ */
     .news-bar {
-      background: var(--bg);
+      background: var(--bg-off);
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 24px 0;
     }
-
-    .news-bar__inner {
-      max-width: 1280px;
+    .news-bar-inner {
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 40px;
       display: flex;
-      align-items: center;
-      gap: 24px;
+      align-items: stretch;
+      min-height: 64px;
     }
-
-    .news-bar__tag {
-      flex-shrink: 0;
-      background: var(--primary);
-      color: var(--text-on-dark);
-      font-size: 11px;
+    .news-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 5px 14px;
-      border-radius: 4px;
-    }
-
-    .news-bar__list {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0 32px 0 0;
+      border-right: 1px solid var(--border);
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      align-items: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .news-list {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      overflow: hidden;
+    }
+    .news-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 32px;
+      border-right: 1px solid var(--border);
+      height: 100%;
+      min-height: 64px;
+      white-space: nowrap;
       flex: 1;
     }
-
-    .news-bar__item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 14px;
-    }
-
-    .news-bar__date {
-      flex-shrink: 0;
+    .news-item:last-child { border-right: none; }
+    .news-date {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-sub);
-      font-weight: 500;
+      flex-shrink: 0;
     }
-
-    .news-bar__text {
+    .news-text {
+      font-size: 13px;
       color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+    .news-text a { transition: color var(--transition); }
+    .news-text a:hover { color: var(--accent); }
 
-    .news-bar__text a {
-      transition: color 0.3s ease;
-    }
-
-    .news-bar__text a:hover {
-      color: var(--primary-accent);
-    }
-
-    /* ========== VISION / MISSION ========== */
-    .vision {
-      padding: 160px 0;
+    /* ============================
+       Vision / Mission
+    ============================ */
+    .vision-section {
+      padding: var(--section-v) 0;
+      background: var(--bg);
       position: relative;
       overflow: hidden;
-      background: var(--bg);
     }
-
-    .vision__grid {
+    .vision-bg-text {
+      position: absolute;
+      top: 32px;
+      left: -16px;
+      pointer-events: none;
+      user-select: none;
+    }
+    .vision-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: start;
     }
-
-    .vision__left {
-      position: relative;
-    }
-
-    .vision__en-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 96px;
+    .vision-statement {
+      font-size: clamp(26px, 3.2vw, 42px);
       font-weight: 700;
-      color: rgba(26,26,46,0.05);
-      line-height: 1;
-      margin-bottom: -24px;
-      letter-spacing: -0.04em;
-    }
-
-    .vision__heading {
-      font-size: 36px;
-      font-weight: 900;
-      line-height: 1.5;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .vision__heading::after {
-      content: '';
-      display: block;
-      width: 48px;
-      height: 3px;
-      background: var(--primary-accent);
+      color: var(--text);
+      line-height: 1.45;
+      letter-spacing: -0.01em;
       margin-top: 24px;
+      margin-bottom: 20px;
     }
-
-    .vision__desc {
-      font-size: 16px;
+    .vision-desc {
+      font-size: 15px;
       color: var(--text-sub);
-      line-height: 2;
+      line-height: 1.9;
     }
-
-    .vision__right {
-      padding-top: 40px;
-    }
-
-    .mission__list {
-      list-style: none;
+    .mission-list {
+      margin-top: 56px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 28px;
     }
-
-    .mission__item {
+    .mission-item {
       display: flex;
       gap: 20px;
       align-items: flex-start;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
     }
-
-    .mission__num {
+    .mission-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
       flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--primary-accent);
-      line-height: 1;
-      width: 48px;
+      padding-top: 2px;
     }
-
-    .mission__text {
-      font-size: 18px;
+    .mission-text {
+      font-size: 15px;
       font-weight: 700;
+      color: var(--text);
       line-height: 1.6;
-      padding-top: 4px;
     }
 
-    .mission__label {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--secondary);
-      margin-bottom: 24px;
-    }
-
-    /* ========== YOUTH SPOT ========== */
-    .youthspot {
-      background: var(--bg-dark);
-      padding: 160px 0;
+    /* ============================
+       Youth Spot (Dark)
+    ============================ */
+    .youthspot-section {
+      background: var(--primary);
+      padding: var(--section-v) 0;
       position: relative;
       overflow: hidden;
     }
-
-    .youthspot__inner {
-      max-width: 1280px;
+    .youthspot-inner {
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 40px;
       display: grid;
@@ -550,1075 +500,1167 @@
       gap: 80px;
       align-items: center;
     }
-
-    .youthspot__content {}
-
-    .youthspot__heading {
-      font-size: 36px;
-      font-weight: 900;
-      color: var(--text-on-dark);
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-
-    .youthspot__concept {
+    .youthspot-tagline {
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--primary-accent);
-      letter-spacing: 0.1em;
+      font-size: clamp(24px, 3.5vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .youthspot-tagline span { color: var(--accent); }
+    .youthspot-tagline-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(14px, 2vw, 22px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 40px;
+      letter-spacing: 0.05em;
+    }
+    .youthspot-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.95;
       margin-bottom: 32px;
     }
-
-    .youthspot__desc {
-      font-size: 16px;
-      color: var(--text-sub-on-dark);
-      line-height: 2;
-      margin-bottom: 32px;
-    }
-
-    .youthspot__tags {
+    .concept-cards {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      flex-direction: column;
+      gap: 16px;
     }
-
-    .youthspot__tag {
-      background: rgba(255,255,255,0.08);
-      color: var(--text-on-dark);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 20px;
-      border-radius: 8px;
+    .concept-card {
+      background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 20px 24px;
     }
-
-    .youthspot__visual {
-      position: relative;
-    }
-
-    .youthspot__image-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: rgba(255,255,255,0.04);
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.2);
-      font-size: 14px;
+    .concept-card-title {
       font-family: 'Inter', sans-serif;
-      letter-spacing: 0.1em;
-    }
-
-    /* ========== ACTIVITIES ========== */
-    .activities {
-      padding: 160px 0;
-      background: var(--bg);
-    }
-
-    .activities__header {
-      margin-bottom: 80px;
-      position: relative;
-    }
-
-    .activities__en-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 96px;
+      font-size: 11px;
       font-weight: 700;
-      color: rgba(26,26,46,0.04);
-      line-height: 1;
-      margin-bottom: -20px;
-      letter-spacing: -0.04em;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
-
-    .activities__heading {
-      font-size: 36px;
-      font-weight: 900;
+    .concept-card-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
     }
-
-    .activities__grid {
+    .youthspot-images {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      height: 560px;
     }
-
-    .activity-card {
-      padding: 48px 36px;
-      border-left: 3px solid var(--primary-accent);
-      background: var(--bg);
-      border-radius: 0 8px 8px 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .activity-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-
-    .activity-card__num {
-      font-family: 'Inter', sans-serif;
-      font-size: 48px;
-      font-weight: 700;
-      color: rgba(26,26,46,0.08);
-      margin-bottom: 16px;
-      line-height: 1;
-    }
-
-    .activity-card__title {
-      font-size: 20px;
-      font-weight: 900;
-      margin-bottom: 16px;
-      line-height: 1.4;
-    }
-
-    .activity-card__desc {
-      font-size: 14px;
-      color: var(--text-sub);
-      line-height: 1.9;
-    }
-
-    /* ========== STATS ========== */
-    .stats {
-      background: var(--bg-dark);
-      padding: 120px 0;
+    .youthspot-img-slot {
+      border-radius: var(--radius);
       overflow: hidden;
     }
+    .youthspot-img-slot img {
+      height: 100%;
+      object-fit: cover;
+    }
 
-    .stats__inner {
-      max-width: 1280px;
+    /* ============================
+       Activities (Light)
+    ============================ */
+    .activities-section {
+      padding: var(--section-v) 0;
+      background: var(--bg-off);
+      position: relative;
+      overflow: hidden;
+    }
+    .activities-header {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      margin-bottom: 72px;
+      position: relative;
+    }
+    .activities-en {
+      position: absolute;
+      top: -16px;
+      left: 20px;
+    }
+    .activities-list {
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 40px;
     }
-
-    .stats__heading {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--primary-accent);
-      margin-bottom: 64px;
+    .activity-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 220px;
+      gap: 40px;
+      align-items: center;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
     }
+    .activity-item:first-child { border-top: 1px solid var(--border); }
+    .activity-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      transition: color var(--transition);
+    }
+    .activity-item:hover .activity-num { color: var(--accent); }
+    .activity-body {
+      padding-left: 24px;
+      border-left: 2px solid var(--accent);
+    }
+    .activity-title {
+      font-size: clamp(17px, 2vw, 24px);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .activity-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.85;
+    }
+    .activity-locations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .activity-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(74,124,111,0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+    .activity-image {
+      width: 220px;
+      height: 165px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .activity-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .activity-item:hover .activity-image img { transform: scale(1.05); }
 
-    .stats__grid {
+    /* ============================
+       Stats (Dark)
+    ============================ */
+    .stats-section {
+      background: var(--primary);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .stats-header {
+      margin-bottom: 80px;
+    }
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
     }
-
     .stat-item {
-      text-align: left;
+      padding: 56px 40px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
     }
-
-    .stat-item__number {
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
       font-family: 'Inter', sans-serif;
-      font-size: 96px;
+      font-size: clamp(56px, 7vw, 88px);
       font-weight: 700;
-      color: var(--text-on-dark);
+      color: var(--accent);
       line-height: 1;
+      letter-spacing: -0.03em;
       margin-bottom: 8px;
-      letter-spacing: -0.04em;
     }
-
-    .stat-item__unit {
+    .stat-unit {
       font-size: 24px;
       font-weight: 400;
     }
-
-    .stat-item__label {
+    .stat-label {
       font-size: 14px;
-      color: var(--text-sub-on-dark);
-      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      margin-top: 16px;
     }
-
-    /* ========== VOICES ========== */
-    .voices {
-      padding: 160px 0;
-      background: var(--bg);
-    }
-
-    .voices__header {
-      margin-bottom: 80px;
-    }
-
-    .voices__en-title {
+    .stat-sublabel {
       font-family: 'Inter', sans-serif;
-      font-size: 96px;
-      font-weight: 700;
-      color: rgba(26,26,46,0.04);
-      line-height: 1;
-      margin-bottom: -20px;
-      letter-spacing: -0.04em;
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 6px;
+      letter-spacing: 0.06em;
     }
 
-    .voices__heading {
-      font-size: 36px;
-      font-weight: 900;
+    /* ============================
+       Voices (Light)
+    ============================ */
+    .voices-section {
+      padding: var(--section-v) 0;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
     }
-
-    .voices__grid {
+    .voices-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .voices-header { margin-bottom: 72px; }
+    .voices-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 48px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
     }
-
     .voice-card {
-      padding: 48px;
+      padding: 48px 44px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       position: relative;
+      transition: border-color var(--transition), box-shadow var(--transition);
     }
-
-    .voice-card__quote {
-      font-size: 56px;
-      font-family: 'Inter', serif;
-      color: var(--primary-accent);
-      opacity: 0.3;
-      line-height: 1;
-      margin-bottom: -16px;
-      position: relative;
-      z-index: 0;
+    .voice-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 24px rgba(224,123,76,0.08);
     }
-
-    .voice-card__text {
-      font-size: 18px;
-      font-weight: 500;
+    .voice-quote-mark {
+      font-family: 'Inter', sans-serif;
+      font-size: 80px;
+      line-height: 0.6;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: 32px;
+      left: 36px;
+      font-weight: 700;
+    }
+    .voice-text {
+      font-size: clamp(15px, 1.6vw, 19px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.7;
       font-style: italic;
-      line-height: 2;
-      margin-bottom: 24px;
+      padding-top: 24px;
       position: relative;
       z-index: 1;
     }
-
-    .voice-card__author {
+    .voice-meta {
+      margin-top: 24px;
       font-size: 13px;
       color: var(--text-sub);
-      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-
-    .voice-card__border {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+    .voice-meta::before {
+      content: '';
+      display: block;
+      width: 20px;
       height: 1px;
-      background: var(--border);
+      background: var(--accent);
     }
 
-    /* ========== CTA ========== */
-    .cta {
-      padding: 160px 0;
-      background: #F8F8FA;
+    /* ============================
+       Support / CTA
+    ============================ */
+    .support-section {
+      padding: var(--section-v) 0;
+      background: var(--bg-off);
+      position: relative;
+      overflow: hidden;
     }
-
-    .cta__header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .cta__en-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 96px;
-      font-weight: 700;
-      color: rgba(26,26,46,0.04);
-      line-height: 1;
-      margin-bottom: -20px;
-      letter-spacing: -0.04em;
-    }
-
-    .cta__heading {
-      font-size: 36px;
-      font-weight: 900;
-    }
-
-    .cta__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      max-width: 1280px;
+    .support-inner {
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 40px;
     }
-
-    .cta-card {
+    .support-header { margin-bottom: 72px; }
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .support-card {
       background: var(--bg);
-      padding: 56px 40px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      cursor: pointer;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
     }
-
-    .cta-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-      border-color: var(--primary-accent);
+    .support-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(224,123,76,0.1);
     }
-
-    .cta-card__icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 24px;
-      background: rgba(224, 123, 76, 0.1);
-      border-radius: 8px;
+    .support-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(224,123,76,0.1);
+      border-radius: var(--radius);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      margin-bottom: 28px;
     }
-
-    .cta-card__title {
+    .support-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent);
+    }
+    .support-card-title {
       font-size: 20px;
-      font-weight: 900;
-      margin-bottom: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
     }
-
-    .cta-card__desc {
+    .support-card-desc {
       font-size: 14px;
       color: var(--text-sub);
-      line-height: 1.8;
+      line-height: 1.85;
+      flex: 1;
       margin-bottom: 24px;
     }
-
-    .cta-card__link {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary-accent);
+    .support-amounts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .support-amount-item {
+      font-size: 13px;
+      color: var(--text-sub);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .amount-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .btn-card {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: gap 0.3s ease;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      margin-top: auto;
+    }
+    .btn-card-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-card-primary:hover { background: var(--accent-dark); }
+    .btn-card-secondary {
+      border: 1.5px solid var(--text);
+      color: var(--text);
+    }
+    .btn-card-secondary:hover {
+      background: var(--text);
+      color: #fff;
     }
 
-    .cta-card:hover .cta-card__link {
-      gap: 12px;
-    }
-
-    /* ========== GREETING ========== */
-    .greeting {
-      padding: 160px 0;
+    /* ============================
+       Message
+    ============================ */
+    .message-section {
+      padding: var(--section-v) 0;
       background: var(--bg);
     }
-
-    .greeting__inner {
-      max-width: 720px;
+    .message-inner {
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 40px;
-      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 100px;
+      align-items: start;
     }
-
-    .greeting__label {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--primary-accent);
-      margin-bottom: 16px;
-    }
-
-    .greeting__heading {
-      font-size: 36px;
-      font-weight: 900;
-      margin-bottom: 48px;
-    }
-
-    .greeting__text {
+    .message-body {
       font-size: 16px;
       color: var(--text-sub);
-      line-height: 2.2;
-      text-align: left;
-      margin-bottom: 48px;
+      line-height: 2.1;
+      margin-top: 40px;
     }
-
-    .greeting__name {
-      font-size: 14px;
+    .message-body p + p { margin-top: 24px; }
+    .message-sig {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .message-sig-role {
+      font-size: 12px;
+      color: var(--text-sub);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .message-sig-name {
+      font-size: 20px;
       font-weight: 700;
       color: var(--text);
     }
-
-    .greeting__role {
-      font-size: 13px;
-      color: var(--text-sub);
-      margin-top: 4px;
+    .message-image-wrap {
+      position: relative;
+    }
+    .message-image-main {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 520px;
+    }
+    .message-image-main img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .message-image-accent {
+      position: absolute;
+      bottom: -24px;
+      left: -24px;
+      width: 160px;
+      height: 160px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 4px solid var(--bg);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
-    .greeting__divider {
-      width: 48px;
-      height: 1px;
-      background: var(--border);
-      margin: 32px auto;
+    /* ============================
+       Footer
+    ============================ */
+    .site-footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.7);
+      padding: 80px 0 0;
     }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      background: var(--bg-dark);
-      padding: 80px 0 40px;
-    }
-
-    .footer__inner {
-      max-width: 1280px;
+    .footer-inner {
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 40px;
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr 1fr;
+      gap: 60px;
     }
-
-    .footer__top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 64px;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-
-    .footer__brand {}
-
-    .footer__logo {
+    .footer-logo {
       font-family: 'Inter', sans-serif;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
-      color: var(--text-on-dark);
-      letter-spacing: 0.12em;
-      margin-bottom: 8px;
-    }
-
-    .footer__org-name {
-      font-size: 13px;
-      color: var(--text-sub-on-dark);
+      color: #fff;
+      letter-spacing: 0.06em;
       margin-bottom: 16px;
     }
-
-    .footer__email {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text-sub-on-dark);
-      transition: color 0.3s ease;
-    }
-
-    .footer__email:hover {
-      color: var(--primary-accent);
-    }
-
-    .footer__nav {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .footer__nav a {
+    .footer-tagline {
       font-size: 13px;
-      color: var(--text-sub-on-dark);
-      transition: color 0.3s ease;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
     }
-
-    .footer__nav a:hover {
-      color: var(--text-on-dark);
+    .footer-contact a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      transition: color var(--transition);
     }
-
-    .footer__bottom {
+    .footer-contact a:hover { color: var(--accent); }
+    .footer-col-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+    .footer-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-list a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition);
+    }
+    .footer-nav-list a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 60px auto 0;
+      padding: 24px 40px;
       border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
     }
-
-    .footer__copy {
+    .footer-copy {
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      color: var(--text-sub-on-dark);
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-npo-badge {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
     }
 
-    .footer__address {
-      font-size: 12px;
-      color: var(--text-sub-on-dark);
+    /* ============================
+       Responsive
+    ============================ */
+    @media (max-width: 1024px) {
+      .vision-inner { grid-template-columns: 1fr; gap: 48px; }
+      .youthspot-inner { grid-template-columns: 1fr; gap: 48px; }
+      .youthspot-images { display: none; }
+      .message-inner { grid-template-columns: 1fr; gap: 48px; }
+      .message-image-wrap { max-width: 480px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
 
-    /* ========== MOBILE NAV ========== */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(26, 26, 46, 0.98);
-      z-index: 9998;
-      padding: 40px;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .mobile-nav.active {
-      display: flex;
-    }
-
-    .mobile-nav a {
-      color: var(--text-on-dark);
-      font-size: 20px;
-      font-weight: 700;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
-      .header__nav {
-        display: none;
-      }
+      :root { --section-v: 80px; }
 
-      .header__hamburger {
-        display: flex;
-      }
+      .site-header { padding: 0 24px; }
+      .header-nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { padding: 24px; }
 
-      .header__inner {
-        padding: 0 20px;
-      }
+      .hero-content { padding: 72px 24px 0; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
 
-      .hero {
-        padding: 120px 20px 80px;
-      }
+      .news-bar-inner { padding: 0 24px; flex-direction: column; align-items: flex-start; }
+      .news-label { border-right: none; padding: 16px 0 8px; border-bottom: 1px solid var(--border); width: 100%; }
+      .news-list { flex-direction: column; width: 100%; }
+      .news-item { padding: 14px 0; border-right: none; border-bottom: 1px solid var(--border); white-space: normal; flex: none; width: 100%; }
+      .news-item:last-child { border-bottom: none; }
 
-      .hero__heading {
-        font-size: 36px;
-      }
+      .vision-inner { padding: 0 24px; }
+      .youthspot-inner { padding: 0 24px; }
 
-      .hero__label {
-        font-size: 11px;
-        margin-bottom: 24px;
-      }
+      .activities-header { padding: 0 24px; }
+      .activities-list { padding: 0 24px; }
+      .activity-item { grid-template-columns: 48px 1fr; gap: 16px; }
+      .activity-image { display: none; }
+      .activity-num { font-size: 36px; }
 
-      .hero__sub {
-        font-size: 14px;
-      }
+      .stats-inner { padding: 0 24px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 40px 0; }
+      .stat-item:last-child { border-bottom: none; }
 
-      .hero__actions {
-        flex-direction: column;
-        align-items: center;
-      }
+      .voices-inner { padding: 0 24px; }
+      .voices-grid { grid-template-columns: 1fr; }
 
-      .btn-primary, .btn-outline {
-        width: 100%;
-        justify-content: center;
-        max-width: 300px;
-      }
+      .support-inner { padding: 0 24px; }
+      .support-grid { grid-template-columns: 1fr; }
 
-      .container {
-        padding: 0 20px;
-      }
+      .message-inner { padding: 0 24px; }
 
-      .news-bar__inner {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0 20px;
-      }
-
-      .vision {
-        padding: 100px 0;
-      }
-
-      .vision__grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .vision__en-title {
-        font-size: 48px;
-      }
-
-      .vision__heading {
-        font-size: 28px;
-      }
-
-      .youthspot {
-        padding: 100px 0;
-      }
-
-      .youthspot__inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 0 20px;
-      }
-
-      .activities {
-        padding: 100px 0;
-      }
-
-      .activities__en-title {
-        font-size: 48px;
-      }
-
-      .activities__heading {
-        font-size: 28px;
-      }
-
-      .activities__grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stats {
-        padding: 80px 0;
-      }
-
-      .stats__inner {
-        padding: 0 20px;
-      }
-
-      .stats__grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .stat-item__number {
-        font-size: 64px;
-      }
-
-      .voices {
-        padding: 100px 0;
-      }
-
-      .voices__en-title {
-        font-size: 48px;
-      }
-
-      .voices__heading {
-        font-size: 28px;
-      }
-
-      .voices__grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .voice-card {
-        padding: 32px 0;
-      }
-
-      .cta {
-        padding: 100px 0;
-      }
-
-      .cta__en-title {
-        font-size: 48px;
-      }
-
-      .cta__heading {
-        font-size: 28px;
-      }
-
-      .cta__grid {
-        grid-template-columns: 1fr;
-        padding: 0 20px;
-      }
-
-      .greeting {
-        padding: 100px 0;
-      }
-
-      .greeting__heading {
-        font-size: 28px;
-      }
-
-      .greeting__inner {
-        padding: 0 20px;
-      }
-
-      .footer__inner {
-        padding: 0 20px;
-      }
-
-      .footer__top {
-        flex-direction: column;
-      }
-
-      .footer__nav {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .footer__bottom {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .en-bg-text {
-        font-size: 60px;
-      }
-
-      .pattern-label {
-        top: 80px;
-      }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; }
+      .footer-bottom { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <!-- Pattern Label -->
-  <div class="pattern-label">Pattern B: 凛</div>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="header__inner">
-      <a href="#" class="header__logo">OIKOS</a>
-      <nav class="header__nav">
-        <a href="#vision">ビジョン</a>
-        <a href="#youthspot">ゆーすぽっと</a>
-        <a href="#activities">活動内容</a>
-        <a href="#cta">参加・支援</a>
-        <a href="#greeting">代表あいさつ</a>
-        <a href="#" class="header__donate">寄付する</a>
-      </nav>
-      <button class="header__hamburger" id="hamburger" aria-label="メニュー">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+  <!-- Pattern Label -->
+  <div class="pattern-label" aria-hidden="true">Pattern B: 凛</div>
+
+  <!-- ============================
+       Header
+  ============================ -->
+  <header class="site-header" id="site-header">
+    <a href="/" class="header-logo">OIKOS</a>
+    <nav class="header-nav" aria-label="グローバルナビゲーション">
+      <a href="#about">OIKOSについて</a>
+      <a href="#activities">活動内容</a>
+      <a href="#support">参加・支援</a>
+      <a href="#news-section">お知らせ</a>
+      <a href="#support" class="btn-donate-header">寄付で応援する</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <!-- Mobile Nav -->
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="#vision" onclick="closeMobileNav()">ビジョン</a>
-    <a href="#youthspot" onclick="closeMobileNav()">ゆーすぽっと</a>
-    <a href="#activities" onclick="closeMobileNav()">活動内容</a>
-    <a href="#cta" onclick="closeMobileNav()">参加・支援</a>
-    <a href="#greeting" onclick="closeMobileNav()">代表あいさつ</a>
-    <a href="#" class="header__donate" style="text-align:center;margin-top:16px;">寄付する</a>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="モバイルナビゲーション">
+    <a href="#about" class="mobile-link">OIKOSについて</a>
+    <a href="#activities" class="mobile-link">活動内容</a>
+    <a href="#support" class="mobile-link">参加・支援</a>
+    <a href="#news-section" class="mobile-link">お知らせ</a>
+    <a href="#support" class="btn-donate-header mobile-link">寄付で応援する</a>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero__content">
-      <div class="hero__label fade-in">NPO法人OIKOS</div>
-      <h1 class="hero__heading fade-in stagger-1">
-        すべての子どもたちが<br><span>明日を楽しみにできる</span><br>社会をつくる
+  <!-- ============================
+       Hero
+  ============================ -->
+  <section class="hero" id="hero" aria-label="ヒーロー">
+    <div class="hero-bg" id="hero-bg" role="img" aria-label="東大アーチ前を歩く子どもたち"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up">NPO法人 OIKOS</p>
+      <h1 class="hero-title fade-up delay-1">
+        すべての子どもたちが<br>
+        明日を<em>楽しみに</em>できる<br>
+        社会をつくる
       </h1>
-      <p class="hero__sub fade-in stagger-2">
-        大学生が主体となり、子どもたちの居場所「ゆーすぽっと」を運営。<br>
-        年齢の近い学生だからこそ生まれる安心感で、子どもたちの「いま」を支えます。
+      <p class="hero-subtitle fade-up delay-2">
+        大学生が子どもたちとともにつくる、オフラインの居場所「ゆーすぽっと」。<br>
+        学校でも家庭でもない、ありのままでいられる第3の場所を、全国へ。
       </p>
-      <div class="hero__actions fade-in stagger-3">
-        <a href="#cta" class="btn-primary">活動を支援する →</a>
-        <a href="#vision" class="btn-outline">私たちについて</a>
+      <div class="hero-cta fade-up delay-3">
+        <a href="#about" class="btn-outline-white">
+          OIKOSについて
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="#support" class="btn-solid-orange">
+          寄付で応援する
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3c2.5 0 4.5 2 4.5 4.5S10.5 13 8 13 3.5 11 3.5 7.5 5.5 3 8 3z"/><path d="M8 5.5V10M6 8l2 2 2-2"/></svg>
+        </a>
       </div>
     </div>
-    <div class="hero__scroll">
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-arrow"></div>
       <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
     </div>
   </section>
 
-  <!-- News Bar -->
-  <div class="news-bar">
-    <div class="news-bar__inner">
-      <span class="news-bar__tag">NEWS</span>
-      <div class="news-bar__list">
-        <div class="news-bar__item">
-          <span class="news-bar__date">2026.02.06</span>
-          <span class="news-bar__text"><a href="#">ANRI大学生向け起業プログラム「STARTLINE」に採択されました</a></span>
-        </div>
-        <div class="news-bar__item">
-          <span class="news-bar__date">2026.01.18</span>
-          <span class="news-bar__text"><a href="#">OIKOS科学大 拠点設立のお知らせ</a></span>
-        </div>
-        <div class="news-bar__item">
-          <span class="news-bar__date">2025.06.28</span>
-          <span class="news-bar__text"><a href="#">OIKOS東大 拠点設立のお知らせ</a></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Vision / Mission -->
-  <section class="vision" id="vision">
-    <div class="container">
-      <div class="vision__grid">
-        <div class="vision__left fade-in">
-          <div class="vision__en-title">VISION</div>
-          <div class="section-label">Our Vision</div>
-          <h2 class="vision__heading">
-            すべての子どもたちが<br>明日を楽しみにできる<br>社会をつくる
-          </h2>
-          <p class="vision__desc">
-            学校と家庭の間に、安心して通い続けられる居場所が不足しています。<br>
-            気軽に話せる年上の存在がいない子どもたちの問題は、見えにくいまま進行します。<br>
-            私たちOIKOSは、その「制度の手前」にある子どもたちに向き合います。
-          </p>
-        </div>
-        <div class="vision__right fade-in stagger-2">
-          <div class="mission__label">Mission</div>
-          <ul class="mission__list">
-            <li class="mission__item fade-in stagger-1">
-              <span class="mission__num">01</span>
-              <span class="mission__text">「またね」と言えるオフラインの居場所をふやす</span>
-            </li>
-            <li class="mission__item fade-in stagger-2">
-              <span class="mission__num">02</span>
-              <span class="mission__text">子どもが気軽に話せるナナメ上の学生とのつながりを増やす</span>
-            </li>
-            <li class="mission__item fade-in stagger-3">
-              <span class="mission__num">03</span>
-              <span class="mission__text">ありのままでいいんだと思える子どもを増やす</span>
-            </li>
-          </ul>
-        </div>
+  <!-- ============================
+       News Bar
+  ============================ -->
+  <section id="news-section" aria-label="お知らせ">
+    <div class="news-bar">
+      <div class="news-bar-inner">
+        <div class="news-label" aria-hidden="true">News</div>
+        <ul class="news-list">
+          <li class="news-item">
+            <time class="news-date" datetime="2026-02-06">2026.02.06</time>
+            <span class="news-text">
+              <a href="#">ANRI大学生向け起業プログラム「STARTLINE」に採択されました</a>
+            </span>
+          </li>
+          <li class="news-item">
+            <time class="news-date" datetime="2026-01-18">2026.01.18</time>
+            <span class="news-text">
+              <a href="#">OIKOS科学大 拠点設立のお知らせ</a>
+            </span>
+          </li>
+          <li class="news-item">
+            <time class="news-date" datetime="2025-06-28">2025.06.28</time>
+            <span class="news-text">
+              <a href="#">OIKOS東大 拠点設立のお知らせ</a>
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Youth Spot -->
-  <section class="youthspot" id="youthspot">
-    <div class="youthspot__inner">
-      <div class="youthspot__content fade-in">
-        <div class="section-label section-label--light">Key Concept</div>
-        <h2 class="youthspot__heading">ゆーすぽっと</h2>
-        <p class="youthspot__concept">YOUTH × SPOT / YOUR × SPOT</p>
-        <p class="youthspot__desc">
-          大学生など若い担い手が、子どもたちとの距離の近さを活かしてつくる居場所。<br><br>
-          <strong style="color:var(--text-on-dark);">YOUTH SPOT</strong> — 年齢の近い学生だからこそ生まれる安心感のある関わり<br><br>
-          <strong style="color:var(--text-on-dark);">YOUR SPOT</strong> — 「ここはあなたの場所」。自分のままでいられる場所
+  <!-- ============================
+       Vision / Mission
+  ============================ -->
+  <section class="vision-section" id="about" aria-label="ビジョン・ミッション">
+    <div class="vision-bg-text section-en" aria-hidden="true">VISION</div>
+    <div class="vision-inner">
+      <div class="vision-left">
+        <p class="section-label fade-up">Our Vision</p>
+        <h2 class="vision-statement fade-up delay-1">
+          すべての子どもたちが<br>明日を楽しみにできる<br>社会をつくる
+        </h2>
+        <p class="vision-desc fade-up delay-2">
+          学校と家庭の間にある「抜け穴」に落ちてしまう子どもたちがいます。<br>
+          制度の手前にいる彼らに、安心できる居場所と、気軽に話せるナナメ上の存在を届けること。<br>
+          それがOIKOSの出発点です。
         </p>
-        <div class="youthspot__tags">
-          <span class="youthspot__tag">食事</span>
-          <span class="youthspot__tag">遊び</span>
-          <span class="youthspot__tag">学び</span>
-          <span class="youthspot__tag">おしゃべり</span>
-        </div>
       </div>
-      <div class="youthspot__visual fade-in-right">
-        <div class="youthspot__image-placeholder">
-          PHOTO
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Activities -->
-  <section class="activities" id="activities">
-    <div class="container">
-      <div class="activities__header fade-in">
-        <div class="activities__en-title">ACTIVITY</div>
-        <div class="section-label">What We Do</div>
-        <h2 class="activities__heading">3つの活動</h2>
-      </div>
-      <div class="activities__grid">
-        <div class="activity-card fade-in stagger-1">
-          <div class="activity-card__num">01</div>
-          <h3 class="activity-card__title">ゆーすぽっとの<br>設計と運営</h3>
-          <p class="activity-card__desc">
-            大学キャンパスや地域の既存資源を活用した学生主体の子どもの居場所。主に10代までの子ども・若者を対象に、東京大学、慶應義塾大学、東京科学大学などを拠点として食事・遊び・学び・おしゃべりの場を提供します。
-          </p>
-        </div>
-        <div class="activity-card fade-in stagger-2">
-          <div class="activity-card__num">02</div>
-          <h3 class="activity-card__title">他拠点の立ち上げ・<br>伴走支援</h3>
-          <p class="activity-card__desc">
-            立ち上げの設計支援、運営マニュアル提供、研修の実施。安全基準の策定、引き継ぎ体制の構築、関係機関との橋渡し。OIKOSの伴走なしでも自走できる状態を目指します。
-          </p>
-        </div>
-        <div class="activity-card fade-in stagger-3">
-          <div class="activity-card__num">03</div>
-          <h3 class="activity-card__title">ネットワーク形成・<br>調査・発信</h3>
-          <p class="activity-card__desc">
-            地域・行政・大学・NPO・企業等との連携ネットワーク構築。社会福祉協議会との連携や学生子ども食堂ネットワーク会議の開催、勉強会・報告会の開催、SNSでの情報発信に取り組みます。
-          </p>
-        </div>
+      <div class="vision-right">
+        <p class="section-label fade-up">Our Mission</p>
+        <ul class="mission-list">
+          <li class="mission-item fade-up delay-1">
+            <span class="mission-num">01.</span>
+            <span class="mission-text">「またね」と言えるオフラインの居場所をふやす</span>
+          </li>
+          <li class="mission-item fade-up delay-2">
+            <span class="mission-num">02.</span>
+            <span class="mission-text">子どもが気軽に話せるナナメ上の学生とのつながりを増やす</span>
+          </li>
+          <li class="mission-item fade-up delay-3">
+            <span class="mission-num">03.</span>
+            <span class="mission-text">ありのままでいいんだと思える子どもを増やす</span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Stats -->
-  <section class="stats" id="stats">
-    <div class="stats__inner">
-      <div class="stats__heading fade-in">Results — 2026年1月時点</div>
-      <div class="stats__grid">
-        <div class="stat-item fade-in stagger-1">
-          <div class="stat-item__number">423<span class="stat-item__unit">人</span></div>
-          <div class="stat-item__label">のべ来訪子ども・若者数</div>
-        </div>
-        <div class="stat-item fade-in stagger-2">
-          <div class="stat-item__number">5<span class="stat-item__unit">拠点</span></div>
-          <div class="stat-item__label">連携している大学・団体の数</div>
-        </div>
-        <div class="stat-item fade-in stagger-3">
-          <div class="stat-item__number">97<span class="stat-item__unit">%</span></div>
-          <div class="stat-item__label">子ども・若者の満足度</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Voices -->
-  <section class="voices" id="voices">
-    <div class="container">
-      <div class="voices__header fade-in">
-        <div class="voices__en-title">VOICES</div>
-        <div class="section-label">子どもたちの声</div>
-        <h2 class="voices__heading">届いた声</h2>
-      </div>
-      <div class="voices__grid">
-        <div class="voice-card fade-in stagger-1">
-          <div class="voice-card__border"></div>
-          <div class="voice-card__quote">"</div>
-          <p class="voice-card__text">
-            お兄さんたちがいるから、ここに来るのが楽しみ。学校のことも話せるし、ごはんもおいしい。
-          </p>
-          <span class="voice-card__author">— 小学5年生</span>
-        </div>
-        <div class="voice-card fade-in stagger-2">
-          <div class="voice-card__border"></div>
-          <div class="voice-card__quote">"</div>
-          <p class="voice-card__text">
-            家でも学校でもない場所があるって、なんか安心する。自分のままでいていいって思える。
-          </p>
-          <span class="voice-card__author">— 中学2年生</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta" id="cta">
-    <div class="cta__header">
-      <div class="container">
-        <div class="cta__en-title fade-in">SUPPORT</div>
-        <div class="section-label fade-in">Get Involved</div>
-        <h2 class="cta__heading fade-in">参加・支援する</h2>
-      </div>
-    </div>
-    <div class="cta__grid">
-      <div class="cta-card fade-in stagger-1">
-        <div class="cta-card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
-        <h3 class="cta-card__title">寄付で支援する</h3>
-        <p class="cta-card__desc">
-          1,000円で子ども一人に食事を提供。5,000円で活動備品の一部を支え、30,000円で一回の子ども食堂を運営できます。
+  <!-- ============================
+       Youth Spot (Dark)
+  ============================ -->
+  <section class="youthspot-section" aria-label="ゆーすぽっとについて">
+    <div class="youthspot-inner">
+      <div class="youthspot-content">
+        <p class="section-label fade-up">Key Concept</p>
+        <h2 class="youthspot-tagline fade-up delay-1">
+          YOUTH × SPOT<br>
+          <span>YOUR × SPOT</span>
+        </h2>
+        <p class="youthspot-tagline-sub fade-up delay-2">ゆーすぽっと</p>
+        <p class="youthspot-desc fade-up delay-2">
+          大学生など若い担い手が、子どもたちとの距離の近さを活かしてつくる居場所。
+          年齢の近い学生だからこそ生まれる安心感と、「ここはあなたの場所」という感覚が、
+          子どもたちの心に根を張ります。
         </p>
-        <span class="cta-card__link">詳しく見る →</span>
-      </div>
-      <div class="cta-card fade-in stagger-2">
-        <div class="cta-card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="concept-cards fade-up delay-3">
+          <div class="concept-card">
+            <div class="concept-card-title">YOUTH SPOT</div>
+            <div class="concept-card-text">年齢の近い学生だからこそ生まれる安心感のある関わり。先生でも親でもない、絶妙な距離感が子どもたちの本音を引き出す。</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">YOUR SPOT</div>
+            <div class="concept-card-text">「ここはあなたの場所」。自分のままでいられる場所。評価されず、ただそこにいていい場所を、大学のキャンパスにつくる。</div>
+          </div>
         </div>
-        <h3 class="cta-card__title">学生として参加する</h3>
-        <p class="cta-card__desc">
-          特別なスキルは不要。資金援助やノウハウ提供など伴走支援があります。月1回以上の開催を推奨しています。
-        </p>
-        <span class="cta-card__link">詳しく見る →</span>
       </div>
-      <div class="cta-card fade-in stagger-3">
-        <div class="cta-card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <div class="youthspot-images" aria-hidden="true">
+        <div class="youthspot-img-slot fade-up delay-1">
+          <img src="../images/K3M32985.jpg" alt="学生が子どもたちに折り紙を教えている様子" loading="lazy">
         </div>
-        <h3 class="cta-card__title">企業・団体として連携する</h3>
-        <p class="cta-card__desc">
-          規模の大小は問いません。月1回の食材提供から年間の協賛まで、さまざまな形で連携できます。
-        </p>
-        <span class="cta-card__link">詳しく見る →</span>
+        <div class="youthspot-img-slot fade-up delay-2">
+          <img src="../images/K3M33168.jpg" alt="学生を囲む子どもたちの笑顔" loading="lazy">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Greeting -->
-  <section class="greeting" id="greeting">
-    <div class="greeting__inner">
-      <div class="greeting__label fade-in">Message</div>
-      <h2 class="greeting__heading fade-in">代表あいさつ</h2>
-      <p class="greeting__text fade-in stagger-1">
-        原点は、2年前に立ち上げた荒川区の子ども食堂でした。<br><br>
-        そこで気づいたのは、子どもたちにとって食事以上に大切なものがあるということ。安心して過ごせる時間と、信頼できる関係が、子どもの心を支えているのだと。<br><br>
-        現在、大学3年生です。学生である今だからこそ、子どもたちとの距離が近い。その強みを活かして、持続可能な「居場所」の仕組みを創りたい。<br><br>
-        すべての子どもたちが「明日が楽しみだ」と思える社会を、一緒につくりませんか。
-      </p>
-      <div class="greeting__divider"></div>
-      <div class="greeting__name fade-in stagger-2">古川 陽登</div>
-      <div class="greeting__role fade-in stagger-2">NPO法人OIKOS 代表理事</div>
+  <!-- ============================
+       Activities (Light)
+  ============================ -->
+  <section class="activities-section" id="activities" aria-label="3つの活動">
+    <div class="activities-header">
+      <div class="activities-en section-en" aria-hidden="true">ACTIVITY</div>
+      <p class="section-label fade-up" style="position:relative;z-index:1;margin-top:28px;">What We Do</p>
+      <h2 class="fade-up delay-1" style="font-size:clamp(26px,3.2vw,42px);font-weight:700;color:var(--text);margin-top:12px;line-height:1.35;position:relative;z-index:1;">
+        3つの活動で、<br>居場所の連鎖をつくる
+      </h2>
+    </div>
+    <ul class="activities-list">
+      <li class="activity-item fade-up">
+        <div class="activity-num" aria-hidden="true">01</div>
+        <div class="activity-body">
+          <h3 class="activity-title">ゆーすぽっとの設計と運営</h3>
+          <p class="activity-desc">
+            大学キャンパスや地域の既存資源を活用した、学生主体の子どもの居場所。
+            食事・遊び・学び・おしゃべりなど、子どもたちが自然体でいられる時間を毎回積み重ねています。
+          </p>
+          <div class="activity-locations">
+            <span class="activity-tag">東京大学</span>
+            <span class="activity-tag">慶應義塾大学</span>
+            <span class="activity-tag">東京科学大学</span>
+          </div>
+        </div>
+        <div class="activity-image">
+          <img src="../images/K3M32971.jpg" alt="大学構内を歩くグループ" loading="lazy">
+        </div>
+      </li>
+      <li class="activity-item fade-up delay-1">
+        <div class="activity-num" aria-hidden="true">02</div>
+        <div class="activity-body">
+          <h3 class="activity-title">他拠点の立ち上げ・伴走支援</h3>
+          <p class="activity-desc">
+            立ち上げの設計支援から運営マニュアルの提供、研修の実施まで。
+            OIKOSの伴走なしでも自走できる状態を目指し、安全基準の策定と引き継ぎ体制の構築を行います。
+          </p>
+          <div class="activity-locations">
+            <span class="activity-tag">公民館・空き家</span>
+            <span class="activity-tag">地域施設</span>
+          </div>
+        </div>
+        <div class="activity-image">
+          <img src="../images/K3M33049.jpg" alt="緑の中での学生と子どもの交流" loading="lazy">
+        </div>
+      </li>
+      <li class="activity-item fade-up delay-2">
+        <div class="activity-num" aria-hidden="true">03</div>
+        <div class="activity-body">
+          <h3 class="activity-title">ネットワーク形成・調査・発信</h3>
+          <p class="activity-desc">
+            地域・行政・大学・NPO・企業等との連携ネットワーク構築。
+            社会福祉協議会や各大学子ども食堂などと連携し、子どもたちを取り巻く社会課題に声を上げ続けます。
+          </p>
+          <div class="activity-locations">
+            <span class="activity-tag">社会福祉協議会</span>
+            <span class="activity-tag">学生子ども食堂ネットワーク</span>
+          </div>
+        </div>
+        <div class="activity-image">
+          <img src="../images/K3M33176.jpg" alt="学生と子どもの会話" loading="lazy">
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============================
+       Stats (Dark)
+  ============================ -->
+  <section class="stats-section" aria-label="活動実績">
+    <div class="stats-inner">
+      <div class="stats-header">
+        <p class="section-label fade-up">Our Impact</p>
+        <h2 class="fade-up delay-1" style="font-size:clamp(26px,3.2vw,42px);font-weight:700;color:#fff;margin-top:12px;line-height:1.35;">
+          数字が語る、<br>確かな変化
+        </h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item fade-up">
+          <div class="stat-num">
+            <span class="counter" data-target="423">0</span><span class="stat-unit">人</span>
+          </div>
+          <div class="stat-label">のべ来訪<br>子ども・若者数</div>
+          <div class="stat-sublabel">2026年1月時点</div>
+        </div>
+        <div class="stat-item fade-up delay-2">
+          <div class="stat-num">
+            <span class="counter" data-target="5">0</span><span class="stat-unit">拠点</span>
+          </div>
+          <div class="stat-label">連携している<br>大学・団体の数</div>
+          <div class="stat-sublabel">2026年1月時点</div>
+        </div>
+        <div class="stat-item fade-up delay-3">
+          <div class="stat-num">
+            <span class="counter" data-target="97">0</span><span class="stat-unit">%</span>
+          </div>
+          <div class="stat-label">子ども・若者の<br>満足度</div>
+          <div class="stat-sublabel">活動参加者アンケート</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer" id="footer">
-    <div class="footer__inner">
-      <div class="footer__top">
-        <div class="footer__brand">
-          <div class="footer__logo">OIKOS</div>
-          <div class="footer__org-name">特定非営利活動法人OIKOS</div>
-          <a href="mailto:oikos.npo@gmail.com" class="footer__email">oikos.npo@gmail.com</a>
+  <!-- ============================
+       Voices (Light)
+  ============================ -->
+  <section class="voices-section" aria-label="子どもたちの声">
+    <div class="voices-inner">
+      <div class="voices-header">
+        <p class="section-label fade-up">Voices</p>
+        <h2 class="fade-up delay-1" style="font-size:clamp(26px,3.2vw,42px);font-weight:700;color:var(--text);margin-top:12px;line-height:1.35;">
+          子どもたちの声
+        </h2>
+      </div>
+      <div class="voices-grid">
+        <blockquote class="voice-card fade-up">
+          <div class="voice-quote-mark" aria-hidden="true">"</div>
+          <p class="voice-text">「ここに来ると、なんか落ち着く。お兄ちゃんたちが話を聞いてくれるから。」</p>
+          <footer class="voice-meta">小学5年生・女子</footer>
+        </blockquote>
+        <blockquote class="voice-card fade-up delay-1">
+          <div class="voice-quote-mark" aria-hidden="true">"</div>
+          <p class="voice-text">「学校が嫌いだけど、ここは好き。自分のままでいられる気がする。」</p>
+          <footer class="voice-meta">中学1年生・男子</footer>
+        </blockquote>
+        <blockquote class="voice-card fade-up delay-2">
+          <div class="voice-quote-mark" aria-hidden="true">"</div>
+          <p class="voice-text">「また来週も来ていい？って毎回聞いちゃう。それくらい楽しい。」</p>
+          <footer class="voice-meta">小学3年生・女子</footer>
+        </blockquote>
+        <blockquote class="voice-card fade-up delay-3">
+          <div class="voice-quote-mark" aria-hidden="true">"</div>
+          <p class="voice-text">「大学生のお姉さんが優しくて、なんでも話せる。秘密も守ってくれる。」</p>
+          <footer class="voice-meta">中学2年生・女子</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       Support / CTA
+  ============================ -->
+  <section class="support-section" id="support" aria-label="参加・支援">
+    <div class="support-inner">
+      <div class="support-header">
+        <p class="section-label fade-up">Get Involved</p>
+        <h2 class="fade-up delay-1" style="font-size:clamp(26px,3.2vw,42px);font-weight:700;color:var(--text);margin-top:12px;line-height:1.35;">
+          あなたの力が、<br>居場所になる
+        </h2>
+      </div>
+      <div class="support-grid">
+
+        <!-- 寄付 -->
+        <div class="support-card fade-up">
+          <div class="support-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="support-card-title">寄付で支援する</h3>
+          <p class="support-card-desc">一口の寄付が、子どもたちの居場所を直接支えます。継続寄付・単発寄付どちらも歓迎です。</p>
+          <div class="support-amounts">
+            <div class="support-amount-item">
+              <span class="amount-num">¥1,000</span>
+              <span>子ども一人に食事を提供できます</span>
+            </div>
+            <div class="support-amount-item">
+              <span class="amount-num">¥5,000</span>
+              <span>1回の活動備品の一部を支えられます</span>
+            </div>
+            <div class="support-amount-item">
+              <span class="amount-num">¥30,000</span>
+              <span>一回の子ども食堂を運営できます</span>
+            </div>
+          </div>
+          <a href="mailto:oikos.npo@gmail.com?subject=寄付について" class="btn-card btn-card-primary">寄付で応援する</a>
         </div>
-        <nav class="footer__nav">
-          <a href="#hero">ホーム</a>
-          <a href="#vision">私たちについて</a>
-          <a href="#activities">活動内容</a>
-          <a href="#cta">参加・支援</a>
-          <a href="#">お知らせ</a>
-          <a href="#">お問い合わせ</a>
-          <a href="#">団体情報</a>
-        </nav>
+
+        <!-- 学生として参加 -->
+        <div class="support-card fade-up delay-1">
+          <div class="support-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M4 21c0-4 3.58-7 8-7s8 3 8 7"/>
+            </svg>
+          </div>
+          <h3 class="support-card-title">学生として参加する</h3>
+          <p class="support-card-desc">
+            特別なスキルは一切不要。あなたが子どもたちにとっての「ナナメ上の存在」になります。
+            資金援助・ノウハウ提供など伴走支援あり。月1回以上の開催を推奨しています。
+          </p>
+          <a href="mailto:oikos.npo@gmail.com?subject=学生参加について" class="btn-card btn-card-secondary">参加を検討する</a>
+        </div>
+
+        <!-- 企業・団体として連携 -->
+        <div class="support-card fade-up delay-2">
+          <div class="support-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+              <line x1="12" y1="12" x2="12" y2="16"/>
+              <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+          </div>
+          <h3 class="support-card-title">企業・団体として連携する</h3>
+          <p class="support-card-desc">
+            規模の大小は問いません。月1回の食材提供から年間の協賛まで、貴社のスタイルに合わせた連携をご提案します。
+            社会福祉協議会・行政・大学などと連携しながら、地域課題の解決に取り組みましょう。
+          </p>
+          <a href="mailto:oikos.npo@gmail.com?subject=連携について" class="btn-card btn-card-secondary">連携を相談する</a>
+        </div>
       </div>
-      <div class="footer__bottom">
-        <span class="footer__copy">&copy; 2026 NPO法人OIKOS. All rights reserved.</span>
-        <span class="footer__address">東京都杉並区高井戸西3-4-22-314</span>
+    </div>
+  </section>
+
+  <!-- ============================
+       Message
+  ============================ -->
+  <section class="message-section" aria-label="代表あいさつ">
+    <div class="message-inner">
+      <div class="message-content fade-up">
+        <p class="section-label">Message</p>
+        <h2 style="font-size:clamp(22px,2.6vw,34px);font-weight:700;color:var(--text);margin-top:16px;line-height:1.45;">代表あいさつ</h2>
+        <div class="message-body">
+          <p>
+            私がOIKOSを立ち上げた原点は、2年前に荒川区で始めた子ども食堂でした。
+            そこで気づいたのは、子どもたちに必要なのは食事だけではないということ。
+            安心して過ごせる時間と、自分のことを知ってくれる人との関係が、
+            子どもの心を本当に支えているのだと。
+          </p>
+          <p>
+            大学3年生という立場で、NPO法人の設立に踏み切ったのは、
+            学生である今だからこそできる仕組みを創りたいという強い思いからです。
+            先生でも親でもない、絶妙な距離感を持った学生が、子どもたちの隣にいる。
+            そんな居場所を、日本中に増やしていきたい。
+          </p>
+          <p>
+            OIKOSはまだ始まったばかりです。
+            でも、のべ423人の子どもたちとの「またね」の積み重ねが、
+            確かな手応えを教えてくれています。
+            あなたも、この変化の一部になってください。
+          </p>
+        </div>
+        <div class="message-sig">
+          <p class="message-sig-role">特定非営利活動法人OIKOS 代表理事</p>
+          <p class="message-sig-name">古川 陽登</p>
+        </div>
       </div>
+      <div class="message-image-wrap fade-up delay-2">
+        <div class="message-image-main">
+          <img src="../images/K3M33170.jpg" alt="活動の様子" loading="lazy">
+        </div>
+        <div class="message-image-accent">
+          <img src="../images/K3M33180.jpg" alt="子どもたちとの交流" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       Footer
+  ============================ -->
+  <footer class="site-footer" aria-label="サイトフッター">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">OIKOS</div>
+        <p class="footer-tagline">すべての子どもたちが<br>明日を楽しみにできる社会をつくる</p>
+        <div class="footer-contact">
+          <a href="mailto:oikos.npo@gmail.com">oikos.npo@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Navigation</p>
+        <ul class="footer-nav-list">
+          <li><a href="#about">OIKOSについて</a></li>
+          <li><a href="#activities">活動内容</a></li>
+          <li><a href="#support">参加・支援</a></li>
+          <li><a href="#news-section">お知らせ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Support</p>
+        <ul class="footer-nav-list">
+          <li><a href="#support">寄付で応援する</a></li>
+          <li><a href="mailto:oikos.npo@gmail.com?subject=学生参加について">学生として参加する</a></li>
+          <li><a href="mailto:oikos.npo@gmail.com?subject=連携について">企業・団体として連携する</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-nav-list">
+          <li><a href="mailto:oikos.npo@gmail.com">お問い合わせ</a></li>
+          <li><a href="https://www.npo-oikos.com/" target="_blank" rel="noopener noreferrer">現行サイト（Wix）</a></li>
+        </ul>
+        <p class="footer-col-title" style="margin-top:32px;">Address</p>
+        <address style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.85;font-style:normal;">
+          東京都杉並区<br>高井戸西3-4-22-314
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 特定非営利活動法人OIKOS. All rights reserved.</p>
+      <p class="footer-npo-badge">設立準備中 — 2026年5月予定</p>
     </div>
   </footer>
 
-  <!-- JavaScript -->
+  <!-- ============================
+       JavaScript
+  ============================ -->
   <script>
-    // IntersectionObserver for fade-in animations
-    document.addEventListener('DOMContentLoaded', function() {
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -60px 0px',
-        threshold: 0.1
-      };
+    // ── Header: transparent → navy on scroll ──
+    (function () {
+      var header = document.getElementById('site-header');
+      function onScroll() {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }());
 
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
+    // ── Hero background: scale-in on load + subtle parallax ──
+    (function () {
+      var bg = document.getElementById('hero-bg');
+      requestAnimationFrame(function () { bg.classList.add('loaded'); });
+      window.addEventListener('scroll', function () {
+        if (window.scrollY < window.innerHeight) {
+          bg.style.transform = 'translateY(' + (window.scrollY * 0.28) + 'px)';
+        }
+      }, { passive: true });
+    }());
+
+    // ── Hamburger menu ──
+    (function () {
+      var btn = document.getElementById('hamburger');
+      var nav = document.getElementById('mobile-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      });
+      nav.querySelectorAll('.mobile-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'メニューを開く');
+        });
+      });
+    }());
+
+    // ── IntersectionObserver: fade-up animations ──
+    (function () {
+      var els = document.querySelectorAll('.fade-up');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+            io.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    }());
 
-      document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function(el) {
-        observer.observe(el);
-      });
+    // ── Counter / count-up animation ──
+    (function () {
+      var counters = document.querySelectorAll('.counter');
+      var triggered = false;
 
-      // Hamburger menu
-      var hamburger = document.getElementById('hamburger');
-      var mobileNav = document.getElementById('mobileNav');
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
-      hamburger.addEventListener('click', function() {
-        mobileNav.classList.toggle('active');
-        var spans = hamburger.querySelectorAll('span');
-        if (mobileNav.classList.contains('active')) {
-          spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-          spans[1].style.opacity = '0';
-          spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-        } else {
-          spans[0].style.transform = 'none';
-          spans[1].style.opacity = '1';
-          spans[2].style.transform = 'none';
+      function run(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var duration = 1800;
+        var start = performance.now();
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1);
+          el.textContent = Math.round(easeOut(p) * target).toLocaleString('ja-JP');
+          if (p < 1) requestAnimationFrame(tick);
+        }(start));
+      }
+
+      var section = document.querySelector('.stats-section');
+      if (!section) return;
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting && !triggered) {
+          triggered = true;
+          counters.forEach(run);
+          io.disconnect();
         }
-      });
-    });
+      }, { threshold: 0.25 });
+      io.observe(section);
+    }());
 
-    function closeMobileNav() {
-      var mobileNav = document.getElementById('mobileNav');
-      var hamburger = document.getElementById('hamburger');
-      mobileNav.classList.remove('active');
-      var spans = hamburger.querySelectorAll('span');
-      spans[0].style.transform = 'none';
-      spans[1].style.opacity = '1';
-      spans[2].style.transform = 'none';
-    }
+    // ── Smooth scroll for in-page anchors ──
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = this.getAttribute('href');
+          var target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          var top = target.getBoundingClientRect().top + window.scrollY - 72;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+      });
+    }());
   </script>
 </body>
 </html>
